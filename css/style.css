@@ -38,7 +38,12 @@ button:disabled {
 		width: 100%;
 		height: 14%;
 		padding-top: 5px;
+		padding-left: 10px;
 		margin-bottom: 5px;
+		color: #000000;
+	}
+	.leftBar #rockBlock{
+		color: #DDDDDD;
 	}
 .rightBar {
 	display: none;
@@ -53,13 +58,14 @@ pre.block {
   font: 3px/2px monospace;
   cursor: pointer; }
 #alerts {
-  display: none; }
-  background: #444444;
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  border: 1px solid #999999;
-  padding: 5px;
-  width: 300px; }
-  #alerts .alert {
-    border-bottom: 1px dashed #555555; }
+	display: none;
+	background: #444444;
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	border: 1px solid #999999;
+	padding: 5px;
+	width: 300px;
+}	#alerts .alert {
+		border-bottom: 1px dashed #555555;
+	}

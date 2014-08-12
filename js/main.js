@@ -10,12 +10,12 @@ var main = {
 	},
 	
 	updateDisplay: function(){
-		$("#redBlock").text("Leaf: "+pikmin.party.red.numLeaf+"&emsp;Bud: "+pikmin.party.red.numBud+"&emsp;Flower: "+pikmin.party.red.numFlower);
-		$("#yellowBlock").text("Leaf: "+pikmin.party.yellow.numLeaf+"&emsp;Bud: "+pikmin.party.yellow.numBud+"&emsp;Flower: "+pikmin.party.yellow.numFlower);
-		$("#blueBlock").text("Leaf: "+pikmin.party.blue.numLeaf+"&emsp;Bud: "+pikmin.party.blue.numBud+"&emsp;Flower: "+pikmin.party.blue.numFlower);
-		$("#purpleBlock").text("Leaf: "+pikmin.party.purple.numLeaf+"&emsp;Bud: "+pikmin.party.purple.numBud+"&emsp;Flower: "+pikmin.party.purple.numFlower);
-		$("#whiteBlock").text("Leaf: "+pikmin.party.white.numLeaf+"&emsp;Bud: "+pikmin.party.white.numBud+"&emsp;Flower: "+pikmin.party.white.numFlower);
-		$("#rockBlock").text("Leaf: "+pikmin.party.rock.numLeaf+"&emsp;Bud: "+pikmin.party.rock.numBud+"&emsp;Flower: "+pikmin.party.rock.numFlower);
-		$("#pinkBlock").text("Leaf: "+pikmin.party.pink.numLeaf+"&emsp;Bud: "+pikmin.party.pink.numBud+"&emsp;Flower: "+pikmin.party.pink.numFlower);
+		$("#redBlock").html("<b>Leaf:</b> "+pikmin.party.red.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.red.numBud+"<br/><b>Flower:</b> "+pikmin.party.red.numFlower);
+		$("#yellowBlock").html("<b>Leaf:</b> "+pikmin.party.yellow.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.yellow.numBud+"<br/><b>Flower:</b> "+pikmin.party.yellow.numFlower);
+		$("#blueBlock").html("<b>Leaf:</b> "+pikmin.party.blue.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.blue.numBud+"<br/><b>Flower:</b> "+pikmin.party.blue.numFlower);
+		$("#purpleBlock").html("<b>Leaf:</b> "+pikmin.party.purple.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.purple.numBud+"<br/><b>Flower:</b> "+pikmin.party.purple.numFlower);
+		$("#whiteBlock").html("<b>Leaf:</b> "+pikmin.party.white.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.white.numBud+"<br/><b>Flower:</b> "+pikmin.party.white.numFlower);
+		$("#rockBlock").html("<b>Leaf:</b> "+pikmin.party.rock.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.rock.numBud+"<br/><b>Flower:</b> "+pikmin.party.rock.numFlower);
+		$("#pinkBlock").html("<b>Leaf:</b> "+pikmin.party.pink.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.pink.numBud+"<br/><b>Flower:</b> "+pikmin.party.pink.numFlower);
 	}
 };

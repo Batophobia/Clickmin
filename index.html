@@ -8,25 +8,31 @@
     <script src="js/jquery.js"></script>
     <script src="js/pikmin.js"></script>
     <script src="js/items.js"></script>
+    <script src="js/main.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-    <div id="buttons">
+    <div id="buttons" class="topBar">
       <button id="ship">Examine Crash</button>
     </div>
-    <div id='army' class='LeftBar'>
-		<div id="red"></div>
-		<div id="yellow"></div>
-		<div id="blue"></div>
-		<div id="purple"></div>
-		<div id="white"></div>
-		<div id="rock"></div>
-		<div id="pink"></div>
+    <div id='army' class='leftBar'>
+		<div class="pikminMenu" style="background:#F62E30" id="redBlock"></div>
+		<div class="pikminMenu" style="background:#F3D805" id="yellowBlock"></div>
+		<div class="pikminMenu" style="background:#23A2D9" id="blueBlock"></div>
+		<div class="pikminMenu" style="background:#AB5FA9" id="purpleBlock"></div>
+		<div class="pikminMenu" style="background:#EAEAE8" id="whiteBlock"></div>
+		<div class="pikminMenu" style="background:#4B5668" id="rockBlock"></div>
+		<div class="pikminMenu" style="background:#FF91D6" id="pinkBlock"></div>
 	</div>
-    <div id='items' class='RightBar'></div>
+    <div id='items' class='rightBar'></div>
     <div id='alerts'></div>
-  <footer>Clickmin was created by Batophobia.</footer>
+	
+	<script>
+		$(document).ready(function(){
+			main.init();
+		});
+	</script>
   </body>
 </html>

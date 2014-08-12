@@ -1,15 +1,15 @@
 var pikmin = {
 	party:{
-		total:0,
+		total:1,
 		red:{
 			display: "Red",
 			canBomb: false,
 			strength: 15,
 			speed: 2,
 			carry: 1,
-			numLeaf: 0,
-			numbud: 0,
-			numflower: 0
+			numLeaf: 1,
+			numBud: 0,
+			numFlower: 0
 		},
 		yellow:{
 			display: "Yellow",
@@ -18,8 +18,8 @@ var pikmin = {
 			speed: 2,
 			carry: 1,
 			numLeaf:0,
-			numbud:0,
-			numflower:0
+			numBud:0,
+			numFlower:0
 		},
 		blue:{
 			display: "Blue",
@@ -28,8 +28,8 @@ var pikmin = {
 			speed: 2,
 			carry: 1,
 			numLeaf:0,
-			numbud:0,
-			numflower:0
+			numBud:0,
+			numFlower:0
 		},
 		purple:{
 			display: "Purple",
@@ -38,8 +38,8 @@ var pikmin = {
 			speed: 1,
 			carry: 10,
 			numLeaf:0,
-			numbud:0,
-			numflower:0
+			numBud:0,
+			numFlower:0
 		},
 		white:{
 			display: "White",
@@ -48,8 +48,8 @@ var pikmin = {
 			speed: 3,
 			carry: 1,
 			numLeaf:0,
-			numbud:0,
-			numflower:0
+			numBud:0,
+			numFlower:0
 		},
 		rock:{
 			display: "Rock",
@@ -58,8 +58,8 @@ var pikmin = {
 			speed: 2,
 			carry: 1,
 			numLeaf:0,
-			numbud:0,
-			numflower:0
+			numBud:0,
+			numFlower:0
 		},
 		pink:{
 			display: "Winged",
@@ -68,8 +68,16 @@ var pikmin = {
 			speed: 2,
 			carry: 1,
 			numLeaf:0,
-			numbud:0,
-			numflower:0
+			numBud:0,
+			numFlower:0
 		}
+	},
+	
+	init : function(){
+		this.show("red");
+	},
+	
+	show : function(input){
+		$("#"+input+"Block").show();
 	}
 };

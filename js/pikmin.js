@@ -73,6 +73,17 @@ var pikmin = {
 		}
 	},
 	
+	totalUpdate: function(){
+		this.party.total=0;
+		this.party.total+=this.checkNum("red");
+		this.party.total+=this.checkNum("yellow");
+		this.party.total+=this.checkNum("blue");
+		this.party.total+=this.checkNum("purple");
+		this.party.total+=this.checkNum("white");
+		this.party.total+=this.checkNum("rock");
+		this.party.total+=this.checkNum("pink");
+	},
+	
 	give: function(clr, type){
 		if(type=="bud")
 			this.party[clr].numBud+=1;

@@ -9,6 +9,7 @@ var main = {
 	
 	tick : function(){
 		this.updateDisplay();
+		pikmin.totalUpdate();
 		this.save();
 	},
 	
@@ -25,10 +26,14 @@ var main = {
 	save : function(){
 		var data = {'pikmin':{},'items':{}};
 		for(var group in pikmin.party){
-			data['pikmin'][group] = {
-				numLeaf : pikmin.party[group].numLeaf,
-				numBud : pikmin.party[group].numBud,
-				numFlower : pikmin.party[group].numFlower
+			if(group=="total")
+				data['pikmin'][group] = pikmin.party.total;
+			else{
+				data['pikmin'][group] = {
+					numLeaf : pikmin.party[group].numLeaf,
+					numBud : pikmin.party[group].numBud,
+					numFlower : pikmin.party[group].numFlower
+				}
 			}
 		}
 		for(var group in items.types){
@@ -83,9 +88,13 @@ var main = {
 		}
 		for(var group in pikmin.party){
 			if(group in data['pikmin']){
-				pikmin.party[group].numLeaf = data.pikmin[group].numLeaf;
-				pikmin.party[group].numBud = data.pikmin[group].numBud;
-				pikmin.party[group].numFlower = data.pikmin[group].numFlower;
+				if(group=="total")
+					pikmin.party[group] = data.pikmin[group];
+				else{
+					pikmin.party[group].numLeaf = data.pikmin[group].numLeaf;
+					pikmin.party[group].numBud = data.pikmin[group].numBud;
+					pikmin.party[group].numFlower = data.pikmin[group].numFlower;
+				}
 			}
 		}
 	},

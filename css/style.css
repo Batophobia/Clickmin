@@ -1,22 +1,25 @@
 body {
-	background: #000000;
+	background: #FFFFFF;
 	font-family: monospace;
-	color: #CCCCCC;
+	color: #333333;
 	font-size: 14px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 button {
-	background: #000000;
-	border: 1px solid #CCCCCC;
-	color: #CCCCCC;
+	background: #FFFFFF;
+	border: 1px solid #333333;
+	color: #333333;
 	cursor: pointer;
 	margin: 5px;
 	border-radius: 4px;
 }
 button:hover {
-	background: #333333;
+	background: #CCCCCC;
 }
 button:disabled {
-	background: #666666;
+	background: #999999;
 	cursor: default;
 }
 .topBar {
@@ -41,31 +44,49 @@ button:disabled {
 		padding-left: 10px;
 		margin-bottom: 5px;
 		color: #000000;
-	}
+	}	.pikminMenu .head{
+			width: 100%;
+			text-align: center;
+			text-decoration: underline;
+		}
 	.leftBar #rockBlock{
 		color: #DDDDDD;
 	}
 .rightBar {
-	display: none;
 	width: 200px;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #333333;
 	height: 600px;
 	position: absolute;
 	top: 5px;
-	right: 0;
+	right: 10px;
+}	.rightBar:empty {
+		display: none;
+	}
+	.stuff div{
+		width: 100%;
+		padding: 5px;
+	}
+pre {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	font: 4px/3px monospace;
 }
-pre.block {
-  font: 3px/2px monospace;
-  cursor: pointer; }
+#discovery{
+	position: absolute;
+	bottom: 5px;
+	width: 100%;
+	margin-left: 50%;
+}
 #alerts {
 	display: none;
-	background: #444444;
+	background: #FFFFFF;
 	position: absolute;
 	bottom: 15px;
 	left: 15px;
-	border: 1px solid #999999;
+	border: 1px solid #333333;
 	padding: 5px;
 	width: 300px;
 }	#alerts .alert {
-		border-bottom: 1px dashed #555555;
+		border-bottom: 1px dashed #333333;
 	}

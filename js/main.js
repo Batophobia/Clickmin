@@ -1,21 +1,100 @@
 var main = {
 	init : function(){
+		this.load();
 		pikmin.init();
 		items.init();
+		explore.init();
 		window.setInterval(function(){main.tick()}, 1000);
 	},
 	
 	tick : function(){
 		this.updateDisplay();
+		this.save();
 	},
 	
 	updateDisplay: function(){
-		$("#redBlock").html("<b>Leaf:</b> "+pikmin.party.red.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.red.numBud+"<br/><b>Flower:</b> "+pikmin.party.red.numFlower);
-		$("#yellowBlock").html("<b>Leaf:</b> "+pikmin.party.yellow.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.yellow.numBud+"<br/><b>Flower:</b> "+pikmin.party.yellow.numFlower);
-		$("#blueBlock").html("<b>Leaf:</b> "+pikmin.party.blue.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.blue.numBud+"<br/><b>Flower:</b> "+pikmin.party.blue.numFlower);
-		$("#purpleBlock").html("<b>Leaf:</b> "+pikmin.party.purple.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.purple.numBud+"<br/><b>Flower:</b> "+pikmin.party.purple.numFlower);
-		$("#whiteBlock").html("<b>Leaf:</b> "+pikmin.party.white.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.white.numBud+"<br/><b>Flower:</b> "+pikmin.party.white.numFlower);
-		$("#rockBlock").html("<b>Leaf:</b> "+pikmin.party.rock.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.rock.numBud+"<br/><b>Flower:</b> "+pikmin.party.rock.numFlower);
-		$("#pinkBlock").html("<b>Leaf:</b> "+pikmin.party.pink.numLeaf+"<br/><b>Bud:</b> "+pikmin.party.pink.numBud+"<br/><b>Flower:</b> "+pikmin.party.pink.numFlower);
-	}
+		pikmin.updateDisplay("red");
+		pikmin.updateDisplay("yellow");
+		pikmin.updateDisplay("blue");
+		pikmin.updateDisplay("purple");
+		pikmin.updateDisplay("white");
+		pikmin.updateDisplay("rock");
+		pikmin.updateDisplay("pink");
+	},
+	
+	save : function(){
+		var data = {'pikmin':{},'items':{}};
+		for(var group in pikmin.party){
+			data['pikmin'][group] = {
+				numLeaf : pikmin.party[group].numLeaf,
+				numBud : pikmin.party[group].numBud,
+				numFlower : pikmin.party[group].numFlower
+			}
+		}
+		for(var group in items.types){
+			if(group=="stuff"){
+				data['items'][group]={};
+				for(var thing in items.types[group]){
+					data['items'][group][thing]=(items.types[group][thing]);
+				}
+			}else if(group=="pellets"){
+				data['items'][group]={};
+				for(var thing in items.types[group]){
+					data['items'][group][thing]=(items.types[group][thing]);
+				}
+			}else{
+				data['items'][group] = {
+					total : items.types[group].total,
+					owned : items.types[group].owned
+				}
+			}
+		}
+		localStorage["save"] = JSON.stringify(data);
+	},
+	
+	load : function(){
+		if('save' in localStorage){
+			var data = JSON.parse(localStorage['save']);
+		}else{
+			items.types.stuff[0]={
+				display: "Red Onion",
+				numNeeded: 0,
+				x: 0,
+				y: 0,
+				type: "onion"
+			};
+			return;
+		}
+		for(var group in items.types){
+			if(group in data['items']){
+				if(group=="stuff"){
+					for(var thing in data['items'][group]){
+						items.types[group][thing]=data['items'][group][thing];
+					}
+				}else if(group=="pellets"){
+					for(var thing in data['items'][group]){
+						items.types[group][thing]=data['items'][group][thing];
+					}
+				}else{
+					items.types[group].total = data.items[group].total;
+					items.types[group].owned = data.items[group].owned;
+				}
+			}
+		}
+		for(var group in pikmin.party){
+			if(group in data['pikmin']){
+				pikmin.party[group].numLeaf = data.pikmin[group].numLeaf;
+				pikmin.party[group].numBud = data.pikmin[group].numBud;
+				pikmin.party[group].numFlower = data.pikmin[group].numFlower;
+			}
+		}
+	},
+};
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
 };

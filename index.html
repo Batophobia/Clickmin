@@ -9,12 +9,14 @@
     <script src="js/pikmin.js"></script>
     <script src="js/items.js"></script>
     <script src="js/explore.js"></script>
+    <script src="js/enemy.js"></script>
     <script src="js/main.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
+   <div class="everything">
     <div id="buttons" class="topBar">
       <button id="btnMap">Explore</button>
     </div>
@@ -36,84 +38,240 @@
 		<div id="map">
 <div id="overworld"><pre>            ~                          |         /\          /vv\                    /             
                               ~        |    /\  /vv\  /\    /    \/\                /              
-                   ~                   |   /vv\/ __ \/vv\/\/     /vv\          ____/       ~       
-    ~                              ~   |  /    \ || /    \ \    /    \________/                    
+                   <span class="mapButton area15" id="15">~</span>                   |   /vv\/ <span class="mapButton area14" id="14">__</span> \/vv\/\/     /vv\          ____/       ~       
+    ~                              ~   |  /    \ <span class="mapButton area14" id="14">||</span> /    \ \    /    \________/                    
   _________                            \           ____              /                             
  /         \________                    \         /     \___________/                              
 /                   \_______             \_______/                     ~                  ~        
                            /                         ~                                             
                        ___/          ~                                                             
                       /                                   ~                                ________
-       __            /                                                   ~       ________ /        
-    __/  \__         \                                                          /                  
-   /   %%%  \_        \                                                        /                   
-  /   % % %   \        \______                   ~               ____         /                    
- /     %%%    |              /                              ___ /     \      /                     
- |  %  % %    |           __/                      ________/           |    /          )           
- \__   %%%    /          /                        /                    \___/         ( ( )         
-    \      % /          /_________     __________/                                  /) ^ (         
-     \______/                    /    /                                            ( ^)( ^)        
-                                /    /                                              || ^||         
-                                |####|               _  v                                          
-                                |####|                    _   v                                    
-                        "       \    \              v   _    _                                     
-                                 \    \                    v                                       
-                                 |     \            _  v                                   _       
-                                 \     |                                                  / \      
-                                  |   ~\                                                  |()      
-                                  /     |                                                <|||>     
+       <span class="mapButton area13" id="13">__</span>            /                                                   ~       ________ /        
+    <span class="mapButton area13" id="13">__/  \__</span>         \                                                          /                  
+   <span class="mapButton area13" id="13">/   %%%  \_</span>        \                                                        /                   
+  <span class="mapButton area13" id="13">/   % % %   \</span>        \______                   ~               ____         /                    
+ <span class="mapButton area13" id="13">/     %%%    |</span>              /                              ___ /     \      /                     
+ <span class="mapButton area13" id="13">|  %  % %    |</span>           __/                      ________/           |    /          <span class="mapButton area1" id="1">)</span>           
+ <span class="mapButton area13" id="13">\__   %%%    /</span>          /                        /                    \___/         <span class="mapButton area1" id="1">( ( )</span>         
+    <span class="mapButton area13" id="13">\      % /</span>          /_________     __________/                                  <span class="mapButton area1" id="1">/) ^ (</span>         
+     <span class="mapButton area13" id="13">\______/</span>                    /    /                                            <span class="mapButton area1" id="1">( ^)( ^)</span>        
+                                /    /                                              <span class="mapButton area1" id="1">|| ^||</span>         
+                                <span class="mapButton area9" id="9">|####|</span>               <span class="mapButton area2" id="2">_  v   </span>                                       
+                                <span class="mapButton area9" id="9">|####|</span>              <span class="mapButton area2" id="2">      _   v</span>                                    
+                        "       \    \              <span class="mapButton area2" id="2">v   _    _</span>                                     
+                                 \    \            <span class="mapButton area2" id="2">        v</span>                                       
+                                 |     \            <span class="mapButton area2" id="2">_  v  </span>                                 <span class="mapButton area0" id="0">_</span>       
+                                 \     |                                                  <span class="mapButton area0" id="0">/ \</span>      
+                                  |   ~\                                                  <span class="mapButton area0" id="0">|()</span>      
+                                  /     |                                                <span class="mapButton area0" id="0"><|||></span>     
                                  /      /                                                          
                                 /      /                                                           
                                /      /              "                                             
                               | ~    |                                                             
-  O                           \      \                                                             
- (:)                           |      |                                                            
- (_)                    _      /      /                                                            
-                     __/ |    /      /                                                             
-                   _/| | /   /      /                                                              
-      "           / |  _/   /      /                        {}             {}                      
-                 /____/    /   ~  /                         {} .    {}   . {}                      
-                          /      /                          {}   {} {}     {}                      
-                         /      /                                {} {}  {}                         
-                        /      /                           {}    {}     {}  .                  "   
-     ____              /      /                            {}           {}                         
-    /    \____        /      /                             {}   .    .                             
+  <span class="mapButton area12" id="12">O</span>                           \      \                                                             
+ <span class="mapButton area12" id="12">(:)</span>                           |      |                                                            
+ <span class="mapButton area12" id="12">(_)</span>                    <span class="mapButton area11" id="11">_</span>      /      /                                                            
+                     <span class="mapButton area11" id="11">__/ |</span>    /      /                                                             
+                   <span class="mapButton area11" id="11">_/| | /</span>   /      /                                                              
+      "           <span class="mapButton area11" id="11">/ |  _/</span>   /      /                        <span class="mapButton area3" id="3">{}             {}</span>                      
+                 <span class="mapButton area11" id="11">/____/</span>    /   ~  /                         <span class="mapButton area3" id="3">{} .    {}   . {}</span>                      
+                          /      /                          <span class="mapButton area3" id="3">{}   {} {}     {}</span>                      
+                         /      /                          <span class="mapButton area3" id="3">      {} {}  {}   </span>                      
+                        /      /                           <span class="mapButton area3" id="3">{}    {}     {}  .</span>                  "   
+     ____              /      /                            <span class="mapButton area3" id="3">{}           {}</span>                         
+    /    \____        /      /                             <span class="mapButton area3" id="3">{}   .    .</span>                             
    /          \______/    ~ /                                                                      
 __/   ~                    /                                                                       
               ~           /                                                                        
                          /                                                                         
   ~                     /                                                                          
                        /                                                                           
-           ~          /                 "                                               \_         
-                     /                                                                    \/\  _/  
-                ____/                                                                     /__\/    
-    ~          /                                                                  \_ ._.  |/\|  ._.
-          ____/                                          888888888                  \|z|__|\/|__|z|
-____     /                                              88888888888                  |z    __    z|
-    \   /                888 888 88 888                8888888888888                 |____|__|____|
-    |###|             888888888888888888                88888888888                                
-    |###|            8888888 888 88 88888                888888888                                 
-    \   \             888 |   |  |   |8888               \_|@  |_/                                 
-     \   \           88888            888                  |   |                                   
-      \   \         88888              8888               /  n  \                                  
-       \   \         |8888 888  88 8 888888                                                        
- _____  \   \          888888888888888888|                                                         
-/_____\  \   \        88888888 88 888 88                                                           
-|_[|]_|   \   \        | |  |  |  | | |                                                            
-           \   \                                            "                                      
- !-----!    \   \                                                                                  
- |:(:):|     \   \                                                                                 
- |:(:):|      \   \                                                                                
- |:(:):|       )})})                                                                               
- |:(:):|     __})})}                                                                "              
- !-----!    /      |                                                                               
+           ~          /                 "                                               <span class="mapButton area4" id="4">\_</span>         
+                     /                                                                    <span class="mapButton area4" id="4">\/\  _/</span>  
+                ____/                                                                     <span class="mapButton area4" id="4">/__\/</span>    
+    ~          /                                                                  <span class="mapButton area4" id="4">\_ ._.  |/\|  ._.</span>
+          ____/                                          <span class="mapButton area7" id="7">888888888</span>                  <span class="mapButton area4" id="4">\|z|__|\/|__|z|</span>
+____     /                                              <span class="mapButton area7" id="7">88888888888</span>                  <span class="mapButton area4" id="4">|z    __    z|</span>
+    \   /                <span class="mapButton area5" id="5">888 888 88 888</span>                <span class="mapButton area7" id="7">8888888888888</span>                 <span class="mapButton area4" id="4">|____|__|____|</span>
+    <span class="mapButton area8" id="8">|###|</span>             <span class="mapButton area5" id="5">888888888888888888</span>                <span class="mapButton area7" id="7">88888888888</span>                                
+    <span class="mapButton area8" id="8">|###|</span>            <span class="mapButton area5" id="5">8888888 888 88 88888</span>                <span class="mapButton area7" id="7">888888888</span>                                 
+    \   \             <span class="mapButton area5" id="5">888 |   |  |   |8888</span>               <span class="mapButton area7" id="7">\_|@  |_/</span>                                 
+     \   \           <span class="mapButton area5" id="5">88888            888</span>                  <span class="mapButton area7" id="7">|   |</span>                                   
+      \   \         <span class="mapButton area5" id="5">88888              8888</span>               <span class="mapButton area7" id="7">/  n  \</span>                                  
+       \   \         <span class="mapButton area5" id="5">|8888 888  88 8 888888</span>                                                        
+ <span class="mapButton area10" id="10">_____</span>  \   \          <span class="mapButton area5" id="5">888888888888888888|</span>                                                         
+<span class="mapButton area10" id="10">/_____\</span>  \   \        <span class="mapButton area5" id="5">88888888 88 888 88</span>                                                           
+<span class="mapButton area10" id="10">|_[|]_|</span>   \   \        <span class="mapButton area5" id="5">| |  |  |  | | |</span>                                                            
+<span class="mapButton area10" id="10">        </span>   \   \                                            "                                      
+ <span class="mapButton area10" id="10">!-----!</span>    \   \                                                                                  
+ <span class="mapButton area10" id="10">|:(:):|</span>     \   \                                                                                 
+ <span class="mapButton area10" id="10">|:(:):|</span>      \   \                                                                                
+ <span class="mapButton area10" id="10">|:(:):|</span>       <span class="mapButton area6" id="6">)})})</span>                                                                               
+ <span class="mapButton area10" id="10">|:(:):|</span>     __<span class="mapButton area6" id="6">})})}</span>                                                                "              
+ <span class="mapButton area10" id="10">!-----!</span>    /  <span class="mapButton area6" id="6">~~~~|</span>                                                                               
            /  /\__/                      "                                                         
           /  /                                                                                     </pre></div>
+<div id="map1"><pre>                                                                                                   
+                                                                                                   
+            (                                             )                                        
+             )  (                                        (__  )                                    
+           ( ^ )                                         )  \(                                     
+            ^ ^ ^)              (   )                     \^ \)                                    
+            |  ^|               )   (     )                \ ^\            (   )                   
+ )  (       |  @|               ( ^ )     (                 \  \            )   (                  
+ (  )       |   |             (  ^v^   v^ )                |\\  \          (^ ^)                   
+ /\/\       |^  |             ) ^^^^  ^^^v                 | |\__\          ^^v^                   
+ |  |       |  ^|             (^^^v^^^^v^^^                                / /\ \                  
+ | ^|                      ____^^v^^^^^^^^___                             /_/  \_\                 
+ |^ |                     /  -  ^^^^^v^^^  /                                                       
+ |  |                    /_________________\                                                       
+                                                                                                   
+                                                                                                   
+<span id="1_0">___</span><span id="1_1">___</span><span id="1_2">___</span><span id="1_3">___</span><span id="1_4">___</span><span id="1_5">___</span><span id="1_6">___</span><span id="1_7">___</span><span id="1_8">___</span><span id="1_9">___</span><span id="1_10">___</span><span id="1_11">___</span><span id="1_12">___</span><span id="1_13">___</span><span id="1_14">___</span><span id="1_15">___</span><span id="1_16">___</span><span id="1_17">___</span><span id="1_18">___</span><span id="1_19">___</span><span id="1_20">___</span><span id="1_21">___</span><span id="1_22">___</span><span id="1_23">___</span><span id="1_24">___</span><span id="1_25">___</span><span id="1_26">___</span><span id="1_27">___</span><span id="1_28">___</span><span id="1_29">___</span><span id="1_30">___</span><span id="1_31">___</span><span id="1_32">__</span>
+    /|                                __________________)                                          
+ |\/ |                                \   ^     -      ^(                              /|          
+ |   |                                /     -       -   ^                           |\/ |          </pre></div>
 		</div>
+	<div id='placeName'></div>
+	<div class="squadMaker">
+		<div class="helpSquad">Build your squad, up to 100 total pikmin.</div>
+		<div class="squadColor" style="background:#F62E30" id="redSquad">
+			<span class="squadSection" id="redLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('red','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('red','leaf');"></div>
+				<div class="numSquad" id="redLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="redBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('red','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('red','bud');"></div>
+				<div class="numSquad" id="redBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="redFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('red','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('red','flower');"></div>
+				<div class="numSquad" id="redFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<div class="squadColor" style="background:#F3D805" id="yellowSquad">
+			<span class="squadSection" id="yellowLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('yellow','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('yellow','leaf');"></div>
+				<div class="numSquad" id="yellowLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="yellowBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('yellow','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('yellow','bud');"></div>
+				<div class="numSquad" id="yellowBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="yellowFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('yellow','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('yellow','flower');"></div>
+				<div class="numSquad" id="yellowFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<div class="squadColor" style="background:#23A2D9" id="blueSquad">
+			<span class="squadSection" id="blueLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('blue','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('blue','leaf');"></div>
+				<div class="numSquad" id="blueLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="blueBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('blue','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('blue','bud');"></div>
+				<div class="numSquad" id="blueBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="blueFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('blue','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('blue','flower');"></div>
+				<div class="numSquad" id="blueFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<div class="squadColor" style="background:#AB5FA9" id="purpleSquad">
+			<span class="squadSection" id="purpleLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('purple','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('purple','leaf');"></div>
+				<div class="numSquad" id="purpleLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="purpleBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('purple','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('purple','bud');"></div>
+				<div class="numSquad" id="purpleBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="purpleFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('purple','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('purple','flower');"></div>
+				<div class="numSquad" id="purpleFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<div class="squadColor" style="background:#EAEAE8" id="whiteSquad">
+			<span class="squadSection" id="whiteLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('white','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('white','leaf');"></div>
+				<div class="numSquad" id="whiteLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="whiteBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('white','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('white','bud');"></div>
+				<div class="numSquad" id="whiteBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="whiteFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('white','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('white','flower');"></div>
+				<div class="numSquad" id="whiteFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<div class="squadColor" style="background:#4B5668" id="rockSquad">
+			<span class="squadSection" id="rockLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('rock','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('rock','leaf');"></div>
+				<div class="numSquad" id="rockLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="rockBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('rock','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('rock','bud');"></div>
+				<div class="numSquad" id="rockBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="rockFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('rock','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('rock','flower');"></div>
+				<div class="numSquad" id="rockFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<div class="squadColor" style="background:#FF91D6" id="pinkSquad">
+			<span class="squadSection" id="pinkLeaf">Leaf:
+				<div class="upArrow" onclick="explore.addToSquad('pink','leaf');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('pink','leaf');"></div>
+				<div class="numSquad" id="pinkLeafSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="pinkBud">Bud:
+				<div class="upArrow" onclick="explore.addToSquad('pink','bud');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('pink','bud');"></div>
+				<div class="numSquad" id="pinkBudSquadNum">0</div>
+			</span>
+			<span class="squadSection" id="pinkFlower">Flower:
+				<div class="upArrow" onclick="explore.addToSquad('pink','flower');"></div>
+				<div class="downArrow" onclick="explore.removeFromSquad('pink','flower');"></div>
+				<div class="numSquad" id="pinkFlowerSquadNum">0</div>
+			</span>
+		</div>
+		<button id="btnQuest">Begin</button>
+		<div class="totalSquadNum" id="totalSquadNum">Total: 0</div>
+	</div>
+	<div class="battleDialog">
+		<div class="plyrSide">
+			<div class="btlName">You</div>
+			<div class="btlHP" id="plyrHP"></div>
+		</div>
+		<div class="opntSide">
+			<div class="btlName" id="opntName"></div>
+			<div class="btlHP" id="opntHP"></div>
+		</div>
+	</div>
 	</div>
 	<div id="discovery"></div>
     <div id='alerts'></div>
 	
+   </div>
 	<div id="images" style="display:none">
 		<div id="imgred"><pre>                                                                                                             
                                                                 `.,,,,,,,,,,,,,,,,::::,,,,`                  

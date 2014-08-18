@@ -8,8 +8,12 @@ var main = {
 	},
 	
 	tick : function(){
-		this.updateDisplay();
+		pikmin.addGuys();
 		pikmin.totalUpdate();
+		
+		explore.tick();
+
+		this.updateDisplay();
 		this.save();
 	},
 	
@@ -24,7 +28,7 @@ var main = {
 	},
 	
 	save : function(){
-		var data = {'pikmin':{},'items':{}};
+		var data = {'pikmin':{},'items':{},'explore':{}};
 		for(var group in pikmin.party){
 			if(group=="total")
 				data['pikmin'][group] = pikmin.party.total;
@@ -54,6 +58,12 @@ var main = {
 				}
 			}
 		}
+		for(var group in explore.places){
+			data['explore'][group] = {
+					canGo: explore.places[group].canGo,
+					timesBeat: explore.places[group].timesBeat
+				}
+		}
 		localStorage["save"] = JSON.stringify(data);
 	},
 	
@@ -64,8 +74,6 @@ var main = {
 			items.types.stuff[0]={
 				display: "Red Onion",
 				numNeeded: 0,
-				x: 0,
-				y: 0,
 				type: "onion"
 			};
 			return;
@@ -95,6 +103,12 @@ var main = {
 					pikmin.party[group].numBud = data.pikmin[group].numBud;
 					pikmin.party[group].numFlower = data.pikmin[group].numFlower;
 				}
+			}
+		}
+		for(var group in explore.places){
+			if(group in data['explore']){
+				explore.places[group].canGo= data.explore[group].canGo;
+				explore.places[group].timesBeat= data.explore[group].timesBeat;
 			}
 		}
 	},

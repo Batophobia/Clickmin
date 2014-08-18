@@ -21,10 +21,10 @@ var items = {
 	},
 	
 	types:{
-		nectar	:{display:"Nectar",		total:0,	owned:0	},
-		bombRock:{display:"Bomb Rock",	total:0,	owned:0	},
-		stuff	:{},	//display, numNeeded, x, y, type
-		pellets	:{} 	//color, numNeeded, numRed, numYellow, numBlue, x, y
+		nectar	:{display:"Nectar",		total:0	},
+		bombRock:{display:"Bomb Rock",	total:0	},
+		stuff	:{},	//display, numNeeded, type
+		pellets	:{} 	//color, numNeeded
 	},
 	
 	useOnion: function(itm){
@@ -34,7 +34,13 @@ var items = {
 		
 		pikmin.give(clr,"leaf");
 		$("#"+clr+"Block").show();
-		$(".topBar").show();
+		$("#"+clr+"Squad").show();
+		$("#btnMap").show();
+		
+		if(clr=="red"){
+			explore.places["1"].canGo=true;
+			explore.unlock(1);
+		}
 		
 		var tmpPic=$("#img"+clr).html();
 		$("#discovery").html("Discovered new Pikmin<br/>"+tmpPic);
@@ -49,12 +55,10 @@ var items = {
 		delete this.types.stuff[Object.size(this.types.stuff)-1];
 	},
 	
-	addThing: function(displayN, numNeededN, xN, yN, typeN){
+	addThing: function(displayN, numNeededN, typeN){
 		this.types.stuff[Object.size(this.types.stuff)]={
 			display: displayN,
 			numNeeded: numNeededN,
-			x: xN,
-			y: yN,
 			type: typeN
 		};
 		
@@ -66,12 +70,10 @@ var items = {
 		$(".stuff").append("<div id='"+Object.size(this.types.stuff)+"' "+extraStuff+">"+displayN+"</div>");
 	},
 	addRandomThing: function(){
-		var disp, numNeed, mpX, mpY, thngType;
+		var disp, numNeed, thngType;
 		this.types.stuff[Object.size(this.types.stuff)]={
 			display: disp,
 			numNeeded: numNeed,
-			x: mpX,
-			y: mpY,
 			type: thngType
 		};
 		$(".stuff").append("<div>"+disp+"</div>");

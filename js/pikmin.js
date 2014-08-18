@@ -3,6 +3,51 @@ var pikmin = {
 		total:0,
 		red:{
 			display: "Red",
+			numLeaf: 0,
+			numBud: 0,
+			numFlower: 0
+		},
+		yellow:{
+			display: "Yellow",
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		},
+		blue:{
+			display: "Blue",
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		},
+		purple:{
+			display: "Purple",
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		},
+		white:{
+			display: "White",
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		},
+		rock:{
+			display: "Rock",
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		},
+		pink:{
+			display: "Winged",
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		}
+	},
+	
+	squad:{
+		total:0,
+		red:{
 			canBomb: false,
 			strength: 15,
 			speed: 2,
@@ -12,7 +57,6 @@ var pikmin = {
 			numFlower: 0
 		},
 		yellow:{
-			display: "Yellow",
 			canBomb:true,
 			strength: 10,
 			speed: 2,
@@ -22,7 +66,6 @@ var pikmin = {
 			numFlower:0
 		},
 		blue:{
-			display: "Blue",
 			canBomb:false,
 			strength: 10,
 			speed: 2,
@@ -32,7 +75,6 @@ var pikmin = {
 			numFlower:0
 		},
 		purple:{
-			display: "Purple",
 			canBomb:false,
 			strength: 20,
 			speed: 1,
@@ -40,9 +82,8 @@ var pikmin = {
 			numLeaf:0,
 			numBud:0,
 			numFlower:0
-		},
+		},			//Purple and White made by flower only
 		white:{
-			display: "White",
 			canBomb:false,
 			strength: 10,
 			speed: 3,
@@ -52,7 +93,6 @@ var pikmin = {
 			numFlower:0
 		},
 		rock:{
-			display: "Rock",
 			canBomb:false,
 			strength: 15,
 			speed: 2,
@@ -62,7 +102,6 @@ var pikmin = {
 			numFlower:0
 		},
 		pink:{
-			display: "Winged",
 			canBomb:false,
 			strength: 7,
 			speed: 2,
@@ -70,6 +109,87 @@ var pikmin = {
 			numLeaf:0,
 			numBud:0,
 			numFlower:0
+		},
+		bulbmin:{
+			canBomb:false,
+			strength: 7,
+			speed: 2,
+			carry: 1,
+			numLeaf:0,
+			numBud:0,
+			numFlower:0
+		},
+		
+		kill: function(num, effect){
+			for(i=0;i<num;i++){
+				var numToMurder=explore.batman(0,this.total);
+				var rndSurvive = explore.batman(0,10);
+				
+				if(effect!="fire")
+					numToMurder=this.checkForDeath("red",numToMurder,rndSurvive,effect);
+				else
+					numToMurder-=squadColorNum("red");
+				if(effect!="electric")
+					numToMurder=this.checkForDeath("yellow",numToMurder,rndSurvive,effect);
+				else
+					numToMurder-=squadColorNum("yellow");
+				if(effect!="water")
+					numToMurder=this.checkForDeath("blue",numToMurder,rndSurvive,effect);
+				else
+					numToMurder-=squadColorNum("blue");
+				numToMurder=this.checkForDeath("purple",numToMurder,rndSurvive,effect);
+				if(effect!="poison")
+					numToMurder=this.checkForDeath("white",numToMurder,rndSurvive,effect);
+				else
+					numToMurder-=squadColorNum("white");
+				numToMurder=this.checkForDeath("rock",numToMurder,rndSurvive,effect);
+				numToMurder=this.checkForDeath("pink",numToMurder,rndSurvive,effect);
+			}
+		},
+		
+		checkForDeath: function(clr, numKill, chncSurvive, effect){
+			if(numKill<this[clr].numLeaf){
+				this[clr].numLeaf-=1;
+				this.total-=1;
+				return;
+			}
+			numKill-=this[clr].numLeaf;
+			if(numKill<this[clr].numBud){
+				if(rndSurvive>2){
+					this[clr].numBud-=1;
+					this.total-=1;
+					return;
+				}
+			}
+			numKill-=this[clr].numBud;
+			if(numKill<this[clr].numFlower){
+				if(rndSurvive>3){
+					this[clr].numFlower-=1;
+					this.total-=1;
+					return;
+				}
+			}
+			numKill-=this[clr].numFlower;
+			
+			return numKill;
+		},
+		
+		squadColorNum: function(clr){
+			return (this[clr].numLeaf+this[clr].numBud+this[clr].numFlower);
+		},
+		
+		strength: function(){
+			var intStr=0;
+			
+			intStr += pikmin.squad.red.strength * (pikmin.squad.squadColorNum("red"));
+			intStr += pikmin.squad.yellow.strength * (pikmin.squad.squadColorNum("yellow"));
+			intStr += pikmin.squad.blue.strength * (pikmin.squad.squadColorNum("blue"));
+			intStr += pikmin.squad.purple.strength * (pikmin.squad.squadColorNum("purple"));
+			intStr += pikmin.squad.white.strength * (pikmin.squad.squadColorNum("white"));
+			intStr += pikmin.squad.rock.strength * (pikmin.squad.squadColorNum("rock"));
+			intStr += pikmin.squad.pink.strength * (pikmin.squad.squadColorNum("pink"));
+			
+			return intStr;
 		}
 	},
 	
@@ -82,6 +202,21 @@ var pikmin = {
 		this.party.total+=this.checkNum("white");
 		this.party.total+=this.checkNum("rock");
 		this.party.total+=this.checkNum("pink");
+	},
+	
+	addGuys: function(){
+		if(!explore.isOnMap){
+			if(this.checkNum("red")>0)
+				this.party.red.numLeaf++;
+			if(this.checkNum("yellow")>0)
+				this.party.yellow.numLeaf++;
+			if(this.checkNum("blue")>0)
+				this.party.blue.numLeaf++;
+			if(this.checkNum("rock")>0)
+				this.party.rock.numLeaf++;
+			if(this.checkNum("pink")>0)
+				this.party.pink.numLeaf++;
+		}
 	},
 	
 	give: function(clr, type){
@@ -116,6 +251,7 @@ var pikmin = {
 	
 	show : function(input){
 		$("#"+input+"Block").show();
+		$("#"+input+"Squad").show();
 	},
 	
 	updateDisplay : function(clr){

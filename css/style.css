@@ -3,6 +3,13 @@ body {
 	font-family: monospace;
 	color: #333333;
 	font-size: 14px;
+	width: 100%;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+.everything{
+	width: 100%;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -28,6 +35,9 @@ button:disabled {
 	position: absolute;
 	top: 5px;
 	left: 250px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }	.topBar button{
 		display: none;
 	}
@@ -37,6 +47,9 @@ button:disabled {
 	position: absolute;
 	top: 5px;
 	left: 0;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }	.leftBar .pikminMenu{
 		display: none;
 		width: 100%;
@@ -60,6 +73,9 @@ button:disabled {
 	position: absolute;
 	top: 5px;
 	right: 10px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }	.rightBar:empty {
 		display: none;
 	}
@@ -68,16 +84,122 @@ button:disabled {
 		padding: 5px;
 	}
 .mainBar {
-	width: 380px;
+	width: 695px;
 	height: 600px;
-	position: absolute;
-	top: 110px;
-	left: 250px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }	.mainBar #map {
 		display: none;
+		cursor: default;
 	} 	#map pre{
 			font: 12px/10px monospace;
 		}
+		#placeName{
+			position:absolute;
+			border: 1px solid #333333;
+			background: #FFFFFF;
+			padding: 5px;
+			text-align: center;
+		}
+		#placeName:empty{
+			display:none;
+		}
+		#overworld{
+			display:none;
+			border: 1px dashed #333333;
+		}
+@media (min-width: 1111px){
+    .mainBar{
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 110px;
+    }
+}
+
+@media (max-width: 1110px){
+    .mainBar{
+		position: absolute;
+		top: 110px;
+        left: 210px;
+    }
+}
+.battleDialog{
+	display: none;
+	position: absolute;
+	top: 10px;
+	right: 350px;
+	width: 200px;
+	border: 1px solid #333333;
+	background: #FFFFFF;
+	color: #000000;
+} 	.plyrSide{
+		width: 49%;
+		height: 100%;
+		float: left;
+	} .opntSide{
+		width: 49%;
+		height: 100%;
+		float: right;
+		border-left: 1px dotted #333333;
+	}	.btlName{
+			text-align: center;
+		} .btlHP{
+			text-align: right;
+		}
+.squadMaker{
+	position: absolute;
+	display: none;
+	top: 110px;
+	left: 210px;
+	width: 200px;
+	border: 1px solid #333333;
+	background: #FFFFFF;
+	color: #000000;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}	.squadColor{
+		display: none;
+		margin-bottom:5px;
+		width: 200px;
+		height: 50px;
+	} .squadColor #rockSquad{
+		color: #DDDDDD;
+	} .squadSection{
+		position: relative;
+		float: left;
+		width: 33%;
+	} .numSquad{
+		position: absolute;
+		left: 20px;
+		top: 20px;
+	} .totalSquadNum{
+		float: right;
+		margin-right:5px;
+	}
+.upArrow {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid #000000;
+	cursor: pointer;
+	position: absolute;
+	left: 5px;
+	top: 15px;
+}
+.downArrow {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 10px solid #000000;
+	cursor: pointer;
+	position: absolute;
+	left: 5px;
+	top: 30px;
+}
 pre {
 	-moz-user-select: none;
 	-webkit-user-select: none;

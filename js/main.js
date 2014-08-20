@@ -112,6 +112,16 @@ var main = {
 			}
 		}
 	},
+	
+	alrt: function(input){
+		var alert = $("<div class='alert'>" + input + "</div>");
+		$('#alerts').append(alert);
+		setTimeout(function(){
+			alert.fadeOut('slow',function(){
+				$(this).remove();
+			});
+		},3000);
+	}
 };
 
 Object.size = function(obj) {

@@ -128,49 +128,79 @@ var pikmin = {
 				if(effect!="fire")
 					numToMurder=this.checkForDeath("red",numToMurder,rndSurvive,effect);
 				else
-					numToMurder-=squadColorNum("red");
+					numToMurder-=this.squadColorNum("red");
+					
+				if(numToMurder<=0)
+					return;
+				
 				if(effect!="electric")
 					numToMurder=this.checkForDeath("yellow",numToMurder,rndSurvive,effect);
 				else
-					numToMurder-=squadColorNum("yellow");
+					numToMurder-=this.squadColorNum("yellow");
+					
+				if(numToMurder<=0)
+					return;
+				
 				if(effect!="water")
 					numToMurder=this.checkForDeath("blue",numToMurder,rndSurvive,effect);
 				else
-					numToMurder-=squadColorNum("blue");
+					numToMurder-=this.squadColorNum("blue");
+					
+				if(numToMurder<=0)
+					return;
+				
 				numToMurder=this.checkForDeath("purple",numToMurder,rndSurvive,effect);
+					
+				if(numToMurder<=0)
+					return;
+				
 				if(effect!="poison")
 					numToMurder=this.checkForDeath("white",numToMurder,rndSurvive,effect);
 				else
-					numToMurder-=squadColorNum("white");
-				numToMurder=this.checkForDeath("rock",numToMurder,rndSurvive,effect);
+					numToMurder-=this.squadColorNum("white");
+					
+				if(numToMurder<=0)
+					return;
+				
+				if(effect!="rock")
+					numToMurder=this.checkForDeath("rock",numToMurder,rndSurvive,effect);
+				else
+					numToMurder-=this.squadColorNum("rock");
+					
+				if(numToMurder<=0)
+					return;
+				
 				numToMurder=this.checkForDeath("pink",numToMurder,rndSurvive,effect);
 			}
 		},
 		
 		checkForDeath: function(clr, numKill, chncSurvive, effect){
-			if(numKill<this[clr].numLeaf){
-				this[clr].numLeaf-=1;
-				this.total-=1;
-				return;
-			}
-			numKill-=this[clr].numLeaf;
-			if(numKill<this[clr].numBud){
-				if(rndSurvive>2){
-					this[clr].numBud-=1;
+			if(clr==enemy.monsterList["0"].halfAtk && explore.batman(1,10)<5)
+				numKill-=this.squadColorNum(clr);
+			else{
+				if(numKill<this[clr].numLeaf){
+					this[clr].numLeaf-=1;
 					this.total-=1;
 					return;
 				}
-			}
-			numKill-=this[clr].numBud;
-			if(numKill<this[clr].numFlower){
-				if(rndSurvive>3){
-					this[clr].numFlower-=1;
-					this.total-=1;
-					return;
+				numKill-=this[clr].numLeaf;
+				if(numKill<this[clr].numBud){
+					if(rndSurvive>2){
+						this[clr].numBud-=1;
+						this.total-=1;
+						return;
+					}
 				}
+				numKill-=this[clr].numBud;
+				if(numKill<this[clr].numFlower){
+					if(rndSurvive>3){
+						this[clr].numFlower-=1;
+						this.total-=1;
+						return;
+					}
+				}
+				numKill-=this[clr].numFlower;
 			}
-			numKill-=this[clr].numFlower;
-			
 			return numKill;
 		},
 		
@@ -205,7 +235,7 @@ var pikmin = {
 	},
 	
 	addGuys: function(){
-		if(!explore.isOnMap){
+		if(!explore.isQuesting){
 			if(this.checkNum("red")>0)
 				this.party.red.numLeaf++;
 			if(this.checkNum("yellow")>0)

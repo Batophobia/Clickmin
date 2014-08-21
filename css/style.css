@@ -3,7 +3,6 @@ body {
 	font-family: monospace;
 	color: #333333;
 	font-size: 14px;
-	width: 100%;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -79,8 +78,17 @@ button:disabled {
 }	.rightBar:empty {
 		display: none;
 	}
-	.stuff div{
-		width: 100%;
+	.pellets div{
+		width: 90%;
+		padding: 5px;
+	}.stuff div{
+		width: 90%;
+		padding: 5px;
+	}.nectar{
+		width: 90%;
+		padding: 5px;
+	}.bombs{
+		width: 90%;
 		padding: 5px;
 	} .rightTitle{
 		width: 100%;
@@ -93,7 +101,8 @@ button:disabled {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
-}	.mainBar #map {
+}
+.mainBar #map {
 		display: none;
 		cursor: default;
 	} 	#map pre{
@@ -238,3 +247,6 @@ pre {
 	} #alerts:empty {
 		display:none;
 	}
+#btnStop{
+	display: none;
+}

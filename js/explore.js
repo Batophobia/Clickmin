@@ -9,6 +9,20 @@ var explore = {
 			$('#btnMap').hide();
 			explore.isOnMap=true;
 		});
+		$('#btnStop').on('click',function(){
+			$('#overworld').show();
+			$('#map'+explore.questArea).hide();
+			$('#btnStop').hide();
+			$('.squadMaker').hide();
+			explore.resetMap();
+			explore.isOnMap=true;
+		});
+		$('#btnBomb').on('click',function(){
+			explore.throwBomb();
+			
+			if(items.types.bombRock.total<0 || pikmin.squad.squadColorNum("yellow")<0)
+				$('#btnBomb').hide();
+		});
 		$('#btnQuest').on('click',function(){
 			explore.beginQuest();
 		});
@@ -88,6 +102,7 @@ var explore = {
 	
 	unlock: function(input){
 		$('.area'+input).on('click',function(){
+			$('#btnStop').show();
 			$('.squadMaker').show();
 			explore.questArea=input;
 		});
@@ -102,6 +117,9 @@ var explore = {
 			explore.isQuesting=true;
 			explore.plyrLoc=0;
 			explore.populate(explore.questArea);
+			
+			if(items.types.bombRock.total>0 && pikmin.squad.squadColorNum("yellow")>0)
+				$("#btnBomb").show();
 		}
 	},
 	
@@ -110,8 +128,8 @@ var explore = {
 		switch(area){
 			case 1:
 				tmpEnmy = explore.batman(8,16);
-				$("#1_"+tmpEnmy).html(enemy.bulborb.display);
-				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulborb);
+				$("#1_"+tmpEnmy).html(enemy.basicWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.basicWall);
 				
 				tmpEnmy = explore.batman(17,23);
 				$("#1_"+tmpEnmy).html(enemy.bulborb.display);
@@ -152,6 +170,21 @@ var explore = {
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.slooch);
 				break;
 			case 4:
+				tmpEnmy = explore.batman(5,12);
+				$("#4_"+tmpEnmy).html(enemy.amprat.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.amprat);
+				
+				tmpEnmy = explore.batman(13,20);
+				$("#4_"+tmpEnmy).html(enemy.rockWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.rockWall);
+				
+				tmpEnmy = explore.batman(21,28);
+				$("#4_"+tmpEnmy).html(enemy.anodeBeetle.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.anodeBeetle);
+				
+				tmpEnmy = explore.batman(29,32);
+				$("#4_"+tmpEnmy).html(enemy.amprat.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.amprat);
 				break;
 			case 5:
 				break;
@@ -182,28 +215,16 @@ var explore = {
 				var squadStrength=pikmin.squad.strength();
 				squadStrength=explore.batman(squadStrength/2,squadStrength);
 				
-				enemy.monsterList["0"].hp-=squadStrength;
+				if(enemy.monsterList["0"].special=="")
+					enemy.monsterList["0"].hp-=squadStrength;
+				
 				pikmin.squad.kill(explore.batman(0,enemy.monsterList["0"].attack),enemy.monsterList["0"].status);
 				
 				$("#opntHP").text(enemy.monsterList["0"].hp);
 				$("#plyrHP").text(pikmin.squad.total);
 				
 				if(pikmin.squad.total<=0){
-					enemy.monsterList={};
-					$(".battleDialog").hide();
-					
-					var tmpPlace=0;
-					while($("#"+explore.questArea+"_"+tmpPlace).length>0){
-						$("#"+explore.questArea+"_"+tmpPlace).text("___");
-						tmpPlace++;
-					}
-					
-					$('#overworld').show();
-					$('#map'+explore.questArea).hide();
-					explore.questArea=0;
-					explore.plyrLoc=0;
-					explore.isQuesting=false;
-					explore.updateSquad();
+					this.resetMap();
 					return;
 				}
 				
@@ -225,6 +246,24 @@ var explore = {
 				$("#map2").html(newMap);
 			}
 		}
+	},
+	
+	resetMap: function(){
+		enemy.monsterList={};
+		$(".battleDialog").hide();
+		
+		var tmpPlace=0;
+		while($("#"+explore.questArea+"_"+tmpPlace).length>0){
+			$("#"+explore.questArea+"_"+tmpPlace).text("___");
+			tmpPlace++;
+		}
+		
+		$('#overworld').show();
+		$('#map'+explore.questArea).hide();
+		explore.questArea=0;
+		explore.plyrLoc=0;
+		explore.isQuesting=false;
+		explore.updateSquad();
 	},
 	
 	updateSquad: function(){
@@ -253,63 +292,149 @@ var explore = {
 	},
 	
 	finish: function(){
+		var randNumber = this.batman(0,100);
 		switch(explore.questArea){
 			case 1:
 				if(explore.places["1"].timesBeat==0){
 					explore.unlock(2);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 2:
 				if(explore.places["2"].timesBeat==0){
 					items.give("Yellow Onion", 0, "onion");
 					explore.unlock(3);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 3:
 				if(explore.places["3"].timesBeat==0){
 					explore.unlock(4);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 4:
 				if(explore.places["4"].timesBeat==0){
 					items.give("Blue Onion", 0, "onion");
 					explore.unlock(5);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 5:
 				if(explore.places["5"].timesBeat==0){
 					explore.unlock(6);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 6:
 				if(explore.places["6"].timesBeat==0){
 					items.give("Black Onion", 0, "onion");
 					explore.unlock(7);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 7:
 				if(explore.places["7"].timesBeat==0){
 					explore.unlock(11);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 11:
 				if(explore.places["11"].timesBeat==0){
 					items.give("Pink Onion", 0, "onion");
 					explore.unlock(12);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 12:
 				if(explore.places["12"].timesBeat==0){
 					explore.unlock(13);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 13:
 				if(explore.places["13"].timesBeat==0){
 					explore.unlock(14);
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 			case 14:
 				if(explore.places["14"].timesBeat==0){
+					
+				}else if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>70){
+					items.giveBomb();
+				}else if(randNumber>50){
+					items.giveNectar();
+				}else{
+					items.givePellet();
 				}
 				break;
 		}

@@ -4,8 +4,10 @@ var main = {
 		pikmin.init();
 		items.init();
 		explore.init();
-		window.setInterval(function(){main.tick()}, 1000);
+		this.timerID = window.setInterval(function(){main.tick()}, 1000);
 	},
+	
+	timerID: 0,
 	
 	tick : function(){
 		pikmin.addGuys();
@@ -53,8 +55,7 @@ var main = {
 				}
 			}else{
 				data['items'][group] = {
-					total : items.types[group].total,
-					owned : items.types[group].owned
+					total : items.types[group].total
 				}
 			}
 		}
@@ -90,7 +91,6 @@ var main = {
 					}
 				}else{
 					items.types[group].total = data.items[group].total;
-					items.types[group].owned = data.items[group].owned;
 				}
 			}
 		}

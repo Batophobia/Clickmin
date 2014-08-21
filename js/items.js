@@ -1,10 +1,10 @@
 var items = {
 	init: function(){
-		if(this.types.nectar.owned>0){
-			//Display Nectar
+		if(this.types.nectar.total>0){
+			$(".nectar").text("Nectar: "+this.types.nectar.total);
 		}
-		if(this.types.bombRock.owned>0){
-			//Display Bomb Rocks
+		if(this.types.bombRock.total>0){
+			$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
 		}
 		if(Object.size(this.types.stuff)>0){
 			for(var thing in this.types.stuff){
@@ -15,8 +15,10 @@ var items = {
 				$(".stuff").append("<div"+extraStuff+">"+this.types.stuff[thing].display+"</div>");
 			}
 		}
-		if(Object.size(this.types.stuff)>0){
-			//Display Pellets
+		if(Object.size(this.types.pellets)>0){
+			for(var thing in this.types.pellets){
+				$(".pellets").append("<div>"+this.types.pellets[thing].color+" "+this.types.pellets[thing].numNeeded+"</div>");
+			}
 		}
 	},
 	
@@ -25,6 +27,35 @@ var items = {
 		bombRock:{display:"Bomb Rock",	total:0	},
 		stuff	:{},	//display, numNeeded, type
 		pellets	:{} 	//color, numNeeded
+	},
+	
+	giveBomb: function(){
+		this.types.bombRock.total+=1;
+		$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
+	},
+	giveNectar: function(){
+		this.types.nectar.total+=1;
+		$(".nectar").text("Nectar: "+this.types.nectar.total);
+	},
+	givePellet: function(){
+		var colors=[];
+		if(pikmin.checkNum("red")>0)
+			colors.push("Red");
+		if(pikmin.checkNum("yellow")>0)
+			colors.push("Yellow");
+		if(pikmin.checkNum("blue")>0)
+			colors.push("Blue");
+		if(pikmin.checkNum("rock")>0)
+			colors.push("Black");
+		if(pikmin.checkNum("pink")>0)
+			colors.push("Pink");
+		
+		this.types.pellets[Object.size(this.types.pellets)]={
+			color: colors[batman(0,colors.length-1)],
+			numNeeded: batman((3*explore.questArea),(5*explore.questArea))
+		}
+		
+		$(".pellets").append("<div>"+this.types.pellets[Object.size(this.types.pellets)-1].color+" "+this.types.pellets[Object.size(this.types.pellets)-1].numNeeded+"</div>");
 	},
 	
 	useOnion: function(itm){
@@ -80,6 +111,13 @@ var items = {
 	},
 	addRandomThing: function(){
 		var disp, numNeed, thngType;
+		var preFruit=["Straw","Water","Fire", "Ice", "Goji", "May", "Elder", "Musk", "Honey", "Sweet", "Sour", "Poison", "Coco", "Pik"];
+		var postFruit=["melon", "berry", " Fruit"];
+		
+		disp = preFruit[explore.batman(0,preFruit.length-1)] + postFruit[explore.batman(0,postFruit.length-1)];
+		numNeed = explore.batman((3*explore.questArea),(5*explore.questArea));
+		thngType="fruit";
+		
 		this.types.stuff[Object.size(this.types.stuff)]={
 			display: disp,
 			numNeeded: numNeed,

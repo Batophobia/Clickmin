@@ -22,6 +22,15 @@ var items = {
 		}
 	},
 	
+	throwBomb: function(){
+		items.types.bombRock.total--;
+		enemy.monsterList["0"].hp-=1000;
+		$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
+		
+		if(items.types.bombRock.total<1 || pikmin.squad.squadColorNum("yellow")<1)
+			$('#btnBomb').hide();
+	},
+	
 	types:{
 		nectar	:{display:"Nectar",		total:0	},
 		bombRock:{display:"Bomb Rock",	total:0	},

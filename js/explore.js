@@ -14,14 +14,12 @@ var explore = {
 			$('#map'+explore.questArea).hide();
 			$('#btnStop').hide();
 			$('.squadMaker').hide();
+			$('#btnBomb').hide();
 			explore.resetMap();
 			explore.isOnMap=true;
 		});
 		$('#btnBomb').on('click',function(){
-			explore.throwBomb();
-			
-			if(items.types.bombRock.total<0 || pikmin.squad.squadColorNum("yellow")<0)
-				$('#btnBomb').hide();
+			items.throwBomb();
 		});
 		$('#btnQuest').on('click',function(){
 			explore.beginQuest();

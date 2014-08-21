@@ -122,7 +122,7 @@ var pikmin = {
 		
 		kill: function(num, effect){
 			for(i=0;i<num;i++){
-				var numToMurder=explore.batman(0,this.total);
+				var numToMurder=explore.batman(0,this.total+1);
 				var rndSurvive = explore.batman(0,10);
 				
 				if(effect!="fire")
@@ -178,13 +178,13 @@ var pikmin = {
 			if(clr==enemy.monsterList["0"].halfAtk && explore.batman(1,10)<5)
 				numKill-=this.squadColorNum(clr);
 			else{
-				if(numKill<this[clr].numLeaf){
+				if(numKill<=this[clr].numLeaf){
 					this[clr].numLeaf-=1;
 					this.total-=1;
 					return;
 				}
 				numKill-=this[clr].numLeaf;
-				if(numKill<this[clr].numBud){
+				if(numKill<=this[clr].numBud){
 					if(rndSurvive>2){
 						this[clr].numBud-=1;
 						this.total-=1;
@@ -192,7 +192,7 @@ var pikmin = {
 					}
 				}
 				numKill-=this[clr].numBud;
-				if(numKill<this[clr].numFlower){
+				if(numKill<=this[clr].numFlower){
 					if(rndSurvive>3){
 						this[clr].numFlower-=1;
 						this.total-=1;

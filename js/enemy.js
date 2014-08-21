@@ -31,7 +31,7 @@ var enemy = {
 		name: "Bearded Amprat",
 		display: "m()",
 		hp: 1500,
-		attack: 500,
+		attack: 6,
 		status: "",
 		halfAtk: "yellow",
 		special: ""
@@ -40,7 +40,16 @@ var enemy = {
 		name: "Anode Beetle",
 		display: "nHn",
 		hp: 500,
-		attack: 500,
+		attack: 100,
+		status: "electric",
+		halfAtk: "",
+		special: ""
+	},
+	electricWall: {
+		name: "Electric Gate",
+		display: "NMN",
+		hp: 10000,
+		attack: 100,
 		status: "electric",
 		halfAtk: "",
 		special: ""
@@ -54,9 +63,18 @@ var enemy = {
 		halfAtk: "",
 		special: "bomb"
 	},
-	basicWall: {
+	dirtWall: {
 		name: "Dirt Wall",
-		display: "/#\\",
+		display: "Y#Y",
+		hp: 10000,
+		attack: 0,
+		status: "",
+		halfAtk: "",
+		special: ""
+	},
+	basicWall: {
+		name: "Bramble Wall",
+		display: "TXT",
 		hp: 10000,
 		attack: 0,
 		status: "",

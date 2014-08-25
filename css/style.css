@@ -78,7 +78,9 @@ button:disabled {
 }	.rightBar:empty {
 		display: none;
 	}
-	.pellets div{
+	.pellets{
+		display: none;
+	} .pellets div{
 		width: 90%;
 		padding: 5px;
 	}.stuff div{
@@ -101,7 +103,13 @@ button:disabled {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
-}
+}	.pikminFarm{
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}	.btnPluck{
+			display: none;
+		}
 .mainBar #map {
 		display: none;
 		cursor: default;

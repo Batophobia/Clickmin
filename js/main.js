@@ -4,15 +4,13 @@ var main = {
 		pikmin.init();
 		items.init();
 		explore.init();
-		this.timerID = window.setInterval(function(){main.tick()}, 1000);
+		this.timerID = window.setInterval(function(){main.tick()}, 100);
 	},
 	
 	timerID: 0,
 	
 	tick : function(){
-		pikmin.addGuys();
-		pikmin.totalUpdate();
-		
+		pikmin.tick();
 		explore.tick();
 
 		this.updateDisplay();
@@ -36,6 +34,7 @@ var main = {
 				data['pikmin'][group] = pikmin.party.total;
 			else{
 				data['pikmin'][group] = {
+					hadBefore : pikmin.party[group].hadBefore,
 					numLeaf : pikmin.party[group].numLeaf,
 					numBud : pikmin.party[group].numBud,
 					numFlower : pikmin.party[group].numFlower
@@ -102,6 +101,7 @@ var main = {
 					pikmin.party[group].numLeaf = data.pikmin[group].numLeaf;
 					pikmin.party[group].numBud = data.pikmin[group].numBud;
 					pikmin.party[group].numFlower = data.pikmin[group].numFlower;
+					pikmin.party[group].hadBefore = data.pikmin[group].hadBefore;
 				}
 			}
 		}

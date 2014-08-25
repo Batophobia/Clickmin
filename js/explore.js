@@ -7,6 +7,7 @@ var explore = {
 			$('#map').show();
 			$('#overworld').show();
 			$('#btnMap').hide();
+			$('.pikminFarm').hide();
 			explore.isOnMap=true;
 		});
 		$('#btnStop').on('click',function(){
@@ -38,8 +39,9 @@ var explore = {
 		
 		$('.area0').on('click',function(){
 			$('#map').hide();
-			$('#btnMap').show();
 			$('.squadMaker').hide();
+			$('#btnMap').show();
+			$('.pikminFarm').show();
 			explore.isOnMap=false;
 		});
 		
@@ -60,6 +62,8 @@ var explore = {
 	isQuesting: false,
 	questArea: 0,
 	plyrLoc: 0,
+	delayMax: 5,
+	curDelay: 5,
 	
 	addToSquad: function(clr, type){
 		if(type=="bud")
@@ -202,7 +206,11 @@ var explore = {
 	},
 	
 	tick: function(){
-		if(explore.isQuesting){
+		if(explore.curDelay>0)
+			explore.curDelay--;
+		
+		if(explore.isQuesting && explore.curDelay<=0){
+			explore.curDelay=explore.delayMax;
 			if(explore.canMove()){
 				$("#"+explore.questArea+"_"+explore.plyrLoc).text("___");
 				explore.plyrLoc++;

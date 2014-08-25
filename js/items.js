@@ -16,6 +16,7 @@ var items = {
 			}
 		}
 		if(Object.size(this.types.pellets)>0){
+			$(".pellets").show();
 			for(var thing in this.types.pellets){
 				$(".pellets").append("<div>"+this.types.pellets[thing].color+" "+this.types.pellets[thing].numNeeded+"</div>");
 			}
@@ -76,8 +77,7 @@ var items = {
 			clr="rock";
 		
 		pikmin.give(clr,"leaf");
-		$("#"+clr+"Block").show();
-		$("#"+clr+"Squad").show();
+		pikmin.show(clr);
 		$("#btnMap").show();
 		
 		if(clr=="red"){

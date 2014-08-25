@@ -5,43 +5,57 @@ var pikmin = {
 			display: "Red",
 			numLeaf: 0,
 			numBud: 0,
-			numFlower: 0
+			numFlower: 0,
+			hadBefore: false,
+			buttonDelay: 3
 		},
 		yellow:{
 			display: "Yellow",
 			numLeaf:0,
 			numBud:0,
-			numFlower:0
+			numFlower:0,
+			hadBefore: false,
+			buttonDelay: 3
 		},
 		blue:{
 			display: "Blue",
 			numLeaf:0,
 			numBud:0,
-			numFlower:0
+			numFlower:0,
+			hadBefore: false,
+			buttonDelay: 3
 		},
 		purple:{
 			display: "Purple",
 			numLeaf:0,
 			numBud:0,
-			numFlower:0
+			numFlower:0,
+			hadBefore: false,
+			buttonDelay: 3
 		},
 		white:{
 			display: "White",
 			numLeaf:0,
 			numBud:0,
-			numFlower:0
+			numFlower:0,
+			hadBefore: false,
+			buttonDelay: 3
 		},
 		rock:{
 			display: "Rock",
 			numLeaf:0,
 			numBud:0,
-			numFlower:0
+			numFlower:0,
+			hadBefore: false,
+			buttonDelay: 3
 		},
 		pink:{
 			display: "Winged",
 			numLeaf:0,
 			numBud:0,
-			numFlower:0
+			numFlower:0,
+			hadBefore: false,
+			buttonDelay: 3
 		}
 	},
 	
@@ -234,6 +248,10 @@ var pikmin = {
 		this.party.total+=this.checkNum("pink");
 	},
 	
+	tick: function(){
+		
+	},
+	
 	addGuys: function(){
 		if(!explore.isQuesting){
 			if(this.checkNum("red")>0)
@@ -263,25 +281,38 @@ var pikmin = {
 	},
 	
 	init : function(){
-		if(this.checkNum("red")>0)
+		if(this.party.red.hadBefore)
 			this.show("red");
-		if(this.checkNum("yellow")>0)
+		if(this.party.yellow.hadBefore)
 			this.show("yellow");
-		if(this.checkNum("blue")>0)
+		if(this.party.blue.hadBefore)
 			this.show("blue");
-		if(this.checkNum("purple")>0)
+		if(this.party.purple.hadBefore)
 			this.show("purple");
-		if(this.checkNum("white")>0)
+		if(this.party.white.hadBefore)
 			this.show("white");
-		if(this.checkNum("rock")>0)
+		if(this.party.rock.hadBefore)
 			this.show("rock");
-		if(this.checkNum("pink")>0)
+		if(this.party.pink.hadBefore)
 			this.show("pink");
+		
+		$(".btnPluck").on('click',function(){
+			var color = this.id.substring(8);
+			pikmin.give(color,'leaf');
+			$("#btnPluck"+color).attr("disabled", "disabled");
+			setTimeout('$("#btnPluck'+color+'").removeAttr("disabled");',pikmin.party[color].buttonDelay*00);
+		});
 	},
 	
 	show : function(input){
+		if(input!="purple" && input!="white"){
+			$("#btnPluck"+input).show();
+			$("#btnPluck"+input).removeAttr("disabled");
+		}
+		$("#btnMap").show();
 		$("#"+input+"Block").show();
 		$("#"+input+"Squad").show();
+		pikmin.party[input].hadBefore=true;
 	},
 	
 	updateDisplay : function(clr){

@@ -40,6 +40,7 @@ var explore = {
 		$('.area0').on('click',function(){
 			$('#map').hide();
 			$('.squadMaker').hide();
+			$('#btnStop').hide();
 			$('#btnMap').show();
 			$('.pikminFarm').show();
 			explore.isOnMap=false;
@@ -255,6 +256,7 @@ var explore = {
 	},
 	
 	resetMap: function(){
+		$('#btnStop').hide();
 		enemy.monsterList={};
 		$(".battleDialog").hide();
 		

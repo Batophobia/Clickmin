@@ -309,7 +309,8 @@ var pikmin = {
 			$("#btnPluck"+input).show();
 			$("#btnPluck"+input).removeAttr("disabled");
 		}
-		$("#btnMap").show();
+		if(!explore.isOnMap)
+			$("#btnMap").show();
 		$("#"+input+"Block").show();
 		$("#"+input+"Squad").show();
 		pikmin.party[input].hadBefore=true;

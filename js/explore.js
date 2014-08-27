@@ -59,8 +59,9 @@ var explore = {
 			$('.area15').on('click',function(){
 				items.giveBomb();
 				items.giveNectar();
-				this.places["15"].canGo=false;
-				this.places["15"].timesBeat++;
+				explore.places["15"].canGo=false;
+				explore.places["15"].timesBeat++;
+				$('.area15').off('click');
 			});
 		}
 		

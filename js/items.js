@@ -21,6 +21,56 @@ var items = {
 				$(".pellets").append("<div>"+this.types.pellets[thing].color+" "+this.types.pellets[thing].numNeeded+"</div>");
 			}
 		}
+		
+		$(".nectar").on('click',function(){
+			items.select("nectar");
+			if(items.selectedItem=="nectar")
+				$("#btnRndNectar").show();
+			else
+				$("#btnRndNectar").hide();
+		});
+		$(".pikminMenu").on('click',function(){
+			items.useItem(this.id);
+			//$("#btnRndNectar").hide();
+		});
+		$("#btnRndNectar").on('click',function(){
+			items.useItem("");
+			//$("#btnRndNectar").hide();
+		});
+	},
+	selectedItem: "",
+	
+	useItem: function(clr){
+		if(clr!="")
+			clr=clr.slice(0,-5);
+		
+		if(items.selectedItem=="nectar"){
+			if(items.types.nectar.total<=0){
+				this.selectedItem='';
+				this.select("nectar");
+				return false;
+			}
+			items.types.nectar.total--;
+			var minNum=5, maxNum=10;
+			var promoteThisMany = explore.batman(minNum,maxNum);
+			
+			for(i=0;i<promoteThisMany;i++){
+				pikmin.promote(clr);
+			}
+			$(".nectar").text("Nectar: "+this.types.nectar.total);
+		}
+	},
+	
+	select: function(itm){
+		$(".nectar").css('background','');
+		$(".bombs").css('background','');
+		
+		if(items.selectedItem==itm)
+			items.selectedItem='';
+		else{
+			items.selectedItem=itm;
+			$("."+itm).css('background','#CCCCCC');
+		}
 	},
 	
 	throwBomb: function(){
@@ -61,8 +111,8 @@ var items = {
 			colors.push("Pink");
 		
 		this.types.pellets[Object.size(this.types.pellets)]={
-			color: colors[batman(0,colors.length-1)],
-			numNeeded: batman((3*explore.questArea),(5*explore.questArea))
+			color: colors[explore.batman(0,colors.length-1)],
+			numNeeded: explore.batman((3*explore.questArea),(5*explore.questArea))
 		}
 		
 		$(".pellets").append("<div>"+this.types.pellets[Object.size(this.types.pellets)-1].color+" "+this.types.pellets[Object.size(this.types.pellets)-1].numNeeded+"</div>");

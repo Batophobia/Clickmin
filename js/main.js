@@ -35,9 +35,9 @@ var main = {
 			else{
 				data['pikmin'][group] = {
 					hadBefore : pikmin.party[group].hadBefore,
-					numLeaf : pikmin.party[group].numLeaf,
-					numBud : pikmin.party[group].numBud,
-					numFlower : pikmin.party[group].numFlower
+					numLeaf : pikmin.party[group].numLeaf + pikmin.squad[group].numLeaf,
+					numBud : pikmin.party[group].numBud + pikmin.squad[group].numBud,
+					numFlower : pikmin.party[group].numFlower + pikmin.squad[group].numFlower
 				}
 			}
 		}

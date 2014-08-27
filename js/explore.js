@@ -18,12 +18,21 @@ var explore = {
 			$('#btnBomb').hide();
 			explore.resetMap();
 			explore.isOnMap=true;
+			
+			if(pikmin.squad.total>0)
+				$('#btnClearSquad').show();
 		});
 		$('#btnBomb').on('click',function(){
 			items.throwBomb();
 		});
 		$('#btnQuest').on('click',function(){
+			$('#btnClearSquad').hide();
 			explore.beginQuest();
+		});
+		$('#btnClearSquad').on('click',function(){
+			pikmin.squad.reset();
+			explore.updateSquad();
+			$('#btnClearSquad').hide();
 		});
 		
 		$(".mapButton").hover(function(){
@@ -45,6 +54,15 @@ var explore = {
 			$('.pikminFarm').show();
 			explore.isOnMap=false;
 		});
+		
+		if(this.places["15"].canGo){
+			$('.area15').on('click',function(){
+				items.giveBomb();
+				items.giveNectar();
+				this.places["15"].canGo=false;
+				this.places["15"].timesBeat++;
+			});
+		}
 		
 		for(var i=1;i<15;i++){
 			if(explore.places[i].canGo){
@@ -75,6 +93,7 @@ var explore = {
 			type="numLeaf";
 		
 		if(pikmin.party[clr][type]>1 && pikmin.squad.total<100){
+			$('#btnClearSquad').show();
 			pikmin.party[clr][type]-=1;
 			pikmin.party.total-=1;
 			pikmin.squad[clr][type]+=1;
@@ -101,6 +120,9 @@ var explore = {
 			$("#"+clr+type.substring(3)+"SquadNum").text(pikmin.squad[clr][type]);
 			$("#totalSquadNum").text("Total: "+pikmin.squad.total);
 		}
+		
+		if(pikmin.squad.total<=0)
+			$('#btnClearSquad').hide();
 	},
 	
 	unlock: function(input){
@@ -120,6 +142,13 @@ var explore = {
 			explore.isQuesting=true;
 			explore.plyrLoc=0;
 			explore.populate(explore.questArea);
+			
+			if(explore.questArea==2)
+				pikmin.squad.killAllBut("red");
+			else if(explore.questArea==4)
+				pikmin.squad.killAllBut("yellow");
+			else if(explore.questArea==6)
+				pikmin.squad.killAllBut("blue");
 			
 			if(items.types.bombRock.total>0 && pikmin.squad.squadColorNum("yellow")>0)
 				$("#btnBomb").show();
@@ -301,11 +330,14 @@ var explore = {
 	
 	finish: function(){
 		var randNumber = this.batman(0,100);
+		$('#btnStop').hide();
+		$('#btnBomb').hide();
+		$('#btnClearSquad').show();
 		switch(explore.questArea){
 			case 1:
 				if(explore.places["1"].timesBeat==0){
 					explore.unlock(2);
-				}else if(randNumber>90){
+				}else if(randNumber>95){
 					items.addRandomThing();
 				}else if(randNumber>70){
 					items.giveNectar();

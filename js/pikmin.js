@@ -134,6 +134,78 @@ var pikmin = {
 			numFlower:0
 		},
 		
+		killAllBut: function(clr){
+			if(clr!="red"){
+				this.red.numLeaf=0;
+				this.red.numBud=0;
+				this.red.numFlower=0;
+			}if(clr!="yellow"){
+				this.yellow.numLeaf=0;
+				this.yellow.numBud=0;
+				this.yellow.numFlower=0;
+			}if(clr!="blue"){
+				this.blue.numLeaf=0;
+				this.blue.numBud=0;
+				this.blue.numFlower=0;
+			}if(clr!="purple"){
+				this.purple.numLeaf=0;
+				this.purple.numBud=0;
+				this.purple.numFlower=0;
+			}if(clr!="white"){
+				this.white.numLeaf=0;
+				this.white.numBud=0;
+				this.white.numFlower=0;
+			}if(clr!="rock"){
+				this.rock.numLeaf=0;
+				this.rock.numBud=0;
+				this.rock.numFlower=0;
+			}if(clr!="pink"){
+				this.pink.numLeaf=0;
+				this.pink.numBud=0;
+				this.pink.numFlower=0;
+			}
+			this.updateSquadTotal();
+		},
+		
+		reset: function(){
+			pikmin.squad.total=0;
+			pikmin.party.red.numLeaf  +=pikmin.squad.red.numLeaf;
+			pikmin.party.red.numBud   +=pikmin.squad.red.numBud;
+			pikmin.party.red.numFlower+=pikmin.squad.red.numFlower;
+			pikmin.party.yellow.numLeaf  +=pikmin.squad.yellow.numLeaf;
+			pikmin.party.yellow.numBud   +=pikmin.squad.yellow.numBud;
+			pikmin.party.yellow.numFlower+=pikmin.squad.yellow.numFlower;
+			pikmin.party.blue.numLeaf  +=pikmin.squad.blue.numLeaf;
+			pikmin.party.blue.numBud   +=pikmin.squad.blue.numBud;
+			pikmin.party.blue.numFlower+=pikmin.squad.blue.numFlower;
+			pikmin.party.purple.numLeaf  +=pikmin.squad.purple.numLeaf;
+			pikmin.party.purple.numBud   +=pikmin.squad.purple.numBud;
+			pikmin.party.purple.numFlower+=pikmin.squad.purple.numFlower;
+			pikmin.party.white.numLeaf  +=pikmin.squad.white.numLeaf;
+			pikmin.party.white.numBud   +=pikmin.squad.white.numBud;
+			pikmin.party.white.numFlower+=pikmin.squad.white.numFlower;
+			pikmin.party.rock.numLeaf  +=pikmin.squad.rock.numLeaf;
+			pikmin.party.rock.numBud   +=pikmin.squad.rock.numBud;
+			pikmin.party.rock.numFlower+=pikmin.squad.rock.numFlower;
+			pikmin.party.pink.numLeaf  +=pikmin.squad.pink.numLeaf;
+			pikmin.party.pink.numBud   +=pikmin.squad.pink.numBud;
+			pikmin.party.pink.numFlower+=pikmin.squad.pink.numFlower;
+			
+			this.killAllBut("");
+		},
+		
+		updateSquadTotal: function(){
+			pikmin.squad.total=0;
+			pikmin.squad.total+=this.squadColorNum("red");
+			pikmin.squad.total+=this.squadColorNum("yellow");
+			pikmin.squad.total+=this.squadColorNum("blue");
+			pikmin.squad.total+=this.squadColorNum("purple");
+			pikmin.squad.total+=this.squadColorNum("white");
+			pikmin.squad.total+=this.squadColorNum("rock");
+			pikmin.squad.total+=this.squadColorNum("pink");
+			pikmin.squad.total+=this.squadColorNum("bulbmin");
+		},
+		
 		kill: function(num, effect){
 			for(i=0;i<num;i++){
 				var numToMurder=explore.batman(0,this.total+1);
@@ -234,6 +306,39 @@ var pikmin = {
 			intStr += pikmin.squad.pink.strength * (pikmin.squad.squadColorNum("pink"));
 			
 			return intStr;
+		}
+	},
+	
+	promote: function(clr){
+		var clrs=[], type;
+		
+		if(clr==""){
+			if((this.checkNum("red")-this.party.red.numFlower)>0)
+				clrs.push("red");
+			if((this.checkNum("yellow")-this.party.yellow.numFlower)>0)
+				clrs.push("yellow");
+			if((this.checkNum("blue")-this.party.blue.numFlower)>0)
+				clrs.push("blue");
+			if((this.checkNum("purple")-this.party.purple.numFlower)>0)
+				clrs.push("purple");
+			if((this.checkNum("white")-this.party.white.numFlower)>0)
+				clrs.push("white");
+			if((this.checkNum("rock")-this.party.rock.numFlower)>0)
+				clrs.push("rock");
+			if((this.checkNum("pink")-this.party.pink.numFlower)>0)
+				clrs.push("pink");
+			
+			clr=clrs[explore.batman(0,clrs.length)];
+			clrs=[];
+		}
+		
+		type=explore.batman(0,this.party[clr].numLeaf+this.party[clr].numBud);
+		if(type < this.party[clr].numLeaf){
+			pikmin.party[clr].numLeaf--;
+			pikmin.party[clr].numBud++;
+		}else{
+			pikmin.party[clr].numBud--;
+			pikmin.party[clr].numFlower++;
 		}
 	},
 	

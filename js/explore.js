@@ -339,10 +339,8 @@ var explore = {
 					explore.unlock(2);
 				}else if(randNumber>95){
 					items.addRandomThing();
-				}else if(randNumber>70){
-					items.giveNectar();
 				}else{
-					items.givePellet();
+					items.giveNectar();
 				}
 				break;
 			case 2:
@@ -351,10 +349,10 @@ var explore = {
 					explore.unlock(3);
 				}else if(randNumber>90){
 					items.addRandomThing();
-				}else if(randNumber>50){
-					items.giveNectar();
+				}else if(randNumber>80){
+					items.giveBomb();
 				}else{
-					items.givePellet();
+					items.giveNectar();
 				}
 				break;
 			case 3:
@@ -364,10 +362,8 @@ var explore = {
 					items.addRandomThing();
 				}else if(randNumber>70){
 					items.giveBomb();
-				}else if(randNumber>50){
-					items.giveNectar();
 				}else{
-					items.givePellet();
+					items.giveNectar();
 				}
 				break;
 			case 4:
@@ -376,12 +372,10 @@ var explore = {
 					explore.unlock(5);
 				}else if(randNumber>90){
 					items.addRandomThing();
-				}else if(randNumber>70){
+				}else if(randNumber>65){
 					items.giveBomb();
-				}else if(randNumber>50){
-					items.giveNectar();
 				}else{
-					items.givePellet();
+					items.giveNectar();
 				}
 				break;
 			case 5:

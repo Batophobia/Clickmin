@@ -260,7 +260,7 @@ var pikmin = {
 			}
 		},
 		
-		checkForDeath: function(clr, numKill, chncSurvive, effect){
+		checkForDeath: function(clr, numKill, rndSurvive, effect){
 			if(clr==enemy.monsterList["0"].halfAtk && explore.batman(1,10)<5)
 				numKill-=this.squadColorNum(clr);
 			else{

@@ -7,7 +7,7 @@ var pikmin = {
 			numBud: 0,
 			numFlower: 0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		},
 		yellow:{
 			display: "Yellow",
@@ -15,7 +15,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		},
 		blue:{
 			display: "Blue",
@@ -23,7 +23,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		},
 		purple:{
 			display: "Purple",
@@ -31,7 +31,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		},
 		white:{
 			display: "White",
@@ -39,7 +39,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		},
 		rock:{
 			display: "Rock",
@@ -47,7 +47,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		},
 		pink:{
 			display: "Winged",
@@ -55,7 +55,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 3
+			buttonDelay: 5
 		}
 	},
 	
@@ -357,20 +357,20 @@ var pikmin = {
 		
 	},
 	
-	addGuys: function(){
-		if(!explore.isQuesting){
-			if(this.checkNum("red")>0)
-				this.party.red.numLeaf++;
-			if(this.checkNum("yellow")>0)
-				this.party.yellow.numLeaf++;
-			if(this.checkNum("blue")>0)
-				this.party.blue.numLeaf++;
-			if(this.checkNum("rock")>0)
-				this.party.rock.numLeaf++;
-			if(this.checkNum("pink")>0)
-				this.party.pink.numLeaf++;
-		}
-	},
+	//addGuys: function(){
+	//	if(!explore.isQuesting){
+	//		if(this.checkNum("red")>0)
+	//			this.party.red.numLeaf++;
+	//		if(this.checkNum("yellow")>0)
+	//			this.party.yellow.numLeaf++;
+	//		if(this.checkNum("blue")>0)
+	//			this.party.blue.numLeaf++;
+	//		if(this.checkNum("rock")>0)
+	//			this.party.rock.numLeaf++;
+	//		if(this.checkNum("pink")>0)
+	//			this.party.pink.numLeaf++;
+	//	}
+	//},
 	
 	give: function(clr, type){
 		if(type=="bud")
@@ -379,6 +379,11 @@ var pikmin = {
 			this.party[clr].numFlower+=1;
 		else
 			this.party[clr].numLeaf+=1;
+		
+		this.totalUpdate();
+		
+		if(this.party.total>25)
+			$("#btnMap").show();
 	},
 	
 	checkNum: function(clr){
@@ -405,7 +410,7 @@ var pikmin = {
 			var color = this.id.substring(8);
 			pikmin.give(color,'leaf');
 			$("#btnPluck"+color).attr("disabled", "disabled");
-			setTimeout('$("#btnPluck'+color+'").removeAttr("disabled");',pikmin.party[color].buttonDelay*00);
+			setTimeout('$("#btnPluck'+color+'").removeAttr("disabled");',pikmin.party[color].buttonDelay*100);
 		});
 	},
 	
@@ -414,8 +419,8 @@ var pikmin = {
 			$("#btnPluck"+input).show();
 			$("#btnPluck"+input).removeAttr("disabled");
 		}
-		if(!explore.isOnMap)
-			$("#btnMap").show();
+		//if(!explore.isOnMap)
+		//	$("#btnMap").show();
 		$("#"+input+"Block").show();
 		$("#"+input+"Squad").show();
 		pikmin.party[input].hadBefore=true;

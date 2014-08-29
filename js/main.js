@@ -5,8 +5,26 @@ var main = {
 		items.init();
 		explore.init();
 		this.timerID = window.setInterval(function(){main.tick()}, 100);
+		
+		$(".genTopic").on('click', function(){
+			var hlpNum=this.id;
+			hlpNum=hlpNum.substring(5);
+			if(main.helpID!=hlpNum){
+				main.helpID=hlpNum;
+				$(".helpText").hide();
+				$(".helpTopic").hide();
+				$("#topic"+hlpNum+" div").show();
+				$("#tophelp"+hlpNum).show();
+			}
+		});
+		$(".helpTopic").on('click', function(){
+			var hlpNum=this.id;
+			hlpNum=hlpNum.substring(4);
+			$(".helpText").hide();
+			$("#help"+hlpNum).show();
+		});
 	},
-	
+	helpID: 0,
 	timerID: 0,
 	
 	tick : function(){
@@ -28,7 +46,7 @@ var main = {
 	},
 	
 	save : function(){
-		var data = {'pikmin':{},'items':{},'explore':{}};
+		var data = {'pikmin':{},'items':{},'explore':{},'team':{}};
 		for(var group in pikmin.party){
 			if(group=="total")
 				data['pikmin'][group] = pikmin.party.total;
@@ -57,6 +75,11 @@ var main = {
 					total : items.types[group].total
 				}
 			}
+		}
+		for(var group in team){
+			data['team'][group] = {
+					inParty: team[group].inParty
+				}
 		}
 		for(var group in explore.places){
 			data['explore'][group] = {
@@ -92,6 +115,10 @@ var main = {
 					items.types[group].total = data.items[group].total;
 				}
 			}
+		}
+		for(var group in team){
+			if(data.team[group].inParty)
+				team[group].init();
 		}
 		for(var group in pikmin.party){
 			if(group in data['pikmin']){

@@ -338,6 +338,7 @@ var explore = {
 			case 1:
 				if(explore.places["1"].timesBeat==0){
 					explore.unlock(2);
+					team.find("koppad");
 				}else if(randNumber>95){
 					items.addRandomThing();
 				}else{
@@ -359,9 +360,9 @@ var explore = {
 			case 3:
 				if(explore.places["3"].timesBeat==0){
 					explore.unlock(4);
-				}else if(randNumber>90){
+				}else if(randNumber>95){
 					items.addRandomThing();
-				}else if(randNumber>70){
+				}else if(randNumber>35){
 					items.giveBomb();
 				}else{
 					items.giveNectar();

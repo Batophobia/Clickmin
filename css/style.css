@@ -28,8 +28,52 @@ button:disabled {
 	background: #999999;
 	cursor: default;
 }
+.helpMenu{
+	position: absolute;
+	left:300px;
+	top:150px;
+	width:800px;
+	height:500px;
+	background: #CCCCCC;
+	border: 1px solid #333333;
+	border-radius: 50px;
+	display: none;
+	z-index:98;
+}	.helpScreen{
+		position: relative;
+		background: #CCFFCC;
+		margin-left:100px;
+		margin-top:50px;
+		width:600px;
+		height:400px;
+		border: 1px solid #999999;
+		border-radius: 5px;
+		z-index:99;
+	}	.helpLeft{
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			width: 290px;
+			height: 390px;
+			border-right: 1px solid #999999;
+		}.helpRight{
+			position: absolute;
+			top: 5px;
+			left: 300px;
+			width: 290px;
+			height: 390px;
+		}.helpText{
+			display: none;
+		}.genTopic{
+			margin-top: 5px;
+			cursor: pointer;
+		}.helpTopic{
+			display: none;
+			cursor: pointer;
+			margin-left: 5px;
+		}
 .topBar {
-	width: 350px;
+	width: 650px;
 	height: 100px;
 	position: absolute;
 	top: 5px;

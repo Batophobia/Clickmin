@@ -3,7 +3,7 @@ var enemy = {
 	joustmite: {
 		name: "Joustmite",
 		display: "<^)",
-		hp: 1000,
+		hp: 2000,
 		attack: 3,
 		status: "rock",
 		halfAtk: "",

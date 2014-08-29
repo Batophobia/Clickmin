@@ -10,6 +10,7 @@
     <script src="js/items.js"></script>
     <script src="js/explore.js"></script>
     <script src="js/enemy.js"></script>
+    <script src="js/team.js"></script>
     <script src="js/main.js"></script>
   </head>
   <body>
@@ -23,6 +24,7 @@
       <button id="btnClearSquad">Clear Squad</button>
       <button id="btnRndNectar">Random Nectar</button>
       <button id="btnBomb">Use Bomb</button>
+      <button id="btnHelp">KopPad</button>
     </div>
     <div id='army' class='leftBar'>
 		<div class="pikminMenu" style="background:#F62E30" id="redBlock"></div>
@@ -480,6 +482,69 @@ ____     /                                              <span class="mapButton a
 		</div>
 	</div>
 	</div>
+	
+	<div class="helpMenu"><div class="helpScreen">
+		<div class="helpLeft">
+			<div class="genTopic" id="topic1"><u>Pikmin</u>
+				<div class="helpTopic" id="item1" >Red Pikmin</div>
+				<div class="helpTopic" id="item2" >Yellow Pikmin</div>
+				<div class="helpTopic" id="item3" >Blue Pikmin</div>
+				<div class="helpTopic" id="item4" >Purple Pikmin</div>
+				<div class="helpTopic" id="item5" >White Pikmin</div>
+				<div class="helpTopic" id="item6" >Rock Pikmin</div>
+				<div class="helpTopic" id="item7" >Winged Pikmin</div>
+			</div><div class="genTopic" id="topic2"><u>Enemies</u>
+				<div class="helpTopic" id="item8" >Bulborb</div>
+				<div class="helpTopic" id="item9" >Bramble Wall</div>
+				<div class="helpTopic" id="item10">Fiery Blowhog</div>
+				<div class="helpTopic" id="item17">Joustmite</div>
+				<div class="helpTopic" id="item18">Pyroclasmic Slooch</div>
+				<div class="helpTopic" id="item19">Bearded Amprat</div>
+				<div class="helpTopic" id="item20">Reinforced Wall</div>
+				<div class="helpTopic" id="item21">Anode Beetle</div>
+			</div><div class="genTopic" id="topic3"><u>Places</u>
+				<div class="helpTopic" id="item11">Ship</div>
+				<div class="helpTopic" id="item13">Plains</div>
+				<div class="helpTopic" id="item14">Fire Forest</div>
+			</div><div class="genTopic" id="topic4"><u>Teammates</u>
+				<div class="helpTopic" id="item12">KopPad</div>
+			</div><div class="genTopic" id="topic5"><u>Items</u>
+				<div class="helpTopic" id="item15">Bomb Rock</div>
+				<div class="helpTopic" id="item16">Nectar</div>
+			</div>
+		</div>
+		<div class="helpRight">
+			<div class="helpText" id="tophelp1" ><b>Pikmin</b> are weird, little creatures that seem to follow my commands.  They sprout from the ground and wait for me to pluck them.</div>
+			<div class="helpText" id="tophelp2" ><b>Enemies</b> are all over this world.  They come in all different shapes and sizes and each pose their own threats.</div>
+			<div class="helpText" id="tophelp3" ><b>Places</b> to explore are scattered all around the map.  Check in here for information on the different areas.</div>
+			<div class="helpText" id="tophelp4" ><b>Teammates</b> are great to have.  Upon my crash landing here, I seemed to have...misplaced some of them.</div>
+			<div class="helpText" id="tophelp5" ><b>Items</b> are found after completing areas.  If you want to know what they do or how to use them, check here.</div>
+			<div class="helpText" id="help1" ><b>Red Pikmin</b> are resistant to fire.  They also seem to be the stronger than other pikmin.</div>
+			<div class="helpText" id="help2" ><b>Yellow Pikmin</b> are resistant to electricity.  They also seem to be able to carry bomb rocks.</div>
+			<div class="helpText" id="help3" ><b>Blue Pikmin</b> are resistant to water.  Other than that, they are remarkably average.</div>
+			<div class="helpText" id="help4" ><b>Purple Pikmin</b> are quite strong.  They can carry up to 10 tmies what a normal pikmin could manage.</div>
+			<div class="helpText" id="help5" ><b>White Pikmin</b> are resistant to poison.  Their advanced eyesight allows them to spot hidden treasures.</div>
+			<div class="helpText" id="help6" ><b>Rock Pikmin</b> are increadibly dense and can smash through glass.  They also seem immune to blunt force and sharp objects.</div>
+			<div class="helpText" id="help7" ><b>Winged Pikmin</b> are able to fly.  While they are the weakest pikmin, their mobility makes up for it.</div>
+			<div class="helpText" id="help8" ><b>Bulborb</b>: >%%<br/><br/><b>Special Abilities</b>: None<br/><br/>They have no special abilities and seem to love eating any pikmin they can find.</div>
+			<div class="helpText" id="help9" ><b>Bramble Wall</b>: TXT<br/><br/><b>Special Abilities</b>: Durable<br/><br/>It seems pretty durable but eventually Pikmin are able to break it down.</div>
+			<div class="helpText" id="help10"><b>Fiery Blowhog</b>: -{}<br/><br/><b>Special Abilities</b>: Fire<br/><br/> They attack by shooting fire like a flamethrower.</div>
+			<div class="helpText" id="help11"><b>The Ship</b> will allow you to leave the map and get back to plucking Pikmin to replenish your squad.</div>
+			<div class="helpText" id="help12"><b>KopPad</b>, oh hey that's me!  I'm pretty great.  If you need help, just check my systems and I'll tell you what I know.</div>
+			<div class="helpText" id="help13"><b>Plains</b> are a general flat area.  Watch out for the Bulborbs in this area.</div>
+			<div class="helpText" id="help14"><b>Fire Forest</b> is an eternal burning forest.  The flames are increadibly intense and it is impossible to get through without coming into contact with fire.</div>
+			<div class="helpText" id="help15"><b>Bomb Rocks</b> are very powerful items, however it seems that only Yellow pikmin can use them.  You can use them in your adventures to deal massive damage to the enemy in front of you.</div>
+			<div class="helpText" id="help16"><b>Nectar</b> is a peculiar thing.  The Pikmin love to drink it.  Afterwards, their leaves change into buds and their buds sprout into flowers.</div>
+			<div class="helpText" id="help17"><b>Joustmite</b>: &#60;^)<br/><br/><b>Special Abilities</b>: Piercing<br/><br/>They like to pierce Pikmin with their sharp horn and are well protected by their shell.</div>
+			<div class="helpText" id="help18"><b>Pyroclasmic Slooch</b>: /\~<br/><br/><b>Special Abilities</b>: Fire<br/><br/>They leave fire everywhere they go and can burn attacking enemies.</div>
+			<div class="helpText" id="help19"><b>Bearded Amprat</b>: m()<br/><br/><b>Special Abilities</b>: Electric<br/><br/>By creating static with their "beard", these creatures can cause quite the shock.</div>
+			<div class="helpText" id="help20"><b>Reinforced Wall</b>: |||<br/><br/><b>Special Abilities</b>: Really Hard<br/><br/>These walls cannot be damaged by Pikmin.  Perhaps if we could find a few bombs of some sort in other areas.</div>
+			<div class="helpText" id="help21"><b>Anode Beetle</b>: nHn<br/><br/><b>Special Abilities</b>: Electric<br/><br/>Always found in pairs, these beetles create an electric wall between them.</div>
+			<div class="helpText" id="help22"><b>The Desert</b> is a rather desolate area.  Creatures here can handle intense conditions.  There are also occasional Bomb Rocks lying around.</div>
+			<div class="helpText" id="help23"><b>Power Plant</b> seems to be damaged.  There are sparks constantly shooting out of the building.  It is highly likely the inside is just as bad.</div>
+		</div>
+	</div></div>
+	
 	<div id="discovery"></div>
     <div id='alerts'></div>
 	

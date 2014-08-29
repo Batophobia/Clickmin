@@ -128,7 +128,6 @@ var items = {
 		
 		pikmin.give(clr,"leaf");
 		pikmin.show(clr);
-		$("#btnMap").show();
 		
 		if(clr=="red"){
 			explore.places["1"].canGo=true;

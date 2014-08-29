@@ -419,6 +419,22 @@ var pikmin = {
 			$("#btnPluck"+input).show();
 			$("#btnPluck"+input).removeAttr("disabled");
 		}
+		
+		if(input=="yellow")
+			$("#item2").addClass("canShow");
+		else if(input=="blue")
+			$("#item3").addClass("canShow");
+		else if(input=="purple")
+			$("#item4").addClass("canShow");
+		else if(input=="white")
+			$("#item5").addClass("canShow");
+		else if(input=="rock")
+			$("#item6").addClass("canShow");
+		else if(input=="pink")
+			$("#item7").addClass("canShow");
+		else
+			$("#item1").addClass("canShow");
+		
 		//if(!explore.isOnMap)
 		//	$("#btnMap").show();
 		$("#"+input+"Block").show();

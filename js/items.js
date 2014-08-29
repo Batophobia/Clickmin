@@ -2,9 +2,11 @@ var items = {
 	init: function(){
 		if(this.types.nectar.total>0){
 			$(".nectar").text("Nectar: "+this.types.nectar.total);
+			$("#item16").addClass("canShow");
 		}
 		if(this.types.bombRock.total>0){
 			$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
+			$("#item15").addClass("canShow");
 		}
 		if(Object.size(this.types.stuff)>0){
 			for(var thing in this.types.stuff){
@@ -92,10 +94,12 @@ var items = {
 	giveBomb: function(){
 		this.types.bombRock.total+=1;
 		$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
+		$("#item15").addClass("canShow");
 	},
 	giveNectar: function(){
 		this.types.nectar.total+=1;
 		$(".nectar").text("Nectar: "+this.types.nectar.total);
+		$("#item16").addClass("canShow");
 	},
 	givePellet: function(){
 		var colors=[];

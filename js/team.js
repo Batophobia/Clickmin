@@ -4,6 +4,7 @@ var team = {
 		inParty: false,
 		init: function(){
 			this.inParty=true;
+			$("#item12").addClass("canShow");
 			$("#btnHelp").show();
 			$("#btnHelp").on('click',function(){
 				$(".helpMenu").toggle();

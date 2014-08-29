@@ -13,7 +13,7 @@ var main = {
 				main.helpID=hlpNum;
 				$(".helpText").hide();
 				$(".helpTopic").hide();
-				$("#topic"+hlpNum+" div").show();
+				$("#topic"+hlpNum+" .canShow").show();
 				$("#tophelp"+hlpNum).show();
 			}
 		});

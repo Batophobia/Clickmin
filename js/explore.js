@@ -76,7 +76,9 @@ var explore = {
 				'top': e.pageY+15,
 				'left':e.pageX
 			});
-		});  
+		});
+		
+		$("#item11").addClass("canShow");
 	},
 	isOnMap: false,
 	isQuesting: false,
@@ -133,6 +135,30 @@ var explore = {
 			explore.questArea=input;
 		});
 		explore.places[input].canGo=true;
+		
+		switch(input){
+			case 1:
+				$("#item8").addClass("canShow");
+				$("#item9").addClass("canShow");
+				$("#item13").addClass("canShow");
+				break;
+			case 2:
+				$("#item8").addClass("canShow");
+				$("#item10").addClass("canShow");
+				$("#item14").addClass("canShow");
+				break;
+			case 3:
+				$("#item17").addClass("canShow");
+				$("#item18").addClass("canShow");
+				$("#item22").addClass("canShow");
+				break;
+			case 4:
+				$("#item19").addClass("canShow");
+				$("#item20").addClass("canShow");
+				$("#item21").addClass("canShow");
+				$("#item23").addClass("canShow");
+				break;
+		}
 	},
 	
 	beginQuest: function(){

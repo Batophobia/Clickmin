@@ -45,10 +45,37 @@ var enemy = {
 		halfAtk: "",
 		special: ""
 	},
+	sheargrub: {
+		name: "Sheargrub",
+		display: ">ww",
+		hp: 500,
+		attack: 2,
+		status: "",
+		halfAtk: "",
+		special: ""
+	},
+	snagret: {
+		name: "Snagret",
+		display: "_/|",
+		hp: 2800,
+		attack: 7,
+		status: "",
+		halfAtk: "",
+		special: "evasive"
+	},
+	cannonBeetle: {
+		name: "Cannon Beetle",
+		display: "(o)",
+		hp: 4000,
+		attack: 15,
+		status: "rock",
+		halfAtk: "",
+		special: ""
+	},
 	electricWall: {
 		name: "Electric Gate",
 		display: "NMN",
-		hp: 10000,
+		hp: 5000,
 		attack: 100,
 		status: "electric",
 		halfAtk: "",

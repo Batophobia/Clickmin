@@ -284,13 +284,13 @@ pre {
 	position: absolute;
 	bottom: 5px;
 	left: 50%;
+	background: #FFFFFF;
 }
 #alerts {
 	background: #FFFFFF;
 	position: absolute;
-	bottom: 15px;
+	top: 15px;
 	left: 15px;
-	//border: 1px solid #333333;
 	padding: 5px;
 	width: 300px;
 }	#alerts .alert {

@@ -26,13 +26,16 @@ var main = {
 	},
 	helpID: 0,
 	timerID: 0,
+	counter: 0,
 	
 	tick : function(){
 		pikmin.tick();
 		explore.tick();
+		team.tick();
 
 		this.updateDisplay();
 		this.save();
+		this.counter++;
 	},
 	
 	updateDisplay: function(){
@@ -76,9 +79,9 @@ var main = {
 				}
 			}
 		}
-		for(var group in team){
+		for(var group in team.party){
 			data['team'][group] = {
-					inParty: team[group].inParty
+					inParty: team.party[group].inParty
 				}
 		}
 		for(var group in explore.places){
@@ -116,9 +119,9 @@ var main = {
 				}
 			}
 		}
-		for(var group in team){
+		for(var group in team.party){
 			if(data.team[group].inParty)
-				team[group].init();
+				team.party[group].init();
 		}
 		for(var group in pikmin.party){
 			if(group in data['pikmin']){

@@ -357,21 +357,6 @@ var pikmin = {
 		
 	},
 	
-	//addGuys: function(){
-	//	if(!explore.isQuesting){
-	//		if(this.checkNum("red")>0)
-	//			this.party.red.numLeaf++;
-	//		if(this.checkNum("yellow")>0)
-	//			this.party.yellow.numLeaf++;
-	//		if(this.checkNum("blue")>0)
-	//			this.party.blue.numLeaf++;
-	//		if(this.checkNum("rock")>0)
-	//			this.party.rock.numLeaf++;
-	//		if(this.checkNum("pink")>0)
-	//			this.party.pink.numLeaf++;
-	//	}
-	//},
-	
 	give: function(clr, type){
 		if(type=="bud")
 			this.party[clr].numBud+=1;

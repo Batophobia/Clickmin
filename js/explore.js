@@ -157,6 +157,38 @@ var explore = {
 				$("#item20").addClass("canShow");
 				$("#item21").addClass("canShow");
 				$("#item23").addClass("canShow");
+			case 5:
+				$("#item30").addClass("canShow");
+				$("#item39").addClass("canShow");
+				$("#item40").addClass("canShow");
+				$("#item41").addClass("canShow");
+				break;
+			case 6:
+				$("#item31").addClass("canShow");
+				break;
+			case 7:
+				$("#item32").addClass("canShow");
+				break;
+			case 8:
+				$("#item33").addClass("canShow");
+				break;
+			case 9:
+				$("#item33").addClass("canShow");
+				break;
+			case 10:
+				$("#item34").addClass("canShow");
+				break;
+			case 11:
+				$("#item35").addClass("canShow");
+				break;
+			case 12:
+				$("#item36").addClass("canShow");
+				break;
+			case 13:
+				$("#item37").addClass("canShow");
+				break;
+			case 14:
+				$("#item38").addClass("canShow");
 				break;
 		}
 	},
@@ -246,6 +278,30 @@ var explore = {
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.amprat);
 				break;
 			case 5:
+				tmpEnmy = explore.batman(3,5);
+				$("#5_"+tmpEnmy).html(enemy.sheargrub.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.sheargrub);
+				tmpEnmy++;
+				$("#5_"+tmpEnmy).html(enemy.sheargrub.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.sheargrub);
+				
+				tmpEnmy = explore.batman(10,12);
+				$("#5_"+tmpEnmy).html(enemy.sheargrub.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.sheargrub);
+				tmpEnmy++;
+				$("#5_"+tmpEnmy).html(enemy.sheargrub.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.sheargrub);
+				
+				tmpEnmy = explore.batman(16,20);
+				$("#5_"+tmpEnmy).html(enemy.snagret.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snagret);
+				tmpEnmy = explore.batman(25,28);
+				$("#5_"+tmpEnmy).html(enemy.snagret.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snagret);
+				
+				tmpEnmy = explore.batman(29,32);
+				$("#5_"+tmpEnmy).html(enemy.cannonBeetle.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.cannonBeetle);
 				break;
 			case 6:
 				break;
@@ -280,6 +336,10 @@ var explore = {
 				
 				if(enemy.monsterList["0"].special=="")
 					enemy.monsterList["0"].hp-=squadStrength;
+				else if(enemy.monsterList["0"].special=="evasive"){
+					if(this.batman(0,100)>25)
+						enemy.monsterList["0"].hp-=squadStrength;
+				}
 				
 				pikmin.squad.kill(explore.batman(0,enemy.monsterList["0"].attack),enemy.monsterList["0"].status);
 				
@@ -365,6 +425,7 @@ var explore = {
 				if(explore.places["1"].timesBeat==0){
 					explore.unlock(2);
 					team.find("koppad");
+					main.alrt("Located KopPad");
 				}else if(randNumber>95){
 					items.addRandomThing();
 				}else{
@@ -386,9 +447,11 @@ var explore = {
 			case 3:
 				if(explore.places["3"].timesBeat==0){
 					explore.unlock(4);
+					team.find("alph");
+					main.alrt("Located Alph");
 				}else if(randNumber>95){
 					items.addRandomThing();
-				}else if(randNumber>35){
+				}else if(randNumber>35 || explore.places["3"].timesBeat%3==0){
 					items.giveBomb();
 				}else{
 					items.giveNectar();

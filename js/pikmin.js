@@ -217,7 +217,7 @@ var pikmin = {
 					numToMurder-=this.squadColorNum("red");
 					
 				if(numToMurder<0)
-					return;
+					continue;
 				
 				if(effect!="electric")
 					numToMurder=this.checkForDeath("yellow",numToMurder,rndSurvive,effect);
@@ -225,7 +225,7 @@ var pikmin = {
 					numToMurder-=this.squadColorNum("yellow");
 					
 				if(numToMurder<0)
-					return;
+					continue;
 				
 				if(effect!="water")
 					numToMurder=this.checkForDeath("blue",numToMurder,rndSurvive,effect);
@@ -233,12 +233,12 @@ var pikmin = {
 					numToMurder-=this.squadColorNum("blue");
 					
 				if(numToMurder<0)
-					return;
+					continue;
 				
 				numToMurder=this.checkForDeath("purple",numToMurder,rndSurvive,effect);
 					
 				if(numToMurder<0)
-					return;
+					continue;
 				
 				if(effect!="poison")
 					numToMurder=this.checkForDeath("white",numToMurder,rndSurvive,effect);
@@ -246,7 +246,7 @@ var pikmin = {
 					numToMurder-=this.squadColorNum("white");
 					
 				if(numToMurder<0)
-					return;
+					continue;
 				
 				if(effect!="rock")
 					numToMurder=this.checkForDeath("rock",numToMurder,rndSurvive,effect);
@@ -254,7 +254,7 @@ var pikmin = {
 					numToMurder-=this.squadColorNum("rock");
 					
 				if(numToMurder<0)
-					return;
+					continue;
 				
 				numToMurder=this.checkForDeath("pink",numToMurder,rndSurvive,effect);
 			}

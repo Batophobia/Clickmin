@@ -43,10 +43,18 @@ var team = {
 			display: "Brittany",
 			inParty: false,
 			counterMod: 100,
+			odds: 100,
 			init: function(){
 				this.inParty=true;
 				$("#item25").addClass("canShow");
-			}//Rarely give Nectar
+			},
+			
+			synth: function(){
+				if(!explore.isQuesting && this.inParty){
+					if(explore.batman(0,100)<this.odds)
+						items.giveNectar();
+				}
+			},
 		},
 		charlie: {
 			display: "Charlie",
@@ -85,6 +93,9 @@ var team = {
 	tick: function(){
 		if(this.party.alph.inParty && main.counter%this.party.alph.counterMod==0){
 			this.party.alph.pluck();
+		}
+		if(this.party.brittany.inParty && main.counter%this.party.brittany.counterMod==0){
+			this.party.brittany.synth();
 		}
 	},
 	

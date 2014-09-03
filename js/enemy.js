@@ -58,7 +58,7 @@ var enemy = {
 		name: "Snagret",
 		display: "_/|",
 		hp: 2800,
-		attack: 7,
+		attack: 6,
 		status: "",
 		halfAtk: "",
 		special: "evasive"
@@ -67,7 +67,7 @@ var enemy = {
 		name: "Cannon Beetle",
 		display: "(o)",
 		hp: 4000,
-		attack: 15,
+		attack: 12,
 		status: "rock",
 		halfAtk: "",
 		special: ""

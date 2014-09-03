@@ -214,6 +214,9 @@ var explore = {
 			
 			if(items.types.bombRock.total>0 && pikmin.squad.squadColorNum("yellow")>0)
 				$("#btnBomb").show();
+			
+			$("#plyrHP").text(pikmin.squad.total);
+			$(".battleDialog").show();
 		}
 	},
 	
@@ -353,7 +356,7 @@ var explore = {
 					$("#"+explore.questArea+"_"+explore.plyrLoc).text(":o:");
 				}else if(explore.isQuesting){
 					$("#opntName").text(enemy.monsterList["0"].name);
-					$(".battleDialog").show();
+					
 					var squadStrength=pikmin.squad.strength();
 					squadStrength=explore.batman(squadStrength/2,squadStrength);
 					
@@ -375,12 +378,12 @@ var explore = {
 					}
 					
 					if(enemy.monsterList["0"].hp<=0){
+						$("#opntHP").text("0");
 						for(var i=0;i<Object.size(enemy.monsterList)-1;i++){
 							enemy.monsterList[i]=enemy.monsterList[i+1];
 						}
 						delete enemy.monsterList[Object.size(enemy.monsterList)-1];
 						$("#"+explore.questArea+"_"+(explore.plyrLoc+1)).text("___");
-						$(".battleDialog").hide();
 					}
 				}
 			}
@@ -503,6 +506,7 @@ var explore = {
 			case 5:
 				if(explore.places["5"].timesBeat==0){
 					explore.unlock(6);
+					team.find("brittany");
 				}else if(randNumber>90){
 					items.addRandomThing();
 				}else if(randNumber>70){
@@ -529,7 +533,9 @@ var explore = {
 				break;
 			case 7:
 				if(explore.places["7"].timesBeat==0){
-					explore.unlock(11);
+					explore.unlock(8);
+					explore.unlock(9);
+					team.find("charlie");
 				}else if(randNumber>90){
 					items.addRandomThing();
 				}else if(randNumber>70){
@@ -538,6 +544,16 @@ var explore = {
 					items.giveNectar();
 				}else{
 					items.givePellet();
+				}
+				break;
+			case 8:
+				if(explore.places["8"].timesBeat==0){
+					explore.unlock(10);
+				}
+				break;
+			case 9:
+				if(explore.places["9"].timesBeat==0){
+					explore.unlock(11);
 				}
 				break;
 			case 11:

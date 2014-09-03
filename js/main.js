@@ -4,7 +4,7 @@ var main = {
 		pikmin.init();
 		items.init();
 		explore.init();
-		this.timerID = window.setInterval(function(){main.tick()}, 100);
+		this.timerID = window.setInterval(function(){main.tick()}, 200);
 		
 		$(".genTopic").on('click', function(){
 			var hlpNum=this.id;

@@ -43,7 +43,7 @@ var team = {
 			display: "Brittany",
 			inParty: false,
 			counterMod: 100,
-			odds: 10,
+			odds: 5,
 			init: function(){
 				this.inParty=true;
 				$("#item25").addClass("canShow");
@@ -62,15 +62,23 @@ var team = {
 			init: function(){
 				this.inParty=true;
 				$("#item26").addClass("canShow");
-			}//Speed up tick
+				clearInterval(main.timerID);
+				main.timerID = window.setInterval(function(){main.tick()}, 100);
+			}
 		},
 		louie: {
 			display: "Louie",
 			inParty: false,
+			perIncrease: 1,
 			init: function(){
 				this.inParty=true;
 				$("#item27").addClass("canShow");
-			}//Increased damage
+				this.perIncrease+=.1;
+			},
+			
+			stronger: function(){
+				this.perIncrease+=.1;
+			}
 		},
 		olimar: {
 			display: "Olimar",
@@ -78,7 +86,11 @@ var team = {
 			init: function(){
 				this.inParty=true;
 				$("#item28").addClass("canShow");
-			}//Caves on maps
+			},
+			
+			toCave: function(map){
+				
+			}
 		},
 		president: {
 			display: "President",

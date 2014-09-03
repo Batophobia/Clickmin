@@ -171,6 +171,9 @@ var explore = {
 				break;
 			case 7:
 				$("#item32").addClass("canShow");
+				$("#item46").addClass("canShow");
+				$("#item47").addClass("canShow");
+				$("#item48").addClass("canShow");
 				break;
 			case 8:
 				$("#item33").addClass("canShow");
@@ -331,6 +334,25 @@ var explore = {
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.goolix);
 				break;
 			case 7:
+				tmpEnmy = explore.batman(3,8);
+				$("#7_"+tmpEnmy).html(enemy.blowhog.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.blowhog);
+				
+				tmpEnmy = explore.batman(9,13);
+				$("#7_"+tmpEnmy).html(enemy.bulbear.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulbear);
+				
+				tmpEnmy = explore.batman(14,20);
+				$("#7_"+tmpEnmy).html(enemy.skutterchuck.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.skutterchuck);
+				
+				tmpEnmy = explore.batman(22,26);
+				$("#7_"+tmpEnmy).html(enemy.electricWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.electricWall);
+				
+				tmpEnmy = explore.batman(29,32);
+				$("#7_"+tmpEnmy).html(enemy.arachnode.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.arachnode);
 				break;
 			case 11:
 				break;
@@ -358,6 +380,9 @@ var explore = {
 					$("#opntName").text(enemy.monsterList["0"].name);
 					
 					var squadStrength=pikmin.squad.strength();
+					if(team.party.louie.inParty)
+						squadStrength=Math.ceil(squadStrength*team.party.louie.perIncrease);
+					
 					squadStrength=explore.batman(squadStrength/2,squadStrength);
 					
 					if(enemy.monsterList["0"].special=="")

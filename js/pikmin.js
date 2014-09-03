@@ -264,13 +264,16 @@ var pikmin = {
 			if(clr==enemy.monsterList["0"].halfAtk && explore.batman(1,10)<5)
 				numKill-=this.squadColorNum(clr);
 			else{
-				if(numKill<this[clr].numLeaf){
+				var bonus=1;
+				if(clr==enemy.monsterList["0"].extraDmgTo)
+					bonus=2;
+				if(numKill<this[clr].numLeaf*bonus){
 					this[clr].numLeaf-=1;
 					this.total-=1;
 					return -1;
 				}
 				numKill-=this[clr].numLeaf;
-				if(numKill<this[clr].numBud){
+				if(numKill<this[clr].numBud*bonus){
 					if(rndSurvive>2){
 						this[clr].numBud-=1;
 						this.total-=1;
@@ -278,7 +281,7 @@ var pikmin = {
 					}
 				}
 				numKill-=this[clr].numBud;
-				if(numKill<this[clr].numFlower){
+				if(numKill<this[clr].numFlower*bonus){
 					if(rndSurvive>3){
 						this[clr].numFlower-=1;
 						this.total-=1;
@@ -295,15 +298,46 @@ var pikmin = {
 		},
 		
 		strength: function(){
-			var intStr=0;
+			var intStr=0, bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="red")
+				bonus=1.3;
+			intStr += pikmin.squad.red.strength * (pikmin.squad.squadColorNum("red")) * bonus;
 			
-			intStr += pikmin.squad.red.strength * (pikmin.squad.squadColorNum("red"));
-			intStr += pikmin.squad.yellow.strength * (pikmin.squad.squadColorNum("yellow"));
-			intStr += pikmin.squad.blue.strength * (pikmin.squad.squadColorNum("blue"));
-			intStr += pikmin.squad.purple.strength * (pikmin.squad.squadColorNum("purple"));
-			intStr += pikmin.squad.white.strength * (pikmin.squad.squadColorNum("white"));
-			intStr += pikmin.squad.rock.strength * (pikmin.squad.squadColorNum("rock"));
-			intStr += pikmin.squad.pink.strength * (pikmin.squad.squadColorNum("pink"));
+			bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="yellow")
+				bonus=1.3;
+			
+			intStr += pikmin.squad.yellow.strength * (pikmin.squad.squadColorNum("yellow")) * bonus;
+			
+			bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="blue")
+				bonus=1.3;
+			
+			intStr += pikmin.squad.blue.strength * (pikmin.squad.squadColorNum("blue")) * bonus;
+			
+			bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="purple")
+				bonus=1.3;
+			
+			intStr += pikmin.squad.purple.strength * (pikmin.squad.squadColorNum("purple")) * bonus;
+			
+			bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="white")
+				bonus=1.3;
+			
+			intStr += pikmin.squad.white.strength * (pikmin.squad.squadColorNum("white")) * bonus;
+			
+			bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="rock")
+				bonus=1.3;
+			
+			intStr += pikmin.squad.rock.strength * (pikmin.squad.squadColorNum("rock")) * bonus;
+			
+			bonus=1;
+			if(enemy.monsterList["0"].extraDmgFrom=="pink")
+				bonus=1.3;
+			
+			intStr += pikmin.squad.pink.strength * (pikmin.squad.squadColorNum("pink")) * bonus;
 			
 			return intStr;
 		}

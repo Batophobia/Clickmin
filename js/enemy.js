@@ -7,6 +7,8 @@ var enemy = {
 		attack: 3,
 		status: "rock",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	slooch: {
@@ -16,6 +18,8 @@ var enemy = {
 		attack: 4,
 		status: "",
 		halfAtk: "red",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	blowhog: {
@@ -25,6 +29,8 @@ var enemy = {
 		attack: 6,
 		status: "fire",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	amprat: {
@@ -34,6 +40,8 @@ var enemy = {
 		attack: 6,
 		status: "",
 		halfAtk: "yellow",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	anodeBeetle: {
@@ -43,6 +51,8 @@ var enemy = {
 		attack: 100,
 		status: "electric",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	sheargrub: {
@@ -52,6 +62,8 @@ var enemy = {
 		attack: 2,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	snagret: {
@@ -61,6 +73,8 @@ var enemy = {
 		attack: 6,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: "evasive"
 	},
 	cannonBeetle: {
@@ -70,6 +84,8 @@ var enemy = {
 		attack: 12,
 		status: "rock",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	wollywog: {
@@ -79,6 +95,8 @@ var enemy = {
 		attack: 4,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	goolix: {
@@ -88,6 +106,8 @@ var enemy = {
 		attack: 15,
 		status: "water",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	bulbear: {
@@ -97,6 +117,30 @@ var enemy = {
 		attack: 5,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
+	skutterchuck: {
+		name: "Skutterchuck",
+		display: "-M>",
+		hp: 2000,
+		attack: 5,
+		status: "",
+		halfAtk: "rock",
+		extraDmgFrom: "rock",
+		extraDmgTo: "",
+		special: ""
+	},
+	arachnode: {
+		name: "Arachnode",
+		display: "30E",
+		hp: 700,
+		attack: 2,
+		status: "",
+		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "pink",
 		special: ""
 	},
 	electricWall: {
@@ -106,6 +150,8 @@ var enemy = {
 		attack: 100,
 		status: "electric",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	rockWall: {
@@ -115,6 +161,8 @@ var enemy = {
 		attack: 0,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: "bomb"
 	},
 	dirtWall: {
@@ -124,6 +172,8 @@ var enemy = {
 		attack: 0,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	basicWall: {
@@ -133,6 +183,8 @@ var enemy = {
 		attack: 0,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	},
 	bulborb: {
@@ -142,6 +194,8 @@ var enemy = {
 		attack: 3,
 		status: "",
 		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
 		special: ""
 	}
 };

@@ -18,6 +18,7 @@ var items = {
 			}
 		}
 		if(Object.size(this.types.pellets)>0){
+			$("#item45").addClass("canShow");
 			$(".pellets").show();
 			for(var thing in this.types.pellets){
 				$(".pellets").append("<div>"+this.types.pellets[thing].color+" "+this.types.pellets[thing].numNeeded+"</div>");
@@ -33,11 +34,9 @@ var items = {
 		});
 		$(".pikminMenu").on('click',function(){
 			items.useItem(this.id);
-			//$("#btnRndNectar").hide();
 		});
 		$("#btnRndNectar").on('click',function(){
 			items.useItem("");
-			//$("#btnRndNectar").hide();
 		});
 	},
 	selectedItem: "",
@@ -113,6 +112,8 @@ var items = {
 			colors.push("Black");
 		if(pikmin.checkNum("pink")>0)
 			colors.push("Pink");
+		
+		$("#item45").addClass("canShow");
 		
 		this.types.pellets[Object.size(this.types.pellets)]={
 			color: colors[explore.batman(0,colors.length-1)],

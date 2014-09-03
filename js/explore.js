@@ -165,6 +165,9 @@ var explore = {
 				break;
 			case 6:
 				$("#item31").addClass("canShow");
+				$("#item42").addClass("canShow");
+				$("#item43").addClass("canShow");
+				$("#item44").addClass("canShow");
 				break;
 			case 7:
 				$("#item32").addClass("canShow");
@@ -304,6 +307,25 @@ var explore = {
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.cannonBeetle);
 				break;
 			case 6:
+				tmpEnmy = explore.batman(3,8);
+				$("#6_"+tmpEnmy).html(enemy.wollywog.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.wollywog);
+				
+				tmpEnmy = explore.batman(9,13);
+				$("#6_"+tmpEnmy).html(enemy.bulbear.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulbear);
+				
+				tmpEnmy = explore.batman(14,20);
+				$("#6_"+tmpEnmy).html(enemy.wollywog.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.wollywog);
+				
+				tmpEnmy = explore.batman(22,26);
+				$("#6_"+tmpEnmy).html(enemy.snagret.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snagret);
+				
+				tmpEnmy = explore.batman(29,32);
+				$("#6_"+tmpEnmy).html(enemy.goolix.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.goolix);
 				break;
 			case 7:
 				break;
@@ -322,42 +344,44 @@ var explore = {
 		if(explore.curDelay>0)
 			explore.curDelay--;
 		
-		if(explore.isQuesting && explore.curDelay<=0){
-			explore.curDelay=explore.delayMax;
-			if(explore.canMove()){
-				$("#"+explore.questArea+"_"+explore.plyrLoc).text("___");
-				explore.plyrLoc++;
-				$("#"+explore.questArea+"_"+explore.plyrLoc).text(":o:");
-			}else if(explore.isQuesting){
-				$("#opntName").text(enemy.monsterList["0"].name);
-				$(".battleDialog").show();
-				var squadStrength=pikmin.squad.strength();
-				squadStrength=explore.batman(squadStrength/2,squadStrength);
-				
-				if(enemy.monsterList["0"].special=="")
-					enemy.monsterList["0"].hp-=squadStrength;
-				else if(enemy.monsterList["0"].special=="evasive"){
-					if(this.batman(0,100)>25)
+		if(explore.isQuesting){
+			if(explore.curDelay<=0){
+				explore.curDelay=explore.delayMax;
+				if(explore.canMove()){
+					$("#"+explore.questArea+"_"+explore.plyrLoc).text("___");
+					explore.plyrLoc++;
+					$("#"+explore.questArea+"_"+explore.plyrLoc).text(":o:");
+				}else if(explore.isQuesting){
+					$("#opntName").text(enemy.monsterList["0"].name);
+					$(".battleDialog").show();
+					var squadStrength=pikmin.squad.strength();
+					squadStrength=explore.batman(squadStrength/2,squadStrength);
+					
+					if(enemy.monsterList["0"].special=="")
 						enemy.monsterList["0"].hp-=squadStrength;
-				}
-				
-				pikmin.squad.kill(explore.batman(0,enemy.monsterList["0"].attack),enemy.monsterList["0"].status);
-				
-				$("#opntHP").text(enemy.monsterList["0"].hp);
-				$("#plyrHP").text(pikmin.squad.total);
-				
-				if(pikmin.squad.total<=0){
-					this.resetMap();
-					return;
-				}
-				
-				if(enemy.monsterList["0"].hp<=0){
-					for(var i=0;i<Object.size(enemy.monsterList)-1;i++){
-						enemy.monsterList[i]=enemy.monsterList[i+1];
+					else if(enemy.monsterList["0"].special=="evasive"){
+						if(this.batman(0,100)>25)
+							enemy.monsterList["0"].hp-=squadStrength;
 					}
-					delete enemy.monsterList[Object.size(enemy.monsterList)-1];
-					$("#"+explore.questArea+"_"+(explore.plyrLoc+1)).text("___");
-					$(".battleDialog").hide();
+					
+					pikmin.squad.kill(explore.batman(0,enemy.monsterList["0"].attack),enemy.monsterList["0"].status);
+					
+					$("#opntHP").text(enemy.monsterList["0"].hp);
+					$("#plyrHP").text(pikmin.squad.total);
+					
+					if(pikmin.squad.total<=0){
+						this.resetMap();
+						return;
+					}
+					
+					if(enemy.monsterList["0"].hp<=0){
+						for(var i=0;i<Object.size(enemy.monsterList)-1;i++){
+							enemy.monsterList[i]=enemy.monsterList[i+1];
+						}
+						delete enemy.monsterList[Object.size(enemy.monsterList)-1];
+						$("#"+explore.questArea+"_"+(explore.plyrLoc+1)).text("___");
+						$(".battleDialog").hide();
+					}
 				}
 			}
 			
@@ -367,6 +391,13 @@ var explore = {
 					return m === ')' ? '(' : ')';
 				});
 				$("#map2").html(newMap);
+			}
+			if(explore.questArea==6){
+				var newMap=$("#map6").html();
+				newMap=newMap.replace(/\{|\}/g, function(m) {
+					return m === '}' ? '{' : '}';
+				});
+				$("#map6").html(newMap);
 			}
 		}
 	},

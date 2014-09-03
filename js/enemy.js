@@ -72,6 +72,33 @@ var enemy = {
 		halfAtk: "",
 		special: ""
 	},
+	wollywog: {
+		name: "Wollywog",
+		display: "p@q",
+		hp: 1100,
+		attack: 4,
+		status: "",
+		halfAtk: "",
+		special: ""
+	},
+	goolix: {
+		name: "Goolix",
+		display: "C%J",
+		hp: 5000,
+		attack: 15,
+		status: "water",
+		halfAtk: "",
+		special: ""
+	},
+	bulbear: {
+		name: "Bulbear",
+		display: "=&%",
+		hp: 1300,
+		attack: 5,
+		status: "",
+		halfAtk: "",
+		special: ""
+	},
 	electricWall: {
 		name: "Electric Gate",
 		display: "NMN",

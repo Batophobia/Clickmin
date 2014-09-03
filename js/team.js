@@ -43,7 +43,7 @@ var team = {
 			display: "Brittany",
 			inParty: false,
 			counterMod: 100,
-			odds: 100,
+			odds: 10,
 			init: function(){
 				this.inParty=true;
 				$("#item25").addClass("canShow");

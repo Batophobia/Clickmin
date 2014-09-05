@@ -129,11 +129,17 @@ var explore = {
 	},
 	
 	unlock: function(input){
-		$('.area'+input).on('click',function(){
-			$('#btnStop').show();
-			$('.squadMaker').show();
-			explore.questArea=input;
-		});
+		if(input==10){
+			$('.area'+input).on('click',function(){
+				explore.questArea=input;
+			});
+		}else{
+			$('.area'+input).on('click',function(){
+				$('#btnStop').show();
+				$('.squadMaker').show();
+				explore.questArea=input;
+			});
+		}
 		explore.places[input].canGo=true;
 		
 		switch(input){
@@ -157,6 +163,7 @@ var explore = {
 				$("#item20").addClass("canShow");
 				$("#item21").addClass("canShow");
 				$("#item23").addClass("canShow");
+				break;
 			case 5:
 				$("#item30").addClass("canShow");
 				$("#item39").addClass("canShow");
@@ -176,10 +183,9 @@ var explore = {
 				$("#item48").addClass("canShow");
 				break;
 			case 8:
-				$("#item33").addClass("canShow");
-				break;
 			case 9:
 				$("#item33").addClass("canShow");
+				$("#item49").addClass("canShow");
 				break;
 			case 10:
 				$("#item34").addClass("canShow");
@@ -354,6 +360,14 @@ var explore = {
 				$("#7_"+tmpEnmy).html(enemy.arachnode.display);
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.arachnode);
 				break;
+			case 8:
+				$("#8_1").html(enemy.dirtWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
+				break;
+			case 9:
+				$("#9_31").html(enemy.dirtWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
+				break;
 			case 11:
 				break;
 			case 12:
@@ -364,6 +378,7 @@ var explore = {
 				break;
 		}
 	},
+	bridgeBuilder: 0,
 	
 	tick: function(){
 		if(explore.curDelay>0)
@@ -377,6 +392,15 @@ var explore = {
 					explore.plyrLoc++;
 					$("#"+explore.questArea+"_"+explore.plyrLoc).text(":o:");
 				}else if(explore.isQuesting){
+					if($("#"+explore.questArea+"_"+(explore.plyrLoc+1)).text()=="   "){
+						this.bridgeBuilder++;
+						if(this.bridgeBuilder>explore.plyrLoc*10){
+							this.bridgeBuilder++;
+							$("#"+explore.questArea+"_"+(explore.plyrLoc+1)).text("___");
+							bridgeBuilder=0;
+						}
+						return;
+					}
 					$("#opntName").text(enemy.monsterList["0"].name);
 					
 					var squadStrength=pikmin.squad.strength();
@@ -437,7 +461,10 @@ var explore = {
 		
 		var tmpPlace=0;
 		while($("#"+explore.questArea+"_"+tmpPlace).length>0){
-			$("#"+explore.questArea+"_"+tmpPlace).text("___");
+			if((explore.questArea==8 || explore.questArea==9)&&(tmpPlace>0&&tmpPlace<31))
+				$("#"+explore.questArea+"_"+tmpPlace).text("   ");
+			else
+				$("#"+explore.questArea+"_"+tmpPlace).text("___");
 			tmpPlace++;
 		}
 		
@@ -579,6 +606,7 @@ var explore = {
 			case 9:
 				if(explore.places["9"].timesBeat==0){
 					explore.unlock(11);
+					team.find("louie");
 				}
 				break;
 			case 11:
@@ -598,6 +626,7 @@ var explore = {
 			case 12:
 				if(explore.places["12"].timesBeat==0){
 					explore.unlock(13);
+					team.find("olimar");
 				}else if(randNumber>90){
 					items.addRandomThing();
 				}else if(randNumber>70){
@@ -611,6 +640,7 @@ var explore = {
 			case 13:
 				if(explore.places["13"].timesBeat==0){
 					explore.unlock(14);
+					team.find("president");
 				}else if(randNumber>90){
 					items.addRandomThing();
 				}else if(randNumber>70){
@@ -639,6 +669,7 @@ var explore = {
 		$("#"+explore.questArea+"_"+explore.plyrLoc).text("___");
 		$('#overworld').show();
 		$('#map'+explore.questArea).hide();
+		$(".battleDialog").hide();
 		explore.places[explore.questArea].timesBeat++;
 		explore.questArea=0;
 		explore.plyrLoc=0;

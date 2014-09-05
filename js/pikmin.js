@@ -401,7 +401,7 @@ var pikmin = {
 		
 		this.totalUpdate();
 		
-		if(this.party.total>25)
+		if(this.party.total>25 && !explore.isOnMap)
 			$("#btnMap").show();
 	},
 	

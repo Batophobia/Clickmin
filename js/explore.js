@@ -461,7 +461,7 @@ var explore = {
 				var numEnemies = explore.batman(5,12);
 				
 				for(var i=0;i<numEnemies;i++){
-					tmpEnmy = 2+(i/numEnemies)*30;
+					tmpEnmy = Math.ceil(2+(i/numEnemies)*30);
 					selEnemy = arrEnemies[explore.batman(0,arrEnemies.length)];
 					$("#16_"+tmpEnmy).html(enemy[selEnemy].display);
 					enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy[selEnemy]);
@@ -762,7 +762,7 @@ var explore = {
 			case 16:
 				if(randNumber>90){
 					items.addRandomThing();
-				}else if(randNumber>45){
+				}else if(randNumber>30){
 					items.give("White Candypop", 0, "flower");
 				}else{
 					items.give("Purple Candypop", 0, "flower");
@@ -774,6 +774,10 @@ var explore = {
 		$('#overworld').show();
 		$('#map'+explore.questArea).hide();
 		$(".battleDialog").hide();
+		
+		if(team.party.olimar.inParty)
+			$('#btnSpelunking').show();
+		
 		explore.places[explore.questArea].timesBeat++;
 		explore.questArea=0;
 		explore.plyrLoc=0;

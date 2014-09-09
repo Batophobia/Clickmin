@@ -134,6 +134,7 @@ button:disabled {
 	}.nectar{
 		width: 90%;
 		padding: 5px;
+		cursor: pointer;
 	}.bombs{
 		width: 90%;
 		padding: 5px;

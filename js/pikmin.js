@@ -375,6 +375,38 @@ var pikmin = {
 			pikmin.party[clr].numFlower++;
 		}
 	},
+	change: function(clr, toClr){
+		var clrs=[], type;
+		
+		if(clr==""){
+			if((this.checkNum("red"))>0)
+				clrs.push("red");
+			if((this.checkNum("yellow"))>0)
+				clrs.push("yellow");
+			if((this.checkNum("blue"))>0)
+				clrs.push("blue");
+			if((this.checkNum("rock"))>0)
+				clrs.push("rock");
+			if((this.checkNum("pink"))>0)
+				clrs.push("pink");
+			
+			clr=clrs[explore.batman(0,clrs.length)];
+			clrs=[];
+		}
+		
+		if(this.party[clr].numLeaf>1){
+			pikmin.party[clr].numLeaf--;
+			pikmin.party[toClr].numLeaf++;
+		}
+		else if(this.party[clr].numBud>1){
+			pikmin.party[clr].numBud--;
+			pikmin.party[toClr].numBud++;
+		}
+		else{
+			pikmin.party[clr].numFlower--;
+			pikmin.party[toClr].numFlower++;
+		}
+	},
 	
 	totalUpdate: function(){
 		this.party.total=0;

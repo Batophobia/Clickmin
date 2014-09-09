@@ -11,10 +11,13 @@ var items = {
 		if(Object.size(this.types.stuff)>0){
 			for(var thing in this.types.stuff){
 				var extraStuff="";
+				
 				if(this.types.stuff[thing].type=="onion")
 					extraStuff="  id='"+thing+"' style='cursor: pointer;' onclick='items.useOnion(this);'";
+				else if(this.types.stuff[thing].type=="flower")
+					extraStuff=" style='cursor: pointer;' class='candypop'";
 				
-				$(".stuff").append("<div"+extraStuff+">"+this.types.stuff[thing].display+"</div>");
+				$(".stuff").append("<div id='"+(Object.size(this.types.stuff)-1)+"' "+extraStuff+">"+this.types.stuff[thing].display+"</div>");
 			}
 		}
 		if(Object.size(this.types.pellets)>0){
@@ -27,16 +30,28 @@ var items = {
 		
 		$(".nectar").on('click',function(){
 			items.select("nectar");
-			if(items.selectedItem=="nectar")
+			if(items.selectedItem=="nectar"){
 				$("#btnRndNectar").show();
-			else
+				$("#btnRndFlower").hide();
+			}else
 				$("#btnRndNectar").hide();
+		});
+		$(".candypop").on('click',function(){
+			items.select(this);
+			if(items.types.stuff[items.selectedItem.id].display.split(" ")[1].toLowerCase()=="candypop"){
+				$("#btnRndFlower").show();
+				$("#btnRndNectar").hide();
+			}else
+				$("#btnRndFlower").hide();
 		});
 		$(".pikminMenu").on('click',function(){
 			items.useItem(this.id);
 		});
 		$("#btnRndNectar").on('click',function(){
 			items.useItem("");
+		});
+		$("#btnRndFlower").on('click',function(){
+			items.useFlower(items.selectedItem, "");
 		});
 	},
 	selectedItem: "",
@@ -59,18 +74,25 @@ var items = {
 				pikmin.promote(clr);
 			}
 			$(".nectar").text("Nectar: "+this.types.nectar.total);
+		}else if(items.types.stuff[items.selectedItem.id].display.split(" ")[1].toLowerCase()=="candypop"){
+			items.useFlower(items.selectedItem, clr);
 		}
 	},
 	
 	select: function(itm){
 		$(".nectar").css('background','');
 		$(".bombs").css('background','');
+		$(".candypop").css('background','');
 		
 		if(items.selectedItem==itm)
 			items.selectedItem='';
 		else{
 			items.selectedItem=itm;
-			$("."+itm).css('background','#CCCCCC');
+			if(itm=="nectar"){
+				$("."+itm).css('background','#CCCCCC');
+			}else{
+				$(itm).css('background','#CCCCCC');
+			}
 		}
 	},
 	
@@ -123,16 +145,28 @@ var items = {
 		$(".pellets").append("<div>"+this.types.pellets[Object.size(this.types.pellets)-1].color+" "+this.types.pellets[Object.size(this.types.pellets)-1].numNeeded+"</div>");
 	},
 	
-	useFlower: function(itm){
+	useFlower: function(itm, onClr){
 		var thing=itm.id;
 		var clr=this.types.stuff[thing].display.split(" ")[0].toLowerCase();
 		itm.remove();
 		
-		items.select(itm);// @@@@^^^^^^&&&&&&******* Come back to here
-		if(items.selectedItem=="nectar")
-			$("#btnRndNectar").show();
-		else
-			$("#btnRndNectar").hide();
+		if(!pikmin.party[clr].hadBefore){
+			var tmpPic=$("#img"+clr).html();
+			$("#discovery").html("Discovered new Pikmin<br/>"+tmpPic);
+			setTimeout('$("#discovery").html("");',5000);
+			
+			pikmin.party[clr].hadBefore=true;
+			pikmin.totalUpdate();
+			pikmin.show(clr);
+		}
+		
+		for(var i=0;i<5;i++){
+			pikmin.change(onClr, clr);
+		}
+		
+		this.delStuff(thing);
+		items.selectedItem='';
+		$("#btnRndFlower").hide();
 	},
 	useOnion: function(itm){
 		var thing=itm.id;
@@ -180,10 +214,22 @@ var items = {
 		if(typeN=="onion"){
 			extraStuff=" style='cursor: pointer;' onclick='items.useOnion(this);'";
 		}else if(typeN=="flower"){
-			extraStuff=" style='cursor: pointer;' onclick='items.useFlower(this);'";
+			extraStuff=" style='cursor: pointer;' class='candypop'";
 		}
 		
 		$(".stuff").append("<div id='"+(Object.size(this.types.stuff)-1)+"' "+extraStuff+">"+displayN+"</div>");
+		
+		if(typeN=="flower"){
+			$(".candypop").off('click');
+			$(".candypop").on('click',function(){
+				items.select(this);
+				if(items.types.stuff[items.selectedItem.id].display.split(" ")[1].toLowerCase()=="candypop"){
+					$("#btnRndFlower").show();
+					$("#btnRndNectar").hide();
+				}else
+					$("#btnRndFlower").hide();
+			});
+		}
 	},
 	addRandomThing: function(){
 		var disp, numNeed, thngType;

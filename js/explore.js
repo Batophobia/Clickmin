@@ -457,6 +457,15 @@ var explore = {
 				break;
 			case 16:
 				//Caves
+				var arrEnemies = ["joustmite","slooch","blowhog","snagret","wollywog","bulbear","skutterchuck","arachnode","snitchbug","basicWall","bulborb","dirtWall"];
+				var numEnemies = explore.batman(5,12);
+				
+				for(var i=0;i<numEnemies;i++){
+					tmpEnmy = 2+(i/numEnemies)*30;
+					selEnemy = arrEnemies[explore.batman(0,arrEnemies.length)];
+					$("#16_"+tmpEnmy).html(enemy[selEnemy].display);
+					enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy[selEnemy]);
+				}
 				break;
 		}
 	},
@@ -552,6 +561,10 @@ var explore = {
 		
 		$('#overworld').show();
 		$('#map'+explore.questArea).hide();
+		
+		if(team.party.olimar.inParty)
+			$('#btnSpelunking').show();
+		
 		explore.questArea=0;
 		explore.plyrLoc=0;
 		explore.isQuesting=false;
@@ -750,9 +763,9 @@ var explore = {
 				if(randNumber>90){
 					items.addRandomThing();
 				}else if(randNumber>45){
-					items.give("White Candypop", 0, "flower");;
+					items.give("White Candypop", 0, "flower");
 				}else{
-					items.give("Purple Candypop", 0, "flower");;
+					items.give("Purple Candypop", 0, "flower");
 				}
 				break;
 		}
@@ -798,6 +811,7 @@ var explore = {
 		12: {display: "Snowman"		, canGo: false, timesBeat: 0},
 		13: {display: "Swamp"		, canGo: false, timesBeat: 0},
 		14: {display: "Mines"		, canGo: false, timesBeat: 0},
-		15: {display: ""			, canGo: true , timesBeat: 0}
+		15: {display: ""			, canGo: true , timesBeat: 0},
+		16: {display: "Cave"		, canGo: true , timesBeat: 0}
 	}
 };

@@ -90,7 +90,8 @@ var team = {
 			},
 			
 			toCave: function(map){
-				
+				// Was going to add a cave per map (maybe multiples)
+				//Possible future expansion
 			}
 		},
 		president: {

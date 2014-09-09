@@ -8,6 +8,9 @@ var explore = {
 			$('#overworld').show();
 			$('#btnMap').hide();
 			$('.pikminFarm').hide();
+			if(team.party.olimar.inParty)
+				$('#btnSpelunking').show();
+				
 			explore.isOnMap=true;
 		});
 		$('#btnStop').on('click',function(){
@@ -16,6 +19,9 @@ var explore = {
 			$('#btnStop').hide();
 			$('.squadMaker').hide();
 			$('#btnBomb').hide();
+			if(team.party.olimar.inParty)
+				$('#btnSpelunking').show();
+			
 			explore.resetMap();
 			explore.isOnMap=true;
 			
@@ -50,6 +56,7 @@ var explore = {
 			$('#map').hide();
 			$('.squadMaker').hide();
 			$('#btnStop').hide();
+			$('#btnSpelunking').hide();
 			$('#btnMap').show();
 			$('.pikminFarm').show();
 			explore.isOnMap=false;
@@ -64,6 +71,13 @@ var explore = {
 				$('.area15').off('click');
 			});
 		}
+		
+		$('#btnSpelunking').on('click',function(){
+			$('#btnStop').show();
+			$('.squadMaker').show();
+			$('#btnSpelunking').hide();
+			explore.questArea=16;
+		});
 		
 		for(var i=1;i<15;i++){
 			if(explore.places[i].canGo){
@@ -137,6 +151,7 @@ var explore = {
 			$('.area'+input).on('click',function(){
 				$('#btnStop').show();
 				$('.squadMaker').show();
+				$('#btnSpelunking').hide();
 				explore.questArea=input;
 			});
 		}
@@ -192,9 +207,15 @@ var explore = {
 				break;
 			case 11:
 				$("#item35").addClass("canShow");
+				$("#item50").addClass("canShow");
+				$("#item51").addClass("canShow");
+				$("#item52").addClass("canShow");
 				break;
 			case 12:
 				$("#item36").addClass("canShow");
+				$("#item53").addClass("canShow");
+				$("#item54").addClass("canShow");
+				$("#item55").addClass("canShow");
 				break;
 			case 13:
 				$("#item37").addClass("canShow");
@@ -361,20 +382,81 @@ var explore = {
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.arachnode);
 				break;
 			case 8:
-				$("#8_1").html(enemy.dirtWall.display);
-				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
-				break;
 			case 9:
-				$("#9_31").html(enemy.dirtWall.display);
-				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
 				break;
 			case 11:
+				tmpEnmy = explore.batman(3,6);
+				$("#11_"+tmpEnmy).html(enemy.skutterchuck.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.skutterchuck);
+				
+				tmpEnmy = explore.batman(8,12);
+				$("#11_"+tmpEnmy).html(enemy.snagret.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snagret);
+				
+				tmpEnmy = explore.batman(14,18);
+				$("#11_"+tmpEnmy).html(enemy.skutterchuck.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.skutterchuck);
+				
+				tmpEnmy = explore.batman(20,24);
+				$("#11_"+tmpEnmy).html(enemy.cannonLarva.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.cannonLarva);
+				
+				tmpEnmy = explore.batman(26,28);
+				$("#11_"+tmpEnmy).html(enemy.crawbster.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.crawbster);
+				
+				tmpEnmy = explore.batman(30,32);
+				$("#11_"+tmpEnmy).html(enemy.mawdad.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.mawdad);
 				break;
 			case 12:
+				tmpEnmy = explore.batman(3,5);
+				$("#12_"+tmpEnmy).html(enemy.snitchbug.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snitchbug);
+				
+				tmpEnmy = explore.batman(7,10);
+				$("#12_"+tmpEnmy).html(enemy.snagret.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snagret);
+				
+				tmpEnmy = explore.batman(12,15);
+				$("#12_"+tmpEnmy).html(enemy.snitchbug.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.snitchbug);
+				
+				tmpEnmy = explore.batman(17,25);
+				$("#12_"+tmpEnmy).html(enemy.groink.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.groink);
+				
+				tmpEnmy = 27;
+				$("#12_"+tmpEnmy).html(enemy.bulborb.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulborb);
+				tmpEnmy = 28;
+				$("#12_"+tmpEnmy).html(enemy.bulborb.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulborb);
+				tmpEnmy = 29;
+				$("#12_"+tmpEnmy).html(enemy.bulborb.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulborb);
+				tmpEnmy = 30;
+				$("#12_"+tmpEnmy).html(enemy.bulbear.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulbear);
+				tmpEnmy = 31;
+				$("#12_"+tmpEnmy).html(enemy.bulbear.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulbear);
+				tmpEnmy = 32;
+				$("#12_"+tmpEnmy).html(enemy.bulblax.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.bulblax);
 				break;
 			case 13:
+				tmpEnmy = explore.batman(3,8);
+				$("#13_"+tmpEnmy).html(enemy.dirtWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
 				break;
 			case 14:
+				tmpEnmy = explore.batman(3,8);
+				$("#14_"+tmpEnmy).html(enemy.dirtWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
+				break;
+			case 16:
+				//Caves
 				break;
 		}
 	},
@@ -662,6 +744,15 @@ var explore = {
 					items.giveNectar();
 				}else{
 					items.givePellet();
+				}
+				break;
+			case 16:
+				if(randNumber>90){
+					items.addRandomThing();
+				}else if(randNumber>45){
+					items.give("White Candypop", 0, "flower");;
+				}else{
+					items.give("Purple Candypop", 0, "flower");;
 				}
 				break;
 		}

@@ -143,6 +143,72 @@ var enemy = {
 		extraDmgTo: "pink",
 		special: ""
 	},
+	cannonLarva: {
+		name: "Armored Cannon Larva",
+		display: ",@,",
+		hp: 2000,
+		attack: 5,
+		status: "rock",
+		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
+	crawbster: {
+		name: "Segmented Crawbster",
+		display: "7G>",
+		hp: 3000,
+		attack: 15,
+		status: "",
+		halfAtk: "rock",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
+	mawdad: {
+		name: "Armored Mawdad",
+		display: "=Oo",
+		hp: 8000,
+		attack: 5,
+		status: "",
+		halfAtk: "",
+		extraDmgFrom: "rock",
+		extraDmgTo: "",
+		special: ""
+	},
+	snitchbug: {
+		name: "Swooping Snitchbug",
+		display: "~O~",
+		hp: 2400,
+		attack: 1,
+		status: "",
+		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: "evasive"
+	},
+	groink: {
+		name: "Gatling Groink",
+		display: "-(O",
+		hp: 2200,
+		attack: 6,
+		status: "",
+		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
+	bulblax: {
+		name: "Empress Bulblax",
+		display: "oOo",
+		hp: 5000,
+		attack: 11,
+		status: "",
+		halfAtk: "rock",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
 	electricWall: {
 		name: "Electric Gate",
 		display: "NMN",

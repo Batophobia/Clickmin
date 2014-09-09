@@ -86,6 +86,7 @@ var team = {
 			init: function(){
 				this.inParty=true;
 				$("#item28").addClass("canShow");
+				$("#item56").addClass("canShow");
 			},
 			
 			toCave: function(map){

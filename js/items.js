@@ -123,6 +123,17 @@ var items = {
 		$(".pellets").append("<div>"+this.types.pellets[Object.size(this.types.pellets)-1].color+" "+this.types.pellets[Object.size(this.types.pellets)-1].numNeeded+"</div>");
 	},
 	
+	useFlower: function(itm){
+		var thing=itm.id;
+		var clr=this.types.stuff[thing].display.split(" ")[0].toLowerCase();
+		itm.remove();
+		
+		items.select(itm);// @@@@^^^^^^&&&&&&******* Come back to here
+		if(items.selectedItem=="nectar")
+			$("#btnRndNectar").show();
+		else
+			$("#btnRndNectar").hide();
+	},
 	useOnion: function(itm){
 		var thing=itm.id;
 		var clr=this.types.stuff[thing].display.split(" ")[0].toLowerCase();
@@ -168,6 +179,8 @@ var items = {
 		var extraStuff="";
 		if(typeN=="onion"){
 			extraStuff=" style='cursor: pointer;' onclick='items.useOnion(this);'";
+		}else if(typeN=="flower"){
+			extraStuff=" style='cursor: pointer;' onclick='items.useFlower(this);'";
 		}
 		
 		$(".stuff").append("<div id='"+(Object.size(this.types.stuff)-1)+"' "+extraStuff+">"+displayN+"</div>");

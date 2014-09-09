@@ -146,6 +146,9 @@ var explore = {
 		if(input==10){
 			$('.area'+input).on('click',function(){
 				explore.questArea=input;
+				$("#map").hide();
+				$(".topBar").hide();
+				$(".pelletFarm").show();
 			});
 		}else{
 			$('.area'+input).on('click',function(){
@@ -219,6 +222,9 @@ var explore = {
 				break;
 			case 13:
 				$("#item37").addClass("canShow");
+				$("#item58").addClass("canShow");
+				$("#item59").addClass("canShow");
+				$("#item60").addClass("canShow");
 				break;
 			case 14:
 				$("#item38").addClass("canShow");
@@ -447,8 +453,20 @@ var explore = {
 				break;
 			case 13:
 				tmpEnmy = explore.batman(3,8);
-				$("#13_"+tmpEnmy).html(enemy.dirtWall.display);
-				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
+				$("#13_"+tmpEnmy).html(enemy.poisonWall.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.poisonWall);
+				
+				tmpEnmy = explore.batman(10,16);
+				$("#13_"+tmpEnmy).html(enemy.sputtlefish.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.sputtlefish);
+				
+				tmpEnmy = explore.batman(18,23);
+				$("#13_"+tmpEnmy).html(enemy.sputtlefish.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.sputtlefish);
+				
+				tmpEnmy = explore.batman(25,31);
+				$("#13_"+tmpEnmy).html(enemy.phosbat.display);
+				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.phosbat);
 				break;
 			case 14:
 				tmpEnmy = explore.batman(3,8);
@@ -457,7 +475,7 @@ var explore = {
 				break;
 			case 16:
 				//Caves
-				var arrEnemies = ["joustmite","slooch","blowhog","snagret","wollywog","bulbear","skutterchuck","arachnode","snitchbug","basicWall","bulborb","dirtWall"];
+				var arrEnemies = ["joustmite","slooch","blowhog","amprat","snagret","wollywog","bulbear","skutterchuck","arachnode","snitchbug","basicWall","bulborb","dirtWall"];
 				var numEnemies = explore.batman(5,12);
 				
 				for(var i=0;i<numEnemies;i++){

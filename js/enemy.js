@@ -209,6 +209,39 @@ var enemy = {
 		extraDmgTo: "",
 		special: ""
 	},
+	sputtlefish: {
+		name: "Sputtlefish",
+		display: "%O{",
+		hp: 900,
+		attack: 3,
+		status: "",
+		halfAtk: "white",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
+	phosbat: {
+		name: "Vehemoth Phosbat",
+		display: "<O>",
+		hp: 4000,
+		attack: 9,
+		status: "",
+		halfAtk: "white",
+		extraDmgFrom: "yellow",
+		extraDmgTo: "",
+		special: ""
+	},
+	poisonWall: {
+		name: "Poisoned Bramble Wall",
+		display: "<i>TXT</i>",
+		hp: 5000,
+		attack: 100,
+		status: "poison",
+		halfAtk: "",
+		extraDmgFrom: "",
+		extraDmgTo: "",
+		special: ""
+	},
 	electricWall: {
 		name: "Electric Gate",
 		display: "NMN",

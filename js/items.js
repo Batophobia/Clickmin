@@ -160,7 +160,7 @@ var items = {
 			pikmin.show(clr);
 		}
 		
-		for(var i=0;i<5;i++){
+		for(var i=0;i<20;i++){
 			pikmin.change(onClr, clr);
 		}
 		

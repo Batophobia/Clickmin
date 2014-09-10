@@ -3,6 +3,11 @@ var explore = {
 		if(pikmin.party.total>0)
 			$("#btnMap").show();
 		
+		$('#btnLeaveFarm').on('click',function(){
+			$(".pelletFarm").hide();
+			$("#map").show();
+			$(".topBar").show();
+		});
 		$('#btnMap').on('click',function(){
 			$('#map').show();
 			$('#overworld').show();
@@ -677,9 +682,9 @@ var explore = {
 				}else if(randNumber>70){
 					items.giveBomb();
 				}else if(randNumber>50){
-					items.giveNectar();
-				}else{
 					items.givePellet();
+				}else{
+					items.giveNectar();
 				}
 				break;
 			case 6:
@@ -690,10 +695,10 @@ var explore = {
 					items.addRandomThing();
 				}else if(randNumber>70){
 					items.giveBomb();
-				}else if(randNumber>50){
-					items.giveNectar();
-				}else{
+				}else if(randNumber>48){
 					items.givePellet();
+				}else{
+					items.giveNectar();
 				}
 				break;
 			case 7:
@@ -705,10 +710,10 @@ var explore = {
 					items.addRandomThing();
 				}else if(randNumber>70){
 					items.giveBomb();
-				}else if(randNumber>50){
-					items.giveNectar();
-				}else{
+				}else if(randNumber>45){
 					items.givePellet();
+				}else{
+					items.giveNectar();
 				}
 				break;
 			case 8:
@@ -728,12 +733,12 @@ var explore = {
 					explore.unlock(12);
 				}else if(randNumber>90){
 					items.addRandomThing();
-				}else if(randNumber>70){
+				}else if(randNumber>75){
 					items.giveBomb();
-				}else if(randNumber>50){
-					items.giveNectar();
-				}else{
+				}else if(randNumber>45){
 					items.givePellet();
+				}else{
+					items.giveNectar();
 				}
 				break;
 			case 12:
@@ -744,7 +749,7 @@ var explore = {
 					items.addRandomThing();
 				}else if(randNumber>70){
 					items.giveBomb();
-				}else if(randNumber>50){
+				}else if(randNumber>40){
 					items.giveNectar();
 				}else{
 					items.givePellet();
@@ -765,14 +770,11 @@ var explore = {
 				}
 				break;
 			case 14:
+				/*//
 				if(explore.places["14"].timesBeat==0){
 					
-				}else if(randNumber>90){
+				}else*/ if(randNumber>80){
 					items.addRandomThing();
-				}else if(randNumber>70){
-					items.giveBomb();
-				}else if(randNumber>50){
-					items.giveNectar();
 				}else{
 					items.givePellet();
 				}

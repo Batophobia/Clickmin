@@ -11,6 +11,7 @@
     <script src="js/explore.js"></script>
     <script src="js/enemy.js"></script>
     <script src="js/team.js"></script>
+    <script src="js/farm.js"></script>
     <script src="js/main.js"></script>
   </head>
   <body>
@@ -45,18 +46,30 @@
 	</div>
 	<div class="mainBar">
 		<div class="pelletFarm">
-			<div class="numPellets" id="numPelletred">Red Pellet Field: 0</div>
-			<div class="numPellets" id="numPelletyellow">Yellow Pellet Field: 0</div>
-			<div class="numPellets" id="numPelletblue">Blue Pellet Field: 0</div>
-			<div class="numPellets" id="numPelletrock">Rock Pellet Field: 0</div>
-			<div class="numPellets" id="numPelletpink">Pink Pellet Field: 0</div>
+			<button id="btnLeaveFarm">Leave</button>
+			<div>
+				<br/><span class="numWorkers" id="numWorkersred">Red Workers: 0</span><br/>
+				<button class="btnWorker" id="btnWorkerred_1">Assign 1 Red</button><button class="btnWorker" id="btnWorkerred_10">Assign 10 Red</button><button class="btnWorker" id="btnWorkerred_100">Assign 100 Red</button>
+			</div><div>
+				<br/><span class="numWorkers" id="numWorkersyellow">Yellow Workers: 0</span><br/>
+				<button class="btnWorker" id="btnWorkeryellow_1">Assign 1 Yellow</button><button class="btnWorker" id="btnWorkeryellow_10">Assign 10 Yellow</button><button class="btnWorker" id="btnWorkeryellow_100">Assign 100 Yellow</button>
+			</div><div>
+				<br/><span class="numWorkers" id="numWorkersblue">Blue Workers: 0</span><br/>
+				<button class="btnWorker" id="btnWorkerblue_1">Assign 1 Blue</button><button class="btnWorker" id="btnWorkerblue_10">Assign 10 Blue</button><button class="btnWorker" id="btnWorkerblue_100">Assign 100 Blue</button>
+			</div><div>
+				<br/><span class="numWorkers" id="numWorkersrock">Rock Workers: 0</span><br/>
+				<button class="btnWorker" id="btnWorkerrock_1">Assign 1 Rock</button><button class="btnWorker" id="btnWorkerrock_10">Assign 10 Rock</button><button class="btnWorker" id="btnWorkerrock_100">Assign 100 Rock</button>
+			</div><div>
+				<br/><span class="numWorkers" id="numWorkerspink">Winged Workers: 0</span><br/>
+				<button class="btnWorker" id="btnWorkerpink_1">Assign 1 Winged</button><button class="btnWorker" id="btnWorkerpink_10">Assign 10 Winged</button><button class="btnWorker" id="btnWorkerpink_100">Assign 100 Winged</button>
+			</div>
 		</div>
 		<div class="pikminFarm">
 			<button class="btnPluck" id="btnPluckred">Pluck Red</button>
 			<button class="btnPluck" id="btnPluckyellow">Pluck Yellow</button>
 			<button class="btnPluck" id="btnPluckblue">Pluck Blue</button>
 			<button class="btnPluck" id="btnPluckrock">Pluck Rock</button>
-			<button class="btnPluck" id="btnPluckpink">Pluck Pink</button>
+			<button class="btnPluck" id="btnPluckpink">Pluck Winged</button>
 		</div>
 		<div id="map">
 <div id="overworld"><pre>            ~                          |         /\          /vv\                    /             
@@ -623,7 +636,7 @@ X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|
 		<div class="helpRight">
 			<div class="helpText" id="tophelp1" ><b>Pikmin</b> are weird, little creatures that seem to follow my commands.  They sprout from the ground and wait for me to pluck them.</div>
 			<div class="helpText" id="tophelp2" ><b>Enemies</b> are all over this world.  They come in all different shapes and sizes and each pose their own threats.</div>
-			<div class="helpText" id="tophelp3" ><b>Places</b> to explore are scattered all around the map.  Check in here for information on the different areas.</div>
+			<div class="helpText" id="tophelp3" ><b>Places</b> to explore are scattered all around the map.  Check in here for information on the different areas.  While each area is initially given so we can find important things and rescue the team, going back through some areas may prove useful.</div>
 			<div class="helpText" id="tophelp4" ><b>Teammates</b> are great to have.  Upon my crash landing here, I seemed to have...misplaced some of them.</div>
 			<div class="helpText" id="tophelp5" ><b>Items</b> are found after completing areas.  If you want to know what they do or how to use them, check here.</div>
 			<div class="helpText" id="help1" ><b>Red Pikmin</b> are resistant to fire.  They also seem to be the stronger than other pikmin.</div>
@@ -685,7 +698,7 @@ X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|
 			<div class="helpText" id="help57"><b>Candypop Buds</b> are used to change any pikmin into one that shares the color of the flower.  These purple and white Pikmin are not able to be grown like the other types.</div>
 			<div class="helpText" id="help58"><b>Poisoned Bramble Wall</b>: <i>TXT</i><br/><br/><b>Special Abilities</b>: Poison<br/><br/>This Bramble wall is surrounded by a cloud of deadly, poisonous gas.  On the bright side, the extended exposure has weakened the wall.</div>
 			<div class="helpText" id="help59"><b>Sputtlefish</b>: %O{<br/><br/><b>Special Abilities</b>: Poison<br/><br/>Normally found in pools of water, this fish emits a nasty toxin to make it easier to catch and eat their prey.</div>
-			<div class="helpText" id="help60"><b>Vehemoth Phosbat</b>: <O><br/><br/><b>Special Abilities</b>: Poison<br/><br/>A giant moth-like creature that will eat Pikmin and poison the battlefield.  This creature like to hide in dark places and is very sensitive to light.</div>
+			<div class="helpText" id="help60"><b>Vehemoth Phosbat</b>: &#60;O><br/><br/><b>Special Abilities</b>: Poison<br/><br/>A giant moth-like creature that will eat Pikmin and poison the battlefield.  This creature like to hide in dark places and is very sensitive to light.</div>
 		</div>
 	</div></div>
 	

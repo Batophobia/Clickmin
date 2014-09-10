@@ -176,6 +176,10 @@ button:disabled {
 			display:none;
 			border: 1px dashed #333333;
 		}
+		.pelletFarm{
+			display:none;
+			width: 690px;
+		}
 @media (min-width: 1111px){
     .mainBar{
         margin-left: auto;

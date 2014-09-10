@@ -4,6 +4,7 @@ var main = {
 		pikmin.init();
 		items.init();
 		explore.init();
+		farm.init();
 		this.timerID = window.setInterval(function(){main.tick()}, 200);
 		
 		$(".genTopic").on('click', function(){
@@ -49,7 +50,7 @@ var main = {
 	},
 	
 	save : function(){
-		var data = {'pikmin':{},'items':{},'explore':{},'team':{}};
+		var data = {'pikmin':{},'items':{},'explore':{},'team':{},'farm':{}};
 		for(var group in pikmin.party){
 			if(group=="total")
 				data['pikmin'][group] = pikmin.party.total;
@@ -82,6 +83,11 @@ var main = {
 		for(var group in team.party){
 			data['team'][group] = {
 					inParty: team.party[group].inParty
+				}
+		}
+		for(var group in farm.pikmn){
+			data['farm'][group] = {
+					num: farm.pikmn[group].num
 				}
 		}
 		for(var group in explore.places){
@@ -139,6 +145,11 @@ var main = {
 			if(group in data['explore']){
 				explore.places[group].canGo= data.explore[group].canGo;
 				explore.places[group].timesBeat= data.explore[group].timesBeat;
+			}
+		}
+		for(var group in farm.pikmn){
+			if(group in data['farm']){
+				farm.pikmn[group].num= data.farm[group].num;
 			}
 		}
 	},

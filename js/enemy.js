@@ -222,7 +222,7 @@ var enemy = {
 	},
 	phosbat: {
 		name: "Vehemoth Phosbat",
-		display: "<O>",
+		display: "&#60;O>",
 		hp: 4000,
 		attack: 9,
 		status: "",

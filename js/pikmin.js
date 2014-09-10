@@ -435,6 +435,8 @@ var pikmin = {
 		
 		if(this.party.total>25 && !explore.isOnMap)
 			$("#btnMap").show();
+		
+		farm.checkButtons(clr);
 	},
 	
 	checkNum: function(clr){

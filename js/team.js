@@ -9,6 +9,7 @@ var team = {
 				$("#btnHelp").show();
 				$("#btnHelp").on('click',function(){
 					$(".helpMenu").toggle();
+					$(".helpTopic").hide();
 				});
 			}
 		},

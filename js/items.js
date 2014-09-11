@@ -20,13 +20,11 @@ var items = {
 				$(".stuff").append("<div id='"+(Object.size(this.types.stuff)-1)+"' "+extraStuff+">"+this.types.stuff[thing].display+"</div>");
 			}
 		}
-		if(Object.size(this.types.pellets)>0){
-			$("#item45").addClass("canShow");
-			$(".pellets").show();
-			for(var thing in this.types.pellets){
-				$(".pellets").append("<div>"+this.types.pellets[thing].color+" "+this.types.pellets[thing].numNeeded+"</div>");
-			}
-		}
+		this.pelletInit("red");
+		this.pelletInit("yellow");
+		this.pelletInit("blue");
+		this.pelletInit("rock");
+		this.pelletInit("pink");
 		
 		$(".nectar").on('click',function(){
 			items.select("nectar");
@@ -55,6 +53,15 @@ var items = {
 		});
 	},
 	selectedItem: "",
+	
+	pelletInit: function(clr){
+		if(this.types.pellets[clr].num>0){
+			$("#item45").addClass("canShow");
+			$(".pellets").show();
+			$("#pellets"+clr).show();
+			$("#pellets"+clr).text(this.types.pellets[clr].display+" pellets: "+this.types.pellets[clr].num);
+		}
+	},
 	
 	useItem: function(clr){
 		if(clr!="")
@@ -109,7 +116,13 @@ var items = {
 		nectar	:{display:"Nectar",		total:0	},
 		bombRock:{display:"Bomb Rock",	total:0	},
 		stuff	:{},	//display, numNeeded, type
-		pellets	:{} 	//color, numNeeded
+		pellets	:{
+			red:	{ display: "Red"	, num: 0},
+			yellow:	{ display: "Yellow"	, num: 0},
+			blue:	{ display: "Blue"	, num: 0},
+			rock:	{ display: "Black"	, num: 0},
+			pink:	{ display: "Pink"	, num: 0}
+		}
 	},
 	
 	giveBomb: function(){
@@ -131,18 +144,16 @@ var items = {
 		if(pikmin.checkNum("blue")>0)
 			colors.push("Blue");
 		if(pikmin.checkNum("rock")>0)
-			colors.push("Black");
+			colors.push("rock");
 		if(pikmin.checkNum("pink")>0)
-			colors.push("Pink");
+			colors.push("pink");
 		
 		$("#item45").addClass("canShow");
 		
-		this.types.pellets[Object.size(this.types.pellets)]={
-			color: colors[explore.batman(0,colors.length-1)],
-			numNeeded: explore.batman((3*explore.questArea),(5*explore.questArea))
-		}
+		var clr=colors[explore.batman(0,colors.length-1)];
+		this.types.pellets[clr].num+=Math.pow(5,Math.floor((explore.questArea+1)/4));
 		
-		$(".pellets").append("<div>"+this.types.pellets[Object.size(this.types.pellets)-1].color+" "+this.types.pellets[Object.size(this.types.pellets)-1].numNeeded+"</div>");
+		$("#pellets"+clr).text(this.types.pellets[clr].display+" pellets: "+this.types.pellets[clr].num);
 	},
 	
 	useFlower: function(itm, onClr){

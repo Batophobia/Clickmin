@@ -120,6 +120,7 @@ button:disabled {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+	overflow: auto;
 }	.rightBar:empty {
 		display: none;
 	}
@@ -128,6 +129,8 @@ button:disabled {
 	} .pellets div{
 		width: 90%;
 		padding: 5px;
+	} .pelletColor{
+		display: none;
 	}.stuff div{
 		width: 90%;
 		padding: 5px;

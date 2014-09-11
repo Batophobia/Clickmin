@@ -33,6 +33,7 @@ var main = {
 		pikmin.tick();
 		explore.tick();
 		team.tick();
+		farm.tick();
 
 		this.updateDisplay();
 		this.save();
@@ -71,8 +72,10 @@ var main = {
 				}
 			}else if(group=="pellets"){
 				data['items'][group]={};
-				for(var thing in items.types[group]){
-					data['items'][group][thing]=(items.types[group][thing]);
+				for(var thing in items.types.pellets){
+					data['items'][group][thing]={
+						num: items.types.pellets[thing].num
+					}
 				}
 			}else{
 				data['items'][group] = {
@@ -118,7 +121,7 @@ var main = {
 					}
 				}else if(group=="pellets"){
 					for(var thing in data['items'][group]){
-						items.types[group][thing]=data['items'][group][thing];
+						items.types.pellets[thing].num=data['items'][group][thing].num;
 					}
 				}else{
 					items.types[group].total = data.items[group].total;

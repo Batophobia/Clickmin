@@ -35,7 +35,9 @@ var team = {
 					if(pikmin.party.pink.hadBefore)
 						optns.push("pink");
 					
-					pikmin.party[optns[explore.batman(0,optns.length)]].numLeaf++;
+					var clr=optns[explore.batman(0,optns.length)]
+					pikmin.party[clr].numLeaf++;
+					farm.checkButtons(clr);
 				}
 			},
 		},

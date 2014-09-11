@@ -3,42 +3,42 @@ var farm = {
 		red:{
 			display: "Red",
 			num:0,
-			delay: 10
+			delay: 50
 		},
 		yellow:{
 			display: "Yellow",
 			num:0,
-			delay: 10
+			delay: 50
 		},
 		blue:{
 			display: "Blue",
 			num:0,
-			delay: 10
-		},
-		purple:{
-			display: "Purple",
-			num:0,
-			delay: 12
-		},
-		white:{
-			display: "White",
-			num:0,
-			delay: 8
+			delay: 50
 		},
 		rock:{
 			display: "Rock",
 			num:0,
-			delay: 10
+			delay: 50
 		},
 		pink:{
 			display: "Winged",
 			num:0,
-			delay: 8
+			delay: 40
 		}
 	},
 	
 	tick: function(){
-		
+		for(var clr in this.pikmn){
+			if(this.pikmn[clr].num>0){
+				if(main.counter%this.pikmn[clr].delay==0)
+					this.farmPellet(clr);
+			}
+		}
+	},
+	
+	farmPellet: function(clr){
+		items.types.pellets[clr].num+=Math.ceil(this.pikmn[clr].num/10);
+		items.pelletInit(clr);
 	},
 	
 	assign: function(clr, number){

@@ -159,6 +159,10 @@ button:disabled {
 	}	.btnPluck{
 			display: none;
 		}
+	.store{
+		display: none;
+		width: 100%;
+	}
 .mainBar #map {
 		display: none;
 		cursor: default;

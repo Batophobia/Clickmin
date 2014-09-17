@@ -63,6 +63,12 @@ var items = {
 		}
 	},
 	
+	updatePellets: function(){
+		for(var clr in this.types.pellets){
+			$("#pellets"+clr).text(this.types.pellets[clr].display+" pellets: "+this.types.pellets[clr].num);
+		}
+	},
+	
 	useItem: function(clr){
 		if(clr!="")
 			clr=clr.slice(0,-5);
@@ -115,6 +121,7 @@ var items = {
 	types:{
 		nectar	:{display:"Nectar",		total:0	},
 		bombRock:{display:"Bomb Rock",	total:0	},
+		coins:{display:"Coins",	total:0	},
 		stuff	:{},	//display, numNeeded, type
 		pellets	:{
 			red:	{ display: "Red"	, num: 0},

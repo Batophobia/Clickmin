@@ -5,6 +5,7 @@ var main = {
 		items.init();
 		explore.init();
 		farm.init();
+		store.init();
 		this.timerID = window.setInterval(function(){main.tick()}, 200);
 		
 		$(".genTopic").on('click', function(){
@@ -51,7 +52,7 @@ var main = {
 	},
 	
 	save : function(){
-		var data = {'pikmin':{},'items':{},'explore':{},'team':{},'farm':{}};
+		var data = {'pikmin':{},'items':{},'explore':{},'team':{},'farm':{},'store':{}};
 		for(var group in pikmin.party){
 			if(group=="total")
 				data['pikmin'][group] = pikmin.party.total;
@@ -85,19 +86,24 @@ var main = {
 		}
 		for(var group in team.party){
 			data['team'][group] = {
-					inParty: team.party[group].inParty
-				}
+				inParty: team.party[group].inParty
+			}
+		}
+		for(var group in store.items){
+			data['store'][group] = {
+				level: store.items[group].level
+			}
 		}
 		for(var group in farm.pikmn){
 			data['farm'][group] = {
-					num: farm.pikmn[group].num
-				}
+				num: farm.pikmn[group].num
+			}
 		}
 		for(var group in explore.places){
 			data['explore'][group] = {
-					canGo: explore.places[group].canGo,
-					timesBeat: explore.places[group].timesBeat
-				}
+				canGo: explore.places[group].canGo,
+				timesBeat: explore.places[group].timesBeat
+			}
 		}
 		localStorage["save"] = JSON.stringify(data);
 	},
@@ -153,6 +159,11 @@ var main = {
 		for(var group in farm.pikmn){
 			if(group in data['farm']){
 				farm.pikmn[group].num= data.farm[group].num;
+			}
+		}
+		for(var group in store.items){
+			if(group in data['store']){
+				store.items[group].level=data.store[group].level;
 			}
 		}
 	},

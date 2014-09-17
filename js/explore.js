@@ -1,6 +1,6 @@
 var explore = {
 	init: function(){
-		if(pikmin.party.total>0)
+		if(pikmin.party.total>25)
 			$("#btnMap").show();
 		
 		$('#btnLeaveFarm').on('click',function(){

@@ -6,7 +6,7 @@ var store = {
 			price: "5r",
 			level: 0,
 			init: function(){
-				farm.pikmn.red.delay-=farm.pikmn.red.level;
+				farm.pikmn.red.delay-=this.level;
 			}
 		},
 		yellowFarm:	{
@@ -15,7 +15,7 @@ var store = {
 			price: "5y",
 			level: 0,
 			init: function(){
-				farm.pikmn.yellow.delay-=farm.pikmn.yellow.level;
+				farm.pikmn.yellow.delay-=this.level;
 			}
 		},
 		blueFarm:	{
@@ -24,7 +24,7 @@ var store = {
 			price: "5b",
 			level: 0,
 			init: function(){
-				farm.pikmn.blue.delay-=farm.pikmn.blue.level;
+				farm.pikmn.blue.delay-=this.level;
 			}
 		},
 		rockFarm:	{
@@ -33,7 +33,7 @@ var store = {
 			price: "5k",
 			level: 0,
 			init: function(){
-				farm.pikmn.rock.delay-=farm.pikmn.rock.level;
+				farm.pikmn.rock.delay-=this.level;
 			}
 		},
 		pinkFarm:	{
@@ -42,7 +42,7 @@ var store = {
 			price: "5p",
 			level: 0,
 			init: function(){
-				farm.pikmn.pink.delay-=farm.pikmn.pink.level;
+				farm.pikmn.pink.delay-=this.level;
 			}
 		}
 	},

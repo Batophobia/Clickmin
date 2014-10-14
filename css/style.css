@@ -141,6 +141,9 @@ button:disabled {
 	}.bombs{
 		width: 90%;
 		padding: 5px;
+	}.coin{
+		width: 90%;
+		padding: 5px;
 	} .rightTitle{
 		width: 100%;
 		text-align: center;

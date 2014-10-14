@@ -103,6 +103,7 @@ var team = {
 			init: function(){
 				this.inParty=true;
 				$("#item29").addClass("canShow");
+				$(".store").show();
 			}//Open store
 		}
 	},

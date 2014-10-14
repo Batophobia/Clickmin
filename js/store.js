@@ -51,16 +51,45 @@ var store = {
 		for(var group in this.items){
 			this.items[group].init();
 			$(".storeStock").append("<div><span id='str"+group+"'></span> <button class='strBuy' id='buy"+group+"'>Buy</button></div>");
-			this.refreshPrice(group);
+			
+			var temp=this.items[group].level;
+			this.items[group].level=0;
+			
+			for(var i=0;i<=temp;i++){
+				this.refreshPrice(group);
+				this.items[group].level++;
+			}
 		}
 		$(".strBuy").on('click',function(){
 			var itm=this.id.substring(3);
 			store.buy(itm);
 		});
+		$(".btnSellStuff").on('click',function(){
+			store.sellAll();
+		});
 	},
 	
 	tick: function(){
 		
+	},
+	
+	sellAll: function(){
+		var cntNotUseless=0;
+		if(Object.size(items.types.stuff)>0){
+			for(var thing in items.types.stuff){
+				if(items.types.stuff[thing].useless){
+					items.addCoins(Math.ceil(items.types.stuff[thing].numNeeded/2));
+					delete items.types.stuff[thing];
+				}
+				else{
+					$("#"+(thing)).attr("id",cntNotUseless);
+					items.types.stuff[cntNotUseless]=items.types.stuff[thing];
+					delete items.types.stuff[thing];
+					cntNotUseless++;
+				}
+			}
+			$(".uselessItem").remove();
+		}
 	},
 	
 	buy: function(itm){

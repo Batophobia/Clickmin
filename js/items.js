@@ -8,9 +8,13 @@ var items = {
 			$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
 			$("#item15").addClass("canShow");
 		}
+		if(this.types.coins.total>0){
+			$(".coin").text("Pokos: "+this.types.coins.total);
+			$("#item61").addClass("canShow");
+		}
 		if(Object.size(this.types.stuff)>0){
 			for(var thing in this.types.stuff){
-				var extraStuff="";
+				var extraStuff=" class='uselessItem'";
 				
 				if(this.types.stuff[thing].type=="onion")
 					extraStuff="  id='"+thing+"' style='cursor: pointer;' onclick='items.useOnion(this);'";
@@ -121,7 +125,7 @@ var items = {
 	types:{
 		nectar	:{display:"Nectar",		total:0	},
 		bombRock:{display:"Bomb Rock",	total:0	},
-		coins:{display:"Coins",	total:0	},
+		coins:{display:"Pokos",	total:0	},
 		stuff	:{},	//display, numNeeded, type
 		pellets	:{
 			red:	{ display: "Red"	, num: 0},
@@ -132,6 +136,11 @@ var items = {
 		}
 	},
 	
+	addCoins: function(num){
+		this.types.coins.total+=num;
+		$(".coin").text("Pokos: "+this.types.coins.total);
+		$("#item61").addClass("canShow");
+	},
 	giveBomb: function(){
 		this.types.bombRock.total+=1;
 		$(".bombs").text("Bomb Rocks: "+this.types.bombRock.total);
@@ -222,18 +231,21 @@ var items = {
 	},
 	
 	addThing: function(displayN, numNeededN, typeN){
+		var extraStuff=" class='uselessItem'", blnUseless=true;
+		if(typeN=="onion"){
+			extraStuff=" style='cursor: pointer;' onclick='items.useOnion(this);'";
+			blnUseless=false;
+		}else if(typeN=="flower"){
+			extraStuff=" style='cursor: pointer;' class='candypop'";
+			blnUseless=false;
+		}
+		
 		this.types.stuff[Object.size(this.types.stuff)]={
 			display: displayN,
 			numNeeded: numNeededN,
-			type: typeN
+			type: typeN,
+			useless: blnUseless
 		};
-		
-		var extraStuff="";
-		if(typeN=="onion"){
-			extraStuff=" style='cursor: pointer;' onclick='items.useOnion(this);'";
-		}else if(typeN=="flower"){
-			extraStuff=" style='cursor: pointer;' class='candypop'";
-		}
 		
 		$(".stuff").append("<div id='"+(Object.size(this.types.stuff)-1)+"' "+extraStuff+">"+displayN+"</div>");
 		
@@ -258,11 +270,6 @@ var items = {
 		numNeed = explore.batman((3*explore.questArea),(5*explore.questArea));
 		thngType="fruit";
 		
-		this.types.stuff[Object.size(this.types.stuff)]={
-			display: disp,
-			numNeeded: numNeed,
-			type: thngType
-		};
-		$(".stuff").append("<div>"+disp+"</div>");
+		this.addThing(disp, numNeed, thngType);
 	}
 };

@@ -114,7 +114,7 @@ var explore = {
 		else
 			type="numLeaf";
 		
-		if(pikmin.party[clr][type]>1 && pikmin.squad.total<100){
+		if(pikmin.party[clr][type]>1 && pikmin.squad.total<pikmin.squad.max){
 			$('#btnClearSquad').show();
 			pikmin.party[clr][type]-=1;
 			pikmin.party.total-=1;

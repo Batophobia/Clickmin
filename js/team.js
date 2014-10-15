@@ -10,6 +10,7 @@ var team = {
 				$("#btnHelp").on('click',function(){
 					$(".helpMenu").toggle();
 					$(".helpTopic").hide();
+					main.helpID="";
 				});
 			}
 		},

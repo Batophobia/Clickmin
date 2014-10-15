@@ -72,6 +72,11 @@ button:disabled {
 			display: none;
 			cursor: pointer;
 			margin-left: 5px;
+		}.hlpClose{
+			cursor: pointer;
+			position: absolute;
+			top: -25px;
+			right: -50px;
 		}
 .topBar {
 	width: 650px;
@@ -165,7 +170,17 @@ button:disabled {
 	.store{
 		display: none;
 		width: 100%;
-	}
+	} .strItm{
+			width: 100%;
+			display: none;
+			padding-left: 25px;
+		} .storeHeader{
+				cursor: pointer;
+			}
+			.strCatContainer{
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
 .mainBar #map {
 		display: none;
 		cursor: default;

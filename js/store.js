@@ -7,6 +7,9 @@ var store = {
 			level: 0,
 			init: function(){
 				farm.pikmn.red.delay-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
 			}
 		},
 		yellowFarm:	{
@@ -16,6 +19,9 @@ var store = {
 			level: 0,
 			init: function(){
 				farm.pikmn.yellow.delay-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
 			}
 		},
 		blueFarm:	{
@@ -25,6 +31,9 @@ var store = {
 			level: 0,
 			init: function(){
 				farm.pikmn.blue.delay-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
 			}
 		},
 		rockFarm:	{
@@ -34,6 +43,9 @@ var store = {
 			level: 0,
 			init: function(){
 				farm.pikmn.rock.delay-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
 			}
 		},
 		pinkFarm:	{
@@ -43,23 +55,161 @@ var store = {
 			level: 0,
 			init: function(){
 				farm.pikmn.pink.delay-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+			}
+		},
+		alphItm:	{
+			display: "Team Upgrade - Alph",
+			inStock:false,
+			price: "5c",
+			level: 0,
+			init: function(){
+				team.party.alph.counterMod-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				team.party.alph.counterMod--;
+			}
+		},
+		brittanyItm:	{
+			display: "Team Upgrade - Brittany",
+			inStock:false,
+			price: "2c",
+			level: 0,
+			init: function(){
+				team.party.brittany.counterMod-=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				team.party.brittany.counterMod--;
+			}
+		},
+		louieItm:	{
+			display: "Team Upgrade - Louie",
+			inStock:false,
+			price: "10c",
+			level: 0,
+			init: function(){
+				for(var i=0;i<this.level;i++)
+					team.party.louie.stronger();
+			},
+			levelUp: function(){
+				this.level++;
+				team.party.louie.stronger();
+			}
+		},
+		redPkmn:	{
+			display: "Pikmin Upgrade - Red",
+			inStock:false,
+			price: "60r~15c",
+			level: 0,
+			init: function(){
+				pikmin.squad.red.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.red.strength++;
+			}
+		},
+		yellowPkmn:	{
+			display: "Pikmin Upgrade - Yellow",
+			inStock:false,
+			price: "40y~10c",
+			level: 0,
+			init: function(){
+				pikmin.squad.yellow.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.yellow.strength++;
+			}
+		},
+		bluePkmn:	{
+			display: "Pikmin Upgrade - Blue",
+			inStock:false,
+			price: "40b~10c",
+			level: 0,
+			init: function(){
+				pikmin.squad.blue.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.blue.strength++;
+			}
+		},
+		rockPkmn:	{
+			display: "Pikmin Upgrade - Rock",
+			inStock:false,
+			price: "60k~15c",
+			level: 0,
+			init: function(){
+				pikmin.squad.rock.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.rock.strength++;
+			}
+		},
+		pinkPkmn:	{
+			display: "Pikmin Upgrade - Winged",
+			inStock:false,
+			price: "28p~7c",
+			level: 0,
+			init: function(){
+				pikmin.squad.pink.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.pink.strength++;
+			}
+		},
+		sqdSize:	{
+			display: "Pikmin Upgrade - Party Size",
+			inStock:false,
+			price: "1000r~1000y~1000b~1000k~1000p~50c",
+			level: 0,
+			init: function(){
+				pikmin.squad.max+=this.level*10;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.max+=10;
 			}
 		}
 	},
 	
 	init : function(){
+		var curTitle="";
 		for(var group in this.items){
+			if(curTitle!=this.items[group].display.split("-")[0]){
+				curTitle=this.items[group].display.split("-")[0];
+				$(".storeStock").append("<div class='strCatContainer' id='storeHeader"+curTitle.replace(/\s+/g, '')+"'><span class='storeHeader'>"+curTitle+"</span></div>");
+			}
+			
 			this.items[group].init();
-			$(".storeStock").append("<div><span id='str"+group+"'></span> <button class='strBuy' id='buy"+group+"'>Buy</button></div>");
+			$("#storeHeader"+curTitle.replace(/\s+/g, '')).append("<div class='strItm strItem"+curTitle.replace(/\s+/g, '')+"'><span id='str"+group+"'></span> <button class='strBuy' id='buy"+group+"'>Buy</button></div>");
 			
 			var temp=this.items[group].level;
-			this.items[group].level=0;
 			
-			for(var i=0;i<=temp;i++){
+			if(temp==0){
 				this.refreshPrice(group);
-				this.items[group].level++;
+			}else{
+				this.items[group].level=0;
+				
+				for(var i=0;i<temp;i++){
+					this.items[group].level++;
+					this.refreshPrice(group);
+				}
 			}
 		}
+		$(".storeHeader").on('click',function(){
+			var itmGroup=this.parentNode.id;
+			itmGroup=itmGroup.replace("storeHeader","strItem");
+			$(".strItm").hide();
+			$("."+itmGroup).show();
+		});
 		$(".strBuy").on('click',function(){
 			var itm=this.id.substring(3);
 			store.buy(itm);
@@ -90,6 +240,7 @@ var store = {
 			}
 			$(".uselessItem").remove();
 		}
+		$(".coin").text("Pokos: "+items.types.coins.total)
 	},
 	
 	buy: function(itm){
@@ -115,9 +266,11 @@ var store = {
 		items.types.pellets.pink.num	-= arrPrice[4];
 		items.types.coins.total			-= arrPrice[5];
 		
-		this.items[itm].level++;
+		this.items[itm].levelUp();
 		//this.items[itm].inStock=false;
 		this.refreshPrice(itm);
+		
+		this.updateWallets();
 	},
 	
 	refreshPrice: function(itm){
@@ -126,20 +279,20 @@ var store = {
 		var strOutput="";
 		
 		if(arrPrice[0]>0){
-			strOutput="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[0])+"r";
+			strOutput+="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[0])+"r";
 		}if(arrPrice[1]>0){
-			strOutput="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[1])+"y";
+			strOutput+="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[1])+"y";
 		}if(arrPrice[2]>0){
-			strOutput="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[2])+"b";
+			strOutput+="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[2])+"b";
 		}if(arrPrice[3]>0){
-			strOutput="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[3])+"k";
+			strOutput+="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[3])+"k";
 		}if(arrPrice[4]>0){
-			strOutput="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[4])+"p";
+			strOutput+="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[4])+"p";
 		}if(arrPrice[5]>0){
-			strOutput="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[5])+"c";
+			strOutput+="~"+Math.ceil(Math.pow(1.2,lvl)*arrPrice[5])+"c";
 		}
 		this.items[itm].price = strOutput.slice(1);
-		$("#str"+itm).text(this.items[itm].display+" ("+this.items[itm].level+") - "+this.items[itm].price);
+		$("#str"+itm).text(this.items[itm].display+" ("+this.items[itm].level+") - "+this.items[itm].price.replace("~",", "));
 		items.updatePellets();
 	},
 	
@@ -169,7 +322,8 @@ var store = {
 		return [redPel, yelPel, bluPel, blaPel, pinPel, coin];
 	},
 	
-	updateDisplay : function(clr){
-		$("#numWorkers"+clr).text(this.pikmn[clr].display+" Workers: "+this.pikmn[clr].num);
+	updateWallets: function(){
+		$(".coin").text("Pokos: "+items.types.coins.total)
+		items.updatePellets();
 	}
 };

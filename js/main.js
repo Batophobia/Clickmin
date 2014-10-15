@@ -25,6 +25,9 @@ var main = {
 			$(".helpText").hide();
 			$("#help"+hlpNum).show();
 		});
+		$(".hlpClose").on('click', function(){
+			$(".helpMenu").toggle();
+		});
 	},
 	helpID: 0,
 	timerID: 0,

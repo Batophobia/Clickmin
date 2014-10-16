@@ -85,7 +85,7 @@ var items = {
 			}
 			items.types.nectar.total--;
 			var minNum=5, maxNum=10;
-			var promoteThisMany = explore.batman(minNum,maxNum);
+			var promoteThisMany = explore.batman(minNum,maxNum)+store.items.itmNectar.level;
 			
 			for(i=0;i<promoteThisMany;i++){
 				pikmin.promote(clr);

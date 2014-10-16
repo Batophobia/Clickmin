@@ -61,7 +61,7 @@ var pikmin = {
 	
 	squad:{
 		total:0,
-		max:0,
+		max:100,
 		red:{
 			canBomb: false,
 			strength: 15,

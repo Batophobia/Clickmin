@@ -282,6 +282,10 @@ button:disabled {
 	} .totalSquadNum{
 		float: right;
 		margin-right:5px;
+	} .squadHelp{
+		padding-left: 3px;
+		padding-bottom: 3px;
+		font-size: 12px;
 	}
 .upArrow {
 	width: 0;

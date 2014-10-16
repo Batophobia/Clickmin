@@ -100,6 +100,17 @@ var store = {
 				team.party.louie.stronger();
 			}
 		},
+		presItm:	{
+			display: "Team Upgrade - President",
+			inStock:false,
+			price: "100c",
+			level: 0,
+			init: function(){
+			},
+			levelUp: function(){
+				this.level++;
+			}
+		},
 		redPkmn:	{
 			display: "Pikmin Upgrade - Red",
 			inStock:false,
@@ -165,6 +176,32 @@ var store = {
 				pikmin.squad.pink.strength++;
 			}
 		},
+		whitePkmn:	{
+			display: "Pikmin Upgrade - White",
+			inStock:false,
+			price: "16r~8y~4b~2k~1p",
+			level: 0,
+			init: function(){
+				pikmin.squad.white.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.white.strength++;
+			}
+		},
+		purplePkmn:	{
+			display: "Pikmin Upgrade - Purple",
+			inStock:false,
+			price: "500r~500b~10c",
+			level: 0,
+			init: function(){
+				pikmin.squad.purple.strength+=this.level;
+			},
+			levelUp: function(){
+				this.level++;
+				pikmin.squad.purple.strength++;
+			}
+		},
 		sqdSize:	{
 			display: "Pikmin Upgrade - Party Size",
 			inStock:false,
@@ -176,6 +213,30 @@ var store = {
 			levelUp: function(){
 				this.level++;
 				pikmin.squad.max+=10;
+			}
+		},
+		itmNectar:	{
+			display: "Item Upgrade - Nectar",
+			inStock:false,
+			price: "50y~25p~5c",
+			level: 0,
+			init: function(){
+				//Nothing needed
+			},
+			levelUp: function(){
+				this.level++;
+			}
+		},
+		itmBomb:	{
+			display: "Item Upgrade - Bomb Factory",
+			inStock:false,
+			price: "100y~500k~50c",
+			level: 0,
+			init: function(){
+				//Nothing needed
+			},
+			levelUp: function(){
+				this.level++;
 			}
 		}
 	},
@@ -220,7 +281,11 @@ var store = {
 	},
 	
 	tick: function(){
-		
+		if(this.items.itmBomb.level>0 && items.types.bombRock.total<this.items.itmBomb.level*2){
+			var tmpDelay=10000/Math.pow(this.items.itmBomb.level,1.5);
+			if(main.counter%tmpDelay==0)
+				items.giveBomb();
+		}
 	},
 	
 	sellAll: function(){
@@ -228,7 +293,7 @@ var store = {
 		if(Object.size(items.types.stuff)>0){
 			for(var thing in items.types.stuff){
 				if(items.types.stuff[thing].useless){
-					items.addCoins(Math.ceil(items.types.stuff[thing].numNeeded/2));
+					items.addCoins(Math.ceil(items.types.stuff[thing].numNeeded/2*(Math.sqrt(this.items.presItm.level)+1)));
 					delete items.types.stuff[thing];
 				}
 				else{

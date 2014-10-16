@@ -28,16 +28,26 @@ var main = {
 		$(".hlpClose").on('click', function(){
 			$(".helpMenu").toggle();
 		});
+		$(window).keydown(function(evt) {
+			$(".plusNum").css('text-decoration', '');
+			main.keyDown=evt.which;
+			$("#plus"+main.keyDown).css('text-decoration', 'underline');
+		}).keyup(function(evt) {
+			main.keyDown=0;
+			$(".plusNum").css('text-decoration', '');
+		});
 	},
 	helpID: 0,
 	timerID: 0,
 	counter: 0,
+	keyDown: 0,
 	
 	tick : function(){
 		pikmin.tick();
 		explore.tick();
 		team.tick();
 		farm.tick();
+		store.tick();
 
 		this.updateDisplay();
 		this.save();

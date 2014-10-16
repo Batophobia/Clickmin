@@ -105,8 +105,20 @@ var explore = {
 	plyrLoc: 0,
 	delayMax: 5,
 	curDelay: 5,
+	cntEndless: 0,
+	blnEndless: false,
 	
 	addToSquad: function(clr, type){
+		var numToAdd=1;
+		
+		if(main.keyDown==16){
+			numToAdd=10;
+		}else if(main.keyDown==90){
+			numToAdd=25;
+		}else if(main.keyDown==17){
+			numToAdd=100;
+		}
+		
 		if(type=="bud")
 			type="numBud";
 		else if(type=="flower")
@@ -114,18 +126,23 @@ var explore = {
 		else
 			type="numLeaf";
 		
-		if(pikmin.party[clr][type]>1 && pikmin.squad.total<pikmin.squad.max){
+		if(pikmin.party[clr][type]>=numToAdd && pikmin.squad.total<pikmin.squad.max){
+			if(numToAdd+pikmin.squad.total>pikmin.squad.max)
+				numToAdd=pikmin.squad.max-pikmin.squad.total;
+			
 			$('#btnClearSquad').show();
-			pikmin.party[clr][type]-=1;
-			pikmin.party.total-=1;
-			pikmin.squad[clr][type]+=1;
-			pikmin.squad.total+=1;
+			pikmin.party[clr][type]-=numToAdd;
+			pikmin.party.total-=numToAdd;
+			pikmin.squad[clr][type]+=numToAdd;
+			pikmin.squad.total+=numToAdd;
 			
 			$("#"+clr+type.substring(3)+"SquadNum").text(pikmin.squad[clr][type]);
 			$("#totalSquadNum").text("Total: "+pikmin.squad.total);
 		}
 	},
 	removeFromSquad: function(clr, type){
+		var numToAdd=1;
+		
 		if(type=="bud")
 			type="numBud";
 		else if(type=="flower")
@@ -133,11 +150,22 @@ var explore = {
 		else
 			type="numLeaf";
 		
+		if(main.keyDown==16){
+			numToAdd=10;
+		}else if(main.keyDown==90){
+			numToAdd=25;
+		}else if(main.keyDown==17){
+			numToAdd=100;
+		}
+		
 		if(pikmin.squad[clr][type]>0){
-			pikmin.party[clr][type]+=1;
-			pikmin.party.total+=1;
-			pikmin.squad[clr][type]-=1;
-			pikmin.squad.total-=1;
+			if(numToAdd>pikmin.squad[clr][type])
+				numToAdd=pikmin.squad[clr][type];
+			
+			pikmin.party[clr][type]+=numToAdd;
+			pikmin.party.total+=numToAdd;
+			pikmin.squad[clr][type]-=numToAdd;
+			pikmin.squad.total-=numToAdd;
 			
 			$("#"+clr+type.substring(3)+"SquadNum").text(pikmin.squad[clr][type]);
 			$("#totalSquadNum").text("Total: "+pikmin.squad.total);
@@ -239,6 +267,7 @@ var explore = {
 	
 	beginQuest: function(){
 		if(pikmin.squad.total>0){
+			this.cntEndless=0;
 			$('.squadMaker').hide();
 			$('#overworld').hide();
 			$('#map'+explore.questArea).show();
@@ -474,9 +503,19 @@ var explore = {
 				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.phosbat);
 				break;
 			case 14:
-				tmpEnmy = explore.batman(3,8);
-				$("#14_"+tmpEnmy).html(enemy.dirtWall.display);
-				enemy.monsterList[Object.size(enemy.monsterList)]=jQuery.extend({},enemy.dirtWall);
+				var arrEnemies = ["joustmite","slooch","blowhog","amprat","sheargrub","snagret","cannonBeetle","wollywog","goolix","bulbear","skutterchuck","arachnode","cannonLarva","snitchbug","basicWall","crawbster","mawdad","groink","bulblax","sputtlefish","phosbat","bulborb","dirtWall"];
+				var numEnemies = explore.batman(5,12);
+				
+				for(var i=0;i<numEnemies;i++){
+					tmpEnmy = Math.ceil(2+(i/numEnemies)*30);
+					selEnemy = arrEnemies[explore.batman(0,arrEnemies.length)];
+					$("#14_"+tmpEnmy).html(enemy[selEnemy].display);
+					var curEnemy=Object.size(enemy.monsterList);
+					enemy.monsterList[curEnemy]=jQuery.extend({},enemy[selEnemy]);
+					enemy.monsterList[curEnemy].hp*=1+(this.cntEndless/10);
+					if(enemy.monsterList[curEnemy].attack>0)
+						enemy.monsterList[curEnemy].attack+=Math.ceil(this.cntEndless/2);
+				}
 				break;
 			case 16:
 				//Caves
@@ -620,6 +659,9 @@ var explore = {
 	},
 	
 	finish: function(){
+		this.cntEndless++;
+		this.blnEndless=false;
+		
 		var randNumber = this.batman(0,100);
 		$('#btnStop').hide();
 		$('#btnBomb').hide();
@@ -775,9 +817,13 @@ var explore = {
 					
 				}else*/ if(randNumber>80){
 					items.addRandomThing();
+				}else if(randNumber>75){
+					items.giveBomb();
 				}else{
 					items.givePellet();
 				}
+				
+				this.blnEndless=confirm("Explore deeper?");
 				break;
 			case 16:
 				if(randNumber>90){
@@ -791,18 +837,23 @@ var explore = {
 		}
 		
 		$("#"+explore.questArea+"_"+explore.plyrLoc).text("___");
-		$('#overworld').show();
-		$('#map'+explore.questArea).hide();
-		$(".battleDialog").hide();
-		
-		if(team.party.olimar.inParty)
-			$('#btnSpelunking').show();
-		
 		explore.places[explore.questArea].timesBeat++;
-		explore.questArea=0;
 		explore.plyrLoc=0;
-		explore.isQuesting=false;
 		explore.updateSquad();
+		
+		if(this.blnEndless){
+			this.populate(explore.questArea);
+		}else{
+			$('#overworld').show();
+			$('#map'+explore.questArea).hide();
+			$(".battleDialog").hide();
+			
+			if(team.party.olimar.inParty)
+				$('#btnSpelunking').show();
+			
+			explore.questArea=0;
+			explore.isQuesting=false;
+		}
 	},
 	
 	canMove: function(){

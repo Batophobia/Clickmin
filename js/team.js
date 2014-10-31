@@ -67,7 +67,7 @@ var team = {
 				this.inParty=true;
 				$("#item26").addClass("canShow");
 				clearInterval(main.timerID);
-				main.timerID = window.setInterval(function(){main.tick()}, 100);
+				main.timerID = window.setInterval(function(){main.tick()}, 50);
 			}
 		},
 		louie: {

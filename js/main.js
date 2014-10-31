@@ -1,12 +1,14 @@
 var main = {
-	init : function(){
+	init: function(){
 		this.load();
 		pikmin.init();
 		items.init();
 		explore.init();
 		farm.init();
 		store.init();
-		this.timerID = window.setInterval(function(){main.tick()}, 200);
+		
+		if(!team.party.charlie.inParty)
+			main.timerID = window.setInterval(function(){main.tick()}, 100);
 		
 		$(".genTopic").on('click', function(){
 			var hlpNum=this.id;
@@ -41,17 +43,30 @@ var main = {
 	timerID: 0,
 	counter: 0,
 	keyDown: 0,
+	lastTick: new Date(),
 	
 	tick : function(){
-		pikmin.tick();
-		explore.tick();
-		team.tick();
-		farm.tick();
-		store.tick();
-
-		this.updateDisplay();
-		this.save();
-		this.counter++;
+		now = new Date();
+		var elapsedTime = (now.getTime() - main.lastTick.getTime());
+		var delay=100;
+		
+		if(team.party.charlie.inParty)
+			delay=50;
+		
+		if(elapsedTime>delay){
+			for(var i=0;i<Math.floor(elapsedTime/delay);i++){
+				pikmin.tick();
+				explore.tick();
+				team.tick();
+				farm.tick();
+				store.tick();
+				
+				this.updateDisplay();
+				this.save();
+				this.counter++;
+			}
+		main.lastTick = new Date();
+		}
 	},
 	
 	updateDisplay: function(){

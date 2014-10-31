@@ -7,7 +7,7 @@ var pikmin = {
 			numBud: 0,
 			numFlower: 0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		},
 		yellow:{
 			display: "Yellow",
@@ -15,7 +15,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		},
 		blue:{
 			display: "Blue",
@@ -23,7 +23,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		},
 		purple:{
 			display: "Purple",
@@ -31,7 +31,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		},
 		white:{
 			display: "White",
@@ -39,7 +39,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		},
 		rock:{
 			display: "Rock",
@@ -47,7 +47,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		},
 		pink:{
 			display: "Winged",
@@ -55,7 +55,7 @@ var pikmin = {
 			numBud:0,
 			numFlower:0,
 			hadBefore: false,
-			buttonDelay: 5
+			buttonDelay: 1
 		}
 	},
 	
@@ -464,7 +464,7 @@ var pikmin = {
 			var color = this.id.substring(8);
 			pikmin.give(color,'leaf');
 			$("#btnPluck"+color).attr("disabled", "disabled");
-			setTimeout('$("#btnPluck'+color+'").removeAttr("disabled");',pikmin.party[color].buttonDelay*100);
+			setTimeout('$("#btnPluck'+color+'").removeAttr("disabled");',pikmin.party[color].buttonDelay*50);
 		});
 	},
 	

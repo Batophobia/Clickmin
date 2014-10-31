@@ -104,7 +104,7 @@ var explore = {
 	questArea: 0,
 	plyrLoc: 0,
 	delayMax: 5,
-	curDelay: 5,
+	curDelay: 2,
 	cntEndless: 0,
 	blnEndless: false,
 	
@@ -126,7 +126,9 @@ var explore = {
 		else
 			type="numLeaf";
 		
-		if(pikmin.party[clr][type]>=numToAdd && pikmin.squad.total<pikmin.squad.max){
+		if(pikmin.party[clr][type]>0 && pikmin.squad.total<pikmin.squad.max){
+			if(numToAdd>pikmin.party[clr][type])
+				numToAdd=pikmin.party[clr][type];
 			if(numToAdd+pikmin.squad.total>pikmin.squad.max)
 				numToAdd=pikmin.squad.max-pikmin.squad.total;
 			

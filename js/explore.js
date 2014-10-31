@@ -103,8 +103,8 @@ var explore = {
 	isQuesting: false,
 	questArea: 0,
 	plyrLoc: 0,
-	delayMax: 5,
-	curDelay: 2,
+	delayMax: 3,
+	curDelay: 1,
 	cntEndless: 0,
 	blnEndless: false,
 	

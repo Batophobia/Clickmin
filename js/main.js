@@ -65,8 +65,18 @@ var main = {
 				this.save();
 				this.counter++;
 			}
-		main.lastTick = new Date();
+		}else{
+			pikmin.tick();
+			explore.tick();
+			team.tick();
+			farm.tick();
+			store.tick();
+			
+			this.updateDisplay();
+			this.save();
+			this.counter++;
 		}
+		main.lastTick = new Date();
 	},
 	
 	updateDisplay: function(){
